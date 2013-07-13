@@ -5,7 +5,10 @@
 
 from scrapy.item import Item, Field
 
-class SitecrawlerItem(Item):
-    # define the fields for your item here like:
-    # name = Field()
-    pass
+class SiteCrawlerItem(Item):
+	# define the fields for your item here like:
+	# name = Field()
+	name = Field()
+	url = Field()
+	screenshot = Field()
+	
