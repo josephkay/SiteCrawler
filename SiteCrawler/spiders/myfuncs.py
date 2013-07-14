@@ -1,7 +1,7 @@
+import csv
+
 def url_end(string):
 	pos = string.find("/")
-	print "string is: " + string
-	print "pos is: " + str(pos)
 	if pos+1:
 		return url_end(string[pos+1:])
 	else:
@@ -13,3 +13,21 @@ def before_dot(string):
 		return string[:pos]
 	else:
 		return string
+
+def url_fix(root, url):
+	if root not in url:
+		if "http" in url:
+			return False
+		url = root + url
+	return url
+
+def writeCsvFile(fname, data, *args, **kwargs):
+    """
+    @param fname: string, name of file to write
+    @param data: list of list of items
+
+    Write data to file
+    """
+    mycsv = csv.writer(open(fname, 'wb'), *args, **kwargs)
+    for row in data:
+        mycsv.writerow(row)

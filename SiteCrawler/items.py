@@ -11,4 +11,4 @@ class SiteCrawlerItem(Item):
 	name = Field()
 	url = Field()
 	screenshot = Field()
-	
+	links = Field()

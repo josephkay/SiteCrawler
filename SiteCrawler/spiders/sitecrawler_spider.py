@@ -1,8 +1,8 @@
 from scrapy.contrib.spiders import CrawlSpider, Rule
 from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
 from scrapy.selector import HtmlXPathSelector
+from scrapy.http import Request
 from SiteCrawler.items import SiteCrawlerItem
-from screenshooter import Screenshooter
 from myfuncs import *
 
 class MySpider(CrawlSpider):
@@ -10,18 +10,41 @@ class MySpider(CrawlSpider):
 	allowed_domains = ['premierinn.com']
 	start_urls = ['http://www.premierinn.com']
 	
-	def parse(self, response):
+	rules = (
+		# Extract links matching 'category.php' (but not matching 'subsection.php')
+		# and follow links from them (since no callback means follow=True by default).
+		Rule(SgmlLinkExtractor(allow=()), callback='parse_item'),
+	)
+	
+	def parse_item(self, response):
 		self.log('Hi, this is an item page! %s' % response.url)
+		
+		root = 'http://www.premierinn.com'
 		
 		hxs = HtmlXPathSelector(response)
 		item = SiteCrawlerItem()
 		item['url'] = response.url
 		item['name'] = url_end(item['url'])
+		item['screenshot'] = item['name']+'.png'
+		item['links'] = []
 		
-		s = Screenshooter()
-		image = item['name']+'.png'
-		s.capture(item['url'], image)
-		item['screenshot'] = image
+		for url in hxs.select('//a/@href').extract():
+			fixed = url_fix(root, url)
+			if fixed:
+				item['links'].append(fixed)
 		
-		print item
 		return item
+		
+#		try:
+#			depth = response.meta['depth'] + 1
+#		except:
+#			depth = 0
+#		
+#		if depth < 5:
+#			for url in hxs.select('//a/@href').extract():
+#				url = url_fix(root, url)
+#				if url:
+#					print "URL:  " + url
+#					request = Request(url_fix(root, url),callback=self.parse)
+#					request.meta['depth'] = depth
+#					yield request

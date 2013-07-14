@@ -11,5 +11,11 @@ BOT_NAME = 'SiteCrawler'
 SPIDER_MODULES = ['SiteCrawler.spiders']
 NEWSPIDER_MODULE = 'SiteCrawler.spiders'
 
+ITEM_PIPELINES = [
+    'SiteCrawler.pipelines.DuplicatesPipeline',
+	'SiteCrawler.pipelines.ScreenshotPipeline',
+	'SiteCrawler.pipelines.CsvExportPipeline'
+]
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'SiteCrawler (+http://www.yourdomain.com)'
