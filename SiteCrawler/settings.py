@@ -17,5 +17,7 @@ ITEM_PIPELINES = [
 	'SiteCrawler.pipelines.CsvExportPipeline'
 ]
 
+DEPTH_LIMIT = 0
+
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'SiteCrawler (+http://www.yourdomain.com)'

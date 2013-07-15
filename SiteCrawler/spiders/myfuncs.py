@@ -19,7 +19,14 @@ def url_fix(root, url):
 		if "http" in url:
 			return False
 		url = root + url
-	return url
+	return de_hash(url)
+
+def de_hash(url):
+	if '#' in url:
+		pos = url.find('#')
+		return url[:pos]
+	else:
+		return url
 
 def writeCsvFile(fname, data, *args, **kwargs):
     """

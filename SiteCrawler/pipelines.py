@@ -2,6 +2,7 @@
 #
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/topics/item-pipeline.html
+from os import getcwd
 from screenshooter import Screenshooter
 from scrapy.exceptions import DropItem
 from scrapy import signals
@@ -49,10 +50,12 @@ class CsvExportPipeline(object):
 	def spider_opened(self, spider):
 		nodes = open('%s_nodes.csv' % spider.name, 'w+b')
 		self.files[spider] = nodes
-		self.exporter1 = CsvItemExporter(nodes, fields_to_export=['name','url','screenshot'])
+		self.exporter1 = CsvItemExporter(nodes, fields_to_export=['url','name','screenshot'])
 		self.exporter1.start_exporting()
 		
 		self.edges = []
+		self.edges.append(['Source','Target','Type','ID','Label','Weight'])
+		self.num = 1
 		
 		#edges = open('%s_edges.csv' % spider.name, 'w+b')
 		#self.files[spider] = edges
@@ -65,13 +68,13 @@ class CsvExportPipeline(object):
 		file = self.files.pop(spider)
 		file.close()
 		
-		writeCsvFile(r'C:\Users\Joseph\Documents\Work\SiteCrawler\edges.csv', self.edges)
+		writeCsvFile(getcwd()+r'\edges.csv', self.edges)
 	
 	def process_item(self, item, spider):
 		self.exporter1.export_item(item)
 		#self.exporter2.export_item(item)
 		
 		for url in item['links']:
-			self.edges.append([item['url'],url])		
-		
+			self.edges.append([item['url'],url,'Directed',self.num,'',1])
+			self.num += 1
 		return item

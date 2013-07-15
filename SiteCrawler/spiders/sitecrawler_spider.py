@@ -13,10 +13,17 @@ class MySpider(CrawlSpider):
 	rules = (
 		# Extract links matching 'category.php' (but not matching 'subsection.php')
 		# and follow links from them (since no callback means follow=True by default).
-		Rule(SgmlLinkExtractor(allow=()), callback='parse_item'),
+		Rule(SgmlLinkExtractor(allow=()), callback='parse_item', follow=True),
 	)
+	#, process_links='process_links'
+	#def process_links(self, links):
+		#return [link for link in links if self.valid_links(link)]
+	
+	#def valid_links(self,link):
+		#return link not in self.urls_seen
 	
 	def parse_item(self, response):
+		#self.urls_seen = set()
 		self.log('Hi, this is an item page! %s' % response.url)
 		
 		root = 'http://www.premierinn.com'
@@ -32,7 +39,7 @@ class MySpider(CrawlSpider):
 			fixed = url_fix(root, url)
 			if fixed:
 				item['links'].append(fixed)
-		
+				#self.urls_seen.add(url)
 		return item
 		
 #		try:
