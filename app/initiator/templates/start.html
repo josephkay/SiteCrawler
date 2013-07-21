@@ -1,0 +1,13 @@
+<!doctype html>
+<title>Scrape Started</title>
+<body>
+<h1>Scraper</h1>
+<form action="" method="post" name="login">
+    {{form.hidden_tag()}}
+    <p>
+        Please enter the URL:<br>
+        {{form.url(size=80)}}<br>
+    </p>
+    <p><input type="submit" value="Submit URL"></p>
+</form>
+</body>
