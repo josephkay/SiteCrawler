@@ -1,7 +1,8 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, url_for
 from initiator import app
 import runspider
 from forms import TextBox
+from SiteCrawler.spiders.myfuncs import test_url
 
 # index view function suppressed for brevity
 
@@ -9,6 +10,6 @@ from forms import TextBox
 def start():
     form = TextBox()
     if form.validate_on_submit():
-        #flash('Login requested for OpenID="' + form.openid.data + '", remember_me=' + str(form.remember_me.data))
-        return redirect('/runspider')
+        if test_url(form.url.data):
+			return redirect(url_for('runspider', route = form.url.data))
     return render_template('start.html', form = form)

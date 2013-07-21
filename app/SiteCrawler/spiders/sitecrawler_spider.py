@@ -7,36 +7,32 @@ from myfuncs import *
 
 class MySpider(CrawlSpider):
 	name = 'SiteCrawler'
-	allowed_domains = ['premierinn.com']
-	start_urls = ['http://www.premierinn.com']
-	
 	rules = (
-		# Extract links matching 'category.php' (but not matching 'subsection.php')
-		# and follow links from them (since no callback means follow=True by default).
 		Rule(SgmlLinkExtractor(allow=()), callback='parse_item', follow=True),
 	)
-	#, process_links='process_links'
-	#def process_links(self, links):
-		#return [link for link in links if self.valid_links(link)]
 	
-	#def valid_links(self,link):
-		#return link not in self.urls_seen
+	def __init__(self, root, **kwargs):
+		#super(MySpider, self).__init__(*args, **kwargs)
+		CrawlSpider.__init__(self, **kwargs)
+		self.root = root
+		self.start_urls = ['http://' + root]
+		self.allowed_domains = [strip_www(root)]
 	
 	def parse_item(self, response):
 		#self.urls_seen = set()
 		self.log('Hi, this is an item page! %s' % response.url)
 		
-		root = 'http://www.premierinn.com'
+		full_root = 'http://' + self.root
 		
 		hxs = HtmlXPathSelector(response)
 		item = SiteCrawlerItem()
 		item['url'] = response.url
-		item['name'] = url_end(item['url'])
+		item['name'] = get_name(item['url'], strip_www(self.root))
 		item['screenshot'] = item['name']+'.png'
 		item['links'] = []
 		
 		for url in hxs.select('//a/@href').extract():
-			fixed = url_fix(root, url)
+			fixed = url_fix(full_root, url)
 			if fixed:
 				item['links'].append(fixed)
 				#self.urls_seen.add(url)

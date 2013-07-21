@@ -3,12 +3,13 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/topics/item-pipeline.html
 from os import getcwd
-import os
+import sqlite3
 from screenshooter import Screenshooter
 from scrapy.exceptions import DropItem
 from scrapy import signals
 from scrapy.contrib.exporter import CsvItemExporter
 from spiders.myfuncs import *
+from scrapy import log
 
 class SitecrawlerPipeline(object):
     def process_item(self, item, spider):
@@ -29,12 +30,11 @@ class DuplicatesPipeline(object):
 class ScreenshotPipeline(object):
 	
 	def __init__(self):
-		#self.s = Screenshooter()
-		pass
+		self.s = Screenshooter()
 	
 	def process_item(self, item, spider):
-		#image_folder = "screenshots\\"
-		#self.s.capture(item['url'], image_folder + item['screenshot'])
+		image_folder = "screenshots\\"
+		self.s.capture(item['url'], image_folder + item['screenshot'])
 		return item
 
 class CsvExportPipeline(object):
@@ -44,7 +44,6 @@ class CsvExportPipeline(object):
 	
 	@classmethod
 	def from_crawler(cls, crawler):
-		#fish ====== f
 		pipeline = cls()
 		crawler.signals.connect(pipeline.spider_opened, signals.spider_opened)
 		crawler.signals.connect(pipeline.spider_closed, signals.spider_closed)
@@ -73,4 +72,31 @@ class CsvExportPipeline(object):
 		for url in item['links']:
 			self.edges.append([item['url'],url,'Directed',self.num,'',1])
 			self.num += 1
+		return item
+
+class SQLiteExportPipeline(object):
+
+	def __init__(self):
+		pass
+	
+	@classmethod
+	def from_crawler(cls, crawler):
+		pipeline = cls()
+		crawler.signals.connect(pipeline.spider_opened, signals.spider_opened)
+		crawler.signals.connect(pipeline.spider_closed, signals.spider_closed)
+		return pipeline
+
+	def spider_opened(self, spider):
+		self.conn = sqlite3.connect('sitecrawler.db')
+		self.c = self.conn.cursor()
+	
+	def spider_closed(self, spider):
+		self.conn.commit()
+		self.conn.close()
+	
+	def process_item(self, item, spider):
+		insert_row(self.c, "INSERT INTO nodes (id, url, name, screenshot) VALUES (?, ?, ?, ?)", (None, item['url'], item['name'], item['screenshot']))
+		
+		for link in item['links']:
+			insert_row(self.c, "INSERT INTO edges (id, source, target) VALUES (?, ?, ?)", (None, item['url'], link))
 		return item
