@@ -22,8 +22,6 @@ class MySpider(CrawlSpider):
 		#self.urls_seen = set()
 		self.log('Hi, this is an item page! %s' % response.url)
 		
-		full_root = 'http://' + self.root
-		
 		hxs = HtmlXPathSelector(response)
 		item = SiteCrawlerItem()
 		item['url'] = response.url
@@ -32,22 +30,7 @@ class MySpider(CrawlSpider):
 		item['links'] = []
 		
 		for url in hxs.select('//a/@href').extract():
-			fixed = url_fix(full_root, url)
+			fixed = url_fix(strip_www(self.root), url)
 			if fixed:
 				item['links'].append(fixed)
-				#self.urls_seen.add(url)
 		return item
-		
-#		try:
-#			depth = response.meta['depth'] + 1
-#		except:
-#			depth = 0
-#		
-#		if depth < 5:
-#			for url in hxs.select('//a/@href').extract():
-#				url = url_fix(root, url)
-#				if url:
-#					print "URL:  " + url
-#					request = Request(url_fix(root, url),callback=self.parse)
-#					request.meta['depth'] = depth
-#					yield request

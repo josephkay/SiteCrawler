@@ -12,13 +12,18 @@ SPIDER_MODULES = ['SiteCrawler.spiders']
 NEWSPIDER_MODULE = 'SiteCrawler.spiders'
 
 ITEM_PIPELINES = [
-    'SiteCrawler.pipelines.DuplicatesPipeline',
 	'SiteCrawler.pipelines.ScreenshotPipeline',
-	#'SiteCrawler.pipelines.CsvExportPipeline',
-	'SiteCrawler.pipelines.SQLiteExportPipeline'
+	'SiteCrawler.pipelines.CsvExportPipeline',
+	#'SiteCrawler.pipelines.SQLiteExportPipeline',
+	'SiteCrawler.pipelines.DuplicatesPipeline'
 ]
 
 DEPTH_LIMIT = 0
+
+# The following sets it to breadth-first crawling.
+DEPTH_PRIORITY = 1
+SCHEDULER_DISK_QUEUE = 'scrapy.squeue.PickleFifoDiskQueue'
+SCHEDULER_MEMORY_QUEUE = 'scrapy.squeue.FifoMemoryQueue'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'SiteCrawler (+http://www.yourdomain.com)'

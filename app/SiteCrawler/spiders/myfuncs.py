@@ -7,7 +7,7 @@ def get_name(url, root):
 		if len(url) <= pos + len(root):
 			return "root_page"
 		else:
-			return strip_inner_slashes(strip_outer_slashes(url[pos + len(root):]))
+			return replace_slashes(strip_outer_slashes(url[pos + len(root):]),"--")
 	else:
 		return "root_not_found"
 
@@ -23,18 +23,24 @@ def strip_outer_slashes(string):
 	else:
 		return string
 
-def strip_inner_slashes(string):
+def replace_slashes(string,new):
 	if "/" in string:
 		pos = string.find("/")
-		return strip_inner_slashes(string[:pos] + "--" + string[pos+1:])
+		return replace_slashes(string[:pos] + new + string[pos+1:],new)
 	else:
 		return string
+
+def same_link(first,second):
+	if replace_slashes(first,"") == replace_slashes(second,""):
+		return True
+	else:
+		return False
 
 def url_fix(root, url):
 	if root not in url:
 		if "http" in url:
 			return False
-		url = root + url
+		url = "http://www." + root + url
 	return add_slash(de_hash(url))
 
 def de_hash(url):
@@ -43,6 +49,12 @@ def de_hash(url):
 		return url[:pos]
 	else:
 		return url
+
+def add_slash(url):
+	if url[-1] == "/":
+		return url
+	else:
+		return url + "/"
 
 def writeCsvFile(fname, data, *args, **kwargs):
     """
@@ -77,9 +89,3 @@ def test_url(url):
 		return False
 	else:
 		return True
-
-def add_slash(url):
-	if url[-1] == "/":
-		return url
-	else:
-		return url + "/"

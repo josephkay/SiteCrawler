@@ -41,6 +41,7 @@ class CsvExportPipeline(object):
 
 	def __init__(self):
 		self.files = {}
+		self.urls_seen = set()
 	
 	@classmethod
 	def from_crawler(cls, crawler):
@@ -56,7 +57,7 @@ class CsvExportPipeline(object):
 		self.exporter1.start_exporting()
 		
 		self.edges = []
-		self.edges.append(['Source','Target','Type','ID','Label','Weight'])
+		self.edges.append(['Source','Target','Type','ID','Label','Weight','Level'])
 		self.num = 1
 	
 	def spider_closed(self, spider):
@@ -69,15 +70,21 @@ class CsvExportPipeline(object):
 	def process_item(self, item, spider):
 		self.exporter1.export_item(item)
 		
+		if item['url'] not in self.urls_seen:
+			self.urls_seen.add(item['url'])
+		
 		for url in item['links']:
-			self.edges.append([item['url'],url,'Directed',self.num,'',1])
+			if url in self.urls_seen:
+				self.edges.append([item['url'],url,'Directed',self.num,'',1,'secondary'])
+			else:
+				self.edges.append([item['url'],url,'Directed',self.num,'',1,'primary'])
 			self.num += 1
 		return item
 
 class SQLiteExportPipeline(object):
 
 	def __init__(self):
-		pass
+		self.urls_seen = set()
 	
 	@classmethod
 	def from_crawler(cls, crawler):
@@ -95,8 +102,15 @@ class SQLiteExportPipeline(object):
 		self.conn.close()
 	
 	def process_item(self, item, spider):
+		if item['url'] not in self.urls_seen:
+			self.urls_seen.add(item['url'])
+		
 		insert_row(self.c, "INSERT INTO nodes (id, url, name, screenshot) VALUES (?, ?, ?, ?)", (None, item['url'], item['name'], item['screenshot']))
 		
 		for link in item['links']:
-			insert_row(self.c, "INSERT INTO edges (id, source, target) VALUES (?, ?, ?)", (None, item['url'], link))
+			if link in self.urls_seen:
+				level = "secondary"
+			else:
+				level = "primary"
+			insert_row(self.c, "INSERT INTO edges (id, source, target, level) VALUES (?, ?, ?, ?)", (None, item['url'], link, level))
 		return item
