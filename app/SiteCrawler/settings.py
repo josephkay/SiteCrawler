@@ -12,10 +12,11 @@ SPIDER_MODULES = ['SiteCrawler.spiders']
 NEWSPIDER_MODULE = 'SiteCrawler.spiders'
 
 ITEM_PIPELINES = [
+	'SiteCrawler.pipelines.DuplicatesPipeline',
 	'SiteCrawler.pipelines.ScreenshotPipeline',
-	'SiteCrawler.pipelines.CsvExportPipeline',
-	#'SiteCrawler.pipelines.SQLiteExportPipeline',
-	'SiteCrawler.pipelines.DuplicatesPipeline'
+	'SiteCrawler.pipelines.CsvExportPipeline'
+	#'SiteCrawler.pipelines.SQLiteExportPipeline'
+	
 ]
 
 DEPTH_LIMIT = 0

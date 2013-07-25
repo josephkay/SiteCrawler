@@ -1,5 +1,5 @@
-2013-07-24 22:29:36+0100 [scrapy] INFO: Running reactor...
-2013-07-24 22:29:36+0100 [-] Unhandled Error
+2013-07-25 18:16:20+0100 [scrapy] INFO: Running reactor...
+2013-07-25 18:16:20+0100 [-] Unhandled Error
 	Traceback (most recent call last):
 	  File "C:\Python27\lib\site-packages\twisted\internet\base.py", line 416, in fireEvent
 	    DeferredList(beforeResults).addCallback(self._continueFiring)
@@ -20,375 +20,192 @@
 	    signal.signal(signal.SIGINT, self.sigInt)
 	exceptions.ValueError: signal only works in main thread
 	
-2013-07-24 22:29:37+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/> from <GET http://www.childrensvisiontests.co.uk>
-2013-07-24 22:29:37+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/> (referer: None)
-2013-07-24 22:29:37+0100 [SiteCrawler] DEBUG: Filtered offsite request to 'www.facebook.com': <GET http://www.facebook.com/pages/Kay-Fun-Patch/165591303462931>
-2013-07-24 22:29:37+0100 [SiteCrawler] DEBUG: Filtered offsite request to 'twitter.com': <GET http://twitter.com/kayfunpatch>
-2013-07-24 22:29:37+0100 [SiteCrawler] DEBUG: Filtered offsite request to 'www.youtube.com': <GET http://www.youtube.com/user/Kaypictures1>
-2013-07-24 22:29:37+0100 [SiteCrawler] DEBUG: Filtered offsite request to 'www.kaypictures.co.uk': <GET http://www.kaypictures.co.uk/>
-2013-07-24 22:29:38+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/> (referer: http://childrensvisiontests.co.uk/)
-2013-07-24 22:29:38+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/
-2013-07-24 22:29:45+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/wp-content/themes/kayfunpatch/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
+2013-07-25 18:16:20+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/> from <GET http://www.childrensvisiontests.co.uk>
+2013-07-25 18:16:21+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/> (referer: None)
+2013-07-25 18:16:21+0100 [SiteCrawler] DEBUG: Filtered offsite request to 'www.facebook.com': <GET http://www.facebook.com/pages/Kay-Fun-Patch/165591303462931>
+2013-07-25 18:16:21+0100 [SiteCrawler] DEBUG: Filtered offsite request to 'twitter.com': <GET http://twitter.com/kayfunpatch>
+2013-07-25 18:16:21+0100 [SiteCrawler] DEBUG: Filtered offsite request to 'www.youtube.com': <GET http://www.youtube.com/user/Kaypictures1>
+2013-07-25 18:16:21+0100 [SiteCrawler] DEBUG: Filtered offsite request to 'www.kaypictures.co.uk': <GET http://www.kaypictures.co.uk/>
+2013-07-25 18:16:21+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/patches/> from <GET http://childrensvisiontests.co.uk/patches>
+2013-07-25 18:16:21+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/blog/> from <GET http://childrensvisiontests.co.uk/blog>
+2013-07-25 18:16:21+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/otherproducts/> from <GET http://childrensvisiontests.co.uk/otherproducts>
+2013-07-25 18:16:22+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/faq/> from <GET http://childrensvisiontests.co.uk/faq>
+2013-07-25 18:16:22+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/about/> from <GET http://childrensvisiontests.co.uk/about>
+2013-07-25 18:16:22+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/checkout/> (referer: http://childrensvisiontests.co.uk/)
+2013-07-25 18:16:22+0100 [SiteCrawler] DEBUG: DEPTH = 1
+2013-07-25 18:16:25+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/checkout/>
+	{'depth': 1,
+	 'links': [<SiteCrawler.spiders.myclasses.URL object at 0x00000000046D2198>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772400>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x00000000048977F0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004897978>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000487BA58>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000487B9E8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000487B0F0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000487B4E0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000487B1D0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000487B978>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000487B8D0>],
+	 'name': u'www--checkout',
+	 'screenshot': u'www--checkout.png',
+	 'url': u'http://www.childrensvisiontests.co.uk/checkout',
+	 'url_obj': <SiteCrawler.spiders.myclasses.URL object at 0x00000000048AD1D0>}
+2013-07-25 18:16:25+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/contact/> from <GET http://childrensvisiontests.co.uk/contact>
+2013-07-25 18:16:25+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/legal/> from <GET http://childrensvisiontests.co.uk/legal>
+2013-07-25 18:16:25+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/otherproducts/> from <GET http://childrensvisiontests.co.uk/wp-content/themes/kayfunpatch/otherproducts>
+2013-07-25 18:16:25+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/> (referer: http://childrensvisiontests.co.uk/)
+2013-07-25 18:16:25+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/terms/> from <GET http://childrensvisiontests.co.uk/terms>
+2013-07-25 18:16:25+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/instructions-videos/> from <GET http://childrensvisiontests.co.uk/instructions-videos>
+2013-07-25 18:16:25+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/patches/> (referer: http://childrensvisiontests.co.uk/)
+2013-07-25 18:16:25+0100 [SiteCrawler] DEBUG: DEPTH = 1
+2013-07-25 18:16:27+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/>
+	{'depth': 1,
+	 'links': [<SiteCrawler.spiders.myclasses.URL object at 0x0000000004772D30>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772518>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x00000000047725C0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772BE0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772978>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772F60>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x00000000048AD160>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x00000000048AD048>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x00000000048AD0B8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004766EB8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000487BC18>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000487BB38>],
 	 'name': 'root_page',
 	 'screenshot': 'root_page.png',
-	 'url': 'http://childrensvisiontests.co.uk/'}
-2013-07-24 22:29:45+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/patches/> from <GET http://childrensvisiontests.co.uk/patches>
-2013-07-24 22:29:45+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/instructions-videos/> from <GET http://childrensvisiontests.co.uk/instructions-videos>
-2013-07-24 22:29:45+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/about/> from <GET http://childrensvisiontests.co.uk/about>
-2013-07-24 22:29:45+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/contact/> from <GET http://childrensvisiontests.co.uk/contact>
-2013-07-24 22:29:45+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/blog/> from <GET http://childrensvisiontests.co.uk/blog>
-2013-07-24 22:29:45+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/otherproducts/> from <GET http://childrensvisiontests.co.uk/otherproducts>
-2013-07-24 22:29:45+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/faq/> from <GET http://childrensvisiontests.co.uk/faq>
-2013-07-24 22:29:46+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/checkout/> (referer: http://childrensvisiontests.co.uk/)
-2013-07-24 22:29:46+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/checkout/
-2013-07-24 22:29:46+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/checkout/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'checkout',
-	 'screenshot': 'checkout.png',
-	 'url': 'http://childrensvisiontests.co.uk/checkout/'}
-2013-07-24 22:29:46+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/about/> (referer: http://childrensvisiontests.co.uk/)
-2013-07-24 22:29:46+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/terms/> from <GET http://childrensvisiontests.co.uk/terms>
-2013-07-24 22:29:46+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/otherproducts/> from <GET http://childrensvisiontests.co.uk/wp-content/themes/kayfunpatch/otherproducts>
-2013-07-24 22:29:46+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/contact/> (referer: http://childrensvisiontests.co.uk/)
-2013-07-24 22:29:46+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/about/
-2013-07-24 22:29:48+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/about/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'about',
-	 'screenshot': 'about.png',
-	 'url': 'http://childrensvisiontests.co.uk/about/'}
-2013-07-24 22:29:48+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/legal/> from <GET http://childrensvisiontests.co.uk/legal>
-2013-07-24 22:29:48+0100 [SiteCrawler] DEBUG: Filtered offsite request to 'www.kaypictures.com': <GET http://www.kaypictures.com/>
-2013-07-24 22:29:48+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/contact/
-2013-07-24 22:29:49+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/contact/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'contact',
-	 'screenshot': 'contact.png',
-	 'url': 'http://childrensvisiontests.co.uk/contact/'}
-2013-07-24 22:29:49+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/instructions-videos/> (referer: http://childrensvisiontests.co.uk/)
-2013-07-24 22:29:49+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/patches/> (referer: http://childrensvisiontests.co.uk/)
-2013-07-24 22:29:49+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/blog/> (referer: http://childrensvisiontests.co.uk/)
-2013-07-24 22:29:49+0100 [SiteCrawler] DEBUG: Filtered offsite request to 'www.easyphpcontactform.com': <GET http://www.easyphpcontactform.com/>
-2013-07-24 22:29:49+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/instructions-videos/
-2013-07-24 22:29:51+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/instructions-videos/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'instructions-videos',
-	 'screenshot': 'instructions-videos.png',
-	 'url': 'http://childrensvisiontests.co.uk/instructions-videos/'}
-2013-07-24 22:29:51+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/patches/
-2013-07-24 22:29:54+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/patches/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'patches',
-	 'screenshot': 'patches.png',
-	 'url': 'http://childrensvisiontests.co.uk/patches/'}
-2013-07-24 22:29:54+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/blog/
-2013-07-24 22:29:55+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/blog/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/welcome-to-our-blog-2/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'blog',
-	 'screenshot': 'blog.png',
-	 'url': 'http://childrensvisiontests.co.uk/blog/'}
-2013-07-24 22:29:55+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/terms/> (referer: http://childrensvisiontests.co.uk/)
-2013-07-24 22:29:55+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/faq/> (referer: http://childrensvisiontests.co.uk/)
-2013-07-24 22:29:55+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/otherproducts/> (referer: http://childrensvisiontests.co.uk/)
-2013-07-24 22:29:55+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/terms/
-2013-07-24 22:29:56+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/terms/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'terms',
-	 'screenshot': 'terms.png',
-	 'url': 'http://childrensvisiontests.co.uk/terms/'}
-2013-07-24 22:29:56+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/faq/
-2013-07-24 22:29:58+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/faq/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/wp-content/themes/kayfunpatch/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/wp-content/themes/kayfunpatch/contact/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'faq',
-	 'screenshot': 'faq.png',
-	 'url': 'http://childrensvisiontests.co.uk/faq/'}
-2013-07-24 22:29:58+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/otherproducts/
-2013-07-24 22:30:00+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/otherproducts/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/accessories/patch-charts/',
-	           u'http://childrensvisiontests.co.uk/wp-content/uploads/2011/09/KP_PatchchartSsmall.png/',
-	           u'http://childrensvisiontests.co.uk/accessories/toy-glasses/',
-	           u'http://childrensvisiontests.co.uk/wp-content/uploads/2012/01/toyglassesforweb.png/',
-	           u'http://childrensvisiontests.co.uk/accessories/glasses-charts/',
-	           u'http://childrensvisiontests.co.uk/wp-content/uploads/2013/07/KP_Glasseschart.png/',
-	           u'http://childrensvisiontests.co.uk/accessories/hoppity-frog/',
-	           u'http://childrensvisiontests.co.uk/wp-content/uploads/2013/07/Hoppityshop.jpg/',
-	           u'http://childrensvisiontests.co.uk/accessories/wedgees/',
-	           u'http://childrensvisiontests.co.uk/wp-content/uploads/2013/07/wedgeesshop.jpg/',
-	           u'http://childrensvisiontests.co.uk/accessories/reward-stickers/',
-	           u'http://childrensvisiontests.co.uk/wp-content/uploads/2013/07/junglestickers.png/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'otherproducts',
-	 'screenshot': 'otherproducts.png',
-	 'url': 'http://childrensvisiontests.co.uk/otherproducts/'}
-2013-07-24 22:30:00+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/legal/> (referer: http://childrensvisiontests.co.uk/)
-2013-07-24 22:30:00+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/legal/
-2013-07-24 22:30:02+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/legal/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'legal',
-	 'screenshot': 'legal.png',
-	 'url': 'http://childrensvisiontests.co.uk/legal/'}
-2013-07-24 22:30:02+0100 [SiteCrawler] DEBUG: Crawled (404) <GET http://childrensvisiontests.co.uk/welcome-to-our-blog-2/> (referer: http://childrensvisiontests.co.uk/blog/)
-2013-07-24 22:30:02+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/accessories/wedgees/> (referer: http://childrensvisiontests.co.uk/otherproducts/)
-2013-07-24 22:30:02+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/accessories/wedgees/
-2013-07-24 22:30:05+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/accessories/wedgees/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/wp-content/uploads/2013/07/wedgeesshop.jpg/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'accessories--wedgees',
-	 'screenshot': 'accessories--wedgees.png',
-	 'url': 'http://childrensvisiontests.co.uk/accessories/wedgees/'}
-2013-07-24 22:30:05+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/accessories/patch-charts/> (referer: http://childrensvisiontests.co.uk/otherproducts/)
-2013-07-24 22:30:05+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/contact/> from <GET http://childrensvisiontests.co.uk/wp-content/themes/kayfunpatch/contact>
-2013-07-24 22:30:05+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/accessories/reward-stickers/> (referer: http://childrensvisiontests.co.uk/otherproducts/)
-2013-07-24 22:30:05+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/accessories/toy-glasses/> (referer: http://childrensvisiontests.co.uk/otherproducts/)
-2013-07-24 22:30:05+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/accessories/glasses-charts/> (referer: http://childrensvisiontests.co.uk/otherproducts/)
-2013-07-24 22:30:05+0100 [SiteCrawler] DEBUG: Redirecting (301) to <GET http://childrensvisiontests.co.uk/instructions-videos/> from <GET http://childrensvisiontests.co.uk/wp-content/themes/kayfunpatch/instructions-videos>
-2013-07-24 22:30:05+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/accessories/hoppity-frog/> (referer: http://childrensvisiontests.co.uk/otherproducts/)
-2013-07-24 22:30:05+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/accessories/patch-charts/
-2013-07-24 22:30:06+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/accessories/patch-charts/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/wp-content/uploads/2011/09/KP_PatchchartSsmall.png/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'accessories--patch-charts',
-	 'screenshot': 'accessories--patch-charts.png',
-	 'url': 'http://childrensvisiontests.co.uk/accessories/patch-charts/'}
-2013-07-24 22:30:06+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/accessories/reward-stickers/
-2013-07-24 22:30:08+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/accessories/reward-stickers/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/wp-content/uploads/2013/07/junglestickers.png/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'accessories--reward-stickers',
-	 'screenshot': 'accessories--reward-stickers.png',
-	 'url': 'http://childrensvisiontests.co.uk/accessories/reward-stickers/'}
-2013-07-24 22:30:08+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/accessories/toy-glasses/
-2013-07-24 22:30:11+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/accessories/toy-glasses/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/wp-content/uploads/2012/01/toyglassesforweb.png/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'accessories--toy-glasses',
-	 'screenshot': 'accessories--toy-glasses.png',
-	 'url': 'http://childrensvisiontests.co.uk/accessories/toy-glasses/'}
-2013-07-24 22:30:11+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/accessories/glasses-charts/
-2013-07-24 22:30:13+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/accessories/glasses-charts/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/wp-content/uploads/2013/07/KP_Glasseschart.png/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'accessories--glasses-charts',
-	 'screenshot': 'accessories--glasses-charts.png',
-	 'url': 'http://childrensvisiontests.co.uk/accessories/glasses-charts/'}
-2013-07-24 22:30:13+0100 [SiteCrawler] DEBUG: Hi, this is an item page! http://childrensvisiontests.co.uk/accessories/hoppity-frog/
-2013-07-24 22:30:14+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/accessories/hoppity-frog/>
-	{'links': [u'http://www.childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/',
-	           u'http://childrensvisiontests.co.uk/blog/',
-	           u'http://childrensvisiontests.co.uk/patches/',
-	           u'http://childrensvisiontests.co.uk/otherproducts/',
-	           u'http://childrensvisiontests.co.uk/instructions-videos/',
-	           u'http://childrensvisiontests.co.uk/faq/',
-	           u'http://childrensvisiontests.co.uk/about/',
-	           u'http://childrensvisiontests.co.uk/contact/',
-	           u'http://childrensvisiontests.co.uk/checkout/',
-	           u'http://childrensvisiontests.co.uk/wp-content/uploads/2013/07/Hoppityshop.jpg/',
-	           u'http://childrensvisiontests.co.uk/terms/',
-	           u'http://childrensvisiontests.co.uk/legal/'],
-	 'name': 'accessories--hoppity-frog',
-	 'screenshot': 'accessories--hoppity-frog.png',
-	 'url': 'http://childrensvisiontests.co.uk/accessories/hoppity-frog/'}
-2013-07-24 22:30:14+0100 [SiteCrawler] INFO: Closing spider (finished)
-2013-07-24 22:30:14+0100 [SiteCrawler] INFO: Dumping Scrapy stats:
-	{'downloader/request_bytes': 10709,
-	 'downloader/request_count': 32,
-	 'downloader/request_method_count/GET': 32,
-	 'downloader/response_bytes': 92903,
-	 'downloader/response_count': 32,
-	 'downloader/response_status_count/200': 18,
-	 'downloader/response_status_count/301': 13,
-	 'downloader/response_status_count/404': 1,
-	 'finish_reason': 'finished',
-	 'finish_time': datetime.datetime(2013, 7, 24, 21, 30, 14, 921000),
-	 'item_scraped_count': 17,
-	 'request_depth_max': 3,
-	 'response_received_count': 19,
-	 'scheduler/dequeued': 32,
-	 'scheduler/dequeued/memory': 32,
-	 'scheduler/enqueued': 32,
-	 'scheduler/enqueued/memory': 32,
-	 'start_time': datetime.datetime(2013, 7, 24, 21, 29, 36, 730000)}
-2013-07-24 22:30:14+0100 [SiteCrawler] INFO: Spider closed (finished)
-2013-07-24 22:30:14+0100 [scrapy] INFO: Reactor stopped.
+	 'url': u'http://www.childrensvisiontests.co.uk',
+	 'url_obj': <SiteCrawler.spiders.myclasses.URL object at 0x00000000047729B0>}
+2013-07-25 18:16:27+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/blog/> (referer: http://childrensvisiontests.co.uk/)
+2013-07-25 18:16:27+0100 [SiteCrawler] DEBUG: DEPTH = 1
+2013-07-25 18:16:30+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/patches/>
+	{'depth': 1,
+	 'links': [<SiteCrawler.spiders.myclasses.URL object at 0x0000000004897EF0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004897E10>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x00000000048AD160>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x00000000048AD048>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x00000000048AD0B8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000487B358>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000487B128>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000487B048>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000487BC18>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772CC0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000487BB38>],
+	 'name': u'www--patches',
+	 'screenshot': u'www--patches.png',
+	 'url': u'http://www.childrensvisiontests.co.uk/patches',
+	 'url_obj': <SiteCrawler.spiders.myclasses.URL object at 0x0000000004897D30>}
+2013-07-25 18:16:30+0100 [SiteCrawler] DEBUG: DEPTH = 1
+2013-07-25 18:16:32+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/blog/>
+	{'depth': 1,
+	 'links': [<SiteCrawler.spiders.myclasses.URL object at 0x0000000004897AC8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004897978>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004897400>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004897588>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004897BE0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004897F60>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772C50>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x00000000047727B8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772F28>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772630>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772D68>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772668>],
+	 'name': u'www--blog',
+	 'screenshot': u'www--blog.png',
+	 'url': u'http://www.childrensvisiontests.co.uk/blog',
+	 'url_obj': <SiteCrawler.spiders.myclasses.URL object at 0x0000000004897B70>}
+2013-07-25 18:16:32+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/faq/> (referer: http://childrensvisiontests.co.uk/)
+2013-07-25 18:16:32+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/about/> (referer: http://childrensvisiontests.co.uk/)
+2013-07-25 18:16:32+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/otherproducts/> (referer: http://childrensvisiontests.co.uk/)
+2013-07-25 18:16:32+0100 [SiteCrawler] DEBUG: DEPTH = 1
+2013-07-25 18:16:34+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/faq/>
+	{'depth': 1,
+	 'links': [<SiteCrawler.spiders.myclasses.URL object at 0x000000000738B898>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000738BF98>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000738BE48>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000738BD68>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000738BBA8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000738BEB8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000738BDD8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000738BCF8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000738BC18>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000738B9E8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000738BAC8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000738B860>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000738B828>],
+	 'name': u'www--faq',
+	 'screenshot': u'www--faq.png',
+	 'url': u'http://www.childrensvisiontests.co.uk/faq',
+	 'url_obj': <SiteCrawler.spiders.myclasses.URL object at 0x000000000738BC88>}
+2013-07-25 18:16:34+0100 [SiteCrawler] DEBUG: DEPTH = 1
+2013-07-25 18:16:36+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/about/>
+	{'depth': 1,
+	 'links': [<SiteCrawler.spiders.myclasses.URL object at 0x0000000004772A90>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x00000000047724E0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772F60>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772978>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x00000000047725C0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772C18>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772710>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772E10>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772B00>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772400>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000441C0B8>],
+	 'name': u'www--about',
+	 'screenshot': u'www--about.png',
+	 'url': u'http://www.childrensvisiontests.co.uk/about',
+	 'url_obj': <SiteCrawler.spiders.myclasses.URL object at 0x0000000004772BE0>}
+2013-07-25 18:16:36+0100 [SiteCrawler] DEBUG: DEPTH = 1
+2013-07-25 18:16:38+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/otherproducts/>
+	{'depth': 1,
+	 'links': [<SiteCrawler.spiders.myclasses.URL object at 0x000000000739D208>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D588>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739DAC8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D3C8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D9E8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D668>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D4A8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D2E8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D128>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739DA58>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739DA90>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D7B8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D898>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D518>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D358>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D278>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D438>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D0B8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D9B0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D940>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000736ECF8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x00000000079D2A58>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000736EC88>],
+	 'name': u'www--otherproducts',
+	 'screenshot': u'www--otherproducts.png',
+	 'url': u'http://www.childrensvisiontests.co.uk/otherproducts',
+	 'url_obj': <SiteCrawler.spiders.myclasses.URL object at 0x000000000739D748>}
+2013-07-25 18:16:38+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/contact/> (referer: http://childrensvisiontests.co.uk/)
+2013-07-25 18:16:38+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/instructions-videos/> (referer: http://childrensvisiontests.co.uk/)
+2013-07-25 18:16:38+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/legal/> (referer: http://childrensvisiontests.co.uk/)
+2013-07-25 18:16:38+0100 [SiteCrawler] DEBUG: Crawled (200) <GET http://childrensvisiontests.co.uk/terms/> (referer: http://childrensvisiontests.co.uk/)
+2013-07-25 18:16:38+0100 [SiteCrawler] DEBUG: Filtered offsite request to 'www.kaypictures.com': <GET http://www.kaypictures.com/>
+2013-07-25 18:16:38+0100 [SiteCrawler] DEBUG: DEPTH = 1
+2013-07-25 18:16:40+0100 [SiteCrawler] DEBUG: Scraped from <200 http://childrensvisiontests.co.uk/contact/>
+	{'depth': 1,
+	 'links': [<SiteCrawler.spiders.myclasses.URL object at 0x000000000736EFD0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000736EA58>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000736ECC0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000736EB38>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000736EAC8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x000000000736E780>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x00000000073772B0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000007377A58>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x00000000073778D0>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x00000000073773C8>,
+	           <SiteCrawler.spiders.myclasses.URL object at 0x0000000007377BA8>],
+	 'name': u'www--contact',
+	 'screenshot': u'www--contact.png',
+	 'url': u'http://www.childrensvisiontests.co.uk/contact',
+	 'url_obj': <SiteCrawler.spiders.myclasses.URL object at 0x000000000736EEB8>}
+2013-07-25 18:16:40+0100 [SiteCrawler] DEBUG: DEPTH = 1

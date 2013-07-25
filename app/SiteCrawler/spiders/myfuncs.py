@@ -1,60 +1,20 @@
 import csv
 from urllib2 import urlopen
 
-def get_name(url, root):
-	pos = url.find(root)
-	if pos + 1:
-		if len(url) <= pos + len(root):
-			return "root_page"
-		else:
-			return replace_slashes(strip_outer_slashes(url[pos + len(root):]),"--")
-	else:
-		return "root_not_found"
-
-def strip_outer_slashes(string):
-	if string[0] == "/":
-		string = string[1:]
-	if len(string) == 0:
-		return "root_page"
-	if string[-1] == "/":
-		string = string[:-1]
-	if len(string) == 0:
-		return "root_page"
-	else:
-		return string
-
-def replace_slashes(string,new):
-	if "/" in string:
-		pos = string.find("/")
-		return replace_slashes(string[:pos] + new + string[pos+1:],new)
-	else:
-		return string
-
-def same_link(first,second):
-	if replace_slashes(first,"") == replace_slashes(second,""):
-		return True
-	else:
-		return False
-
-def url_fix(root, url):
-	if root not in url:
-		if "http" in url:
-			return False
-		url = "http://www." + root + url
-	return add_slash(de_hash(url))
-
-def de_hash(url):
-	if '#' in url:
-		pos = url.find('#')
-		return url[:pos]
-	else:
-		return url
-
-def add_slash(url):
-	if url[-1] == "/":
-		return url
-	else:
-		return url + "/"
+def get_domain(url):
+	pos = url.find(".")
+	if url[pos+1:].find(".") > -1:
+		url = url[pos+1:]
+	
+	pos = url.find("//")
+	if pos > -1:
+		url = url[pos+2:]
+	
+	pos = url.find("/")
+	if pos > -1:
+		url = url[:pos]
+	
+	return url
 
 def writeCsvFile(fname, data, *args, **kwargs):
     """
@@ -74,11 +34,6 @@ def insert_row(connection, statement, items):
 		print "Insert failed: %s" % e
 		log.msg('-------------------------   INSERT FAILED   --------------------------')
 		log.msg("Insert failed: %s" % e)
-
-def strip_www(url):
-	pos = url.find("www.")
-	if pos >= 0:
-		return url[pos+4:]
 
 def test_url(url):
 	try:

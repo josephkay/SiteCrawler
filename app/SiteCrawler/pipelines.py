@@ -12,8 +12,8 @@ from spiders.myfuncs import *
 from scrapy import log
 
 class SitecrawlerPipeline(object):
-    def process_item(self, item, spider):
-        return item
+	def process_item(self, item, spider):
+		return item
 
 class DuplicatesPipeline(object):
 	
@@ -42,6 +42,9 @@ class CsvExportPipeline(object):
 	def __init__(self):
 		self.files = {}
 		self.urls_seen = set()
+		self.depth = -1
+		self.holding = []
+		self.completed_depth = []
 	
 	@classmethod
 	def from_crawler(cls, crawler):
@@ -57,7 +60,7 @@ class CsvExportPipeline(object):
 		self.exporter1.start_exporting()
 		
 		self.edges = []
-		self.edges.append(['Source','Target','Type','ID','Label','Weight','Level'])
+		self.edges.append(['Source','Target','Type','ID','Label','Depth','Level'])
 		self.num = 1
 	
 	def spider_closed(self, spider):
@@ -73,11 +76,21 @@ class CsvExportPipeline(object):
 		if item['url'] not in self.urls_seen:
 			self.urls_seen.add(item['url'])
 		
-		for url in item['links']:
-			if url in self.urls_seen:
-				self.edges.append([item['url'],url,'Directed',self.num,'',1,'secondary'])
+		if self.depth == -1:
+			self.depth = 0
+		elif item['depth'] != self.depth:
+			self.depth = item['depth']
+			for link in self.holding:
+				self.completed_depth.append(link)
+			self.holding = []
+		
+		for link in item['links']:
+			self.holding.append(link.full)
+			if link.full in self.completed_depth:
+				level = "secondary"
 			else:
-				self.edges.append([item['url'],url,'Directed',self.num,'',1,'primary'])
+				level = "primary"
+			self.edges.append([item['url'],link.full,'Directed',self.num,'',self.depth,level])
 			self.num += 1
 		return item
 
@@ -85,6 +98,9 @@ class SQLiteExportPipeline(object):
 
 	def __init__(self):
 		self.urls_seen = set()
+		self.depth = -1
+		self.holding = []
+		self.completed_depth = []
 	
 	@classmethod
 	def from_crawler(cls, crawler):
@@ -105,12 +121,21 @@ class SQLiteExportPipeline(object):
 		if item['url'] not in self.urls_seen:
 			self.urls_seen.add(item['url'])
 		
+		if self.depth == -1:
+			self.depth = 0
+		elif item['depth'] != self.depth:
+			self.depth = item['depth']
+			for item in self.holding:
+				self.completed_depth.append(item)
+			self.holding = []
+		
 		insert_row(self.c, "INSERT INTO nodes (id, url, name, screenshot) VALUES (?, ?, ?, ?)", (None, item['url'], item['name'], item['screenshot']))
 		
 		for link in item['links']:
-			if link in self.urls_seen:
+			self.holding.append(link.full)
+			if link.full in self.completed_depth:
 				level = "secondary"
 			else:
 				level = "primary"
-			insert_row(self.c, "INSERT INTO edges (id, source, target, level) VALUES (?, ?, ?, ?)", (None, item['url'], link, level))
+			insert_row(self.c, "INSERT INTO edges (id, source, target, level) VALUES (?, ?, ?, ?)", (None, item['url'], link.full, level))
 		return item
