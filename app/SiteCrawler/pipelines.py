@@ -60,7 +60,7 @@ class CsvExportPipeline(object):
 		self.exporter1.start_exporting()
 		
 		self.edges = []
-		self.edges.append(['Source','Target','Type','ID','Label','Depth','Level'])
+		self.edges.append(['Source','Target','Type','ID','Label','Depth','Level','Weight'])
 		self.num = 1
 	
 	def spider_closed(self, spider):
@@ -90,7 +90,7 @@ class CsvExportPipeline(object):
 				level = "secondary"
 			else:
 				level = "primary"
-			self.edges.append([item['url'],link.full,'Directed',self.num,'',self.depth,level])
+			self.edges.append([item['url'],link.full,'Directed',self.num,'',self.depth,level,1])
 			self.num += 1
 		return item
 
