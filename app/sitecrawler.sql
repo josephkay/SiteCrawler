@@ -1,1 +1,1 @@
-SELECT * FROM nodes
+SELECT * FROM edges

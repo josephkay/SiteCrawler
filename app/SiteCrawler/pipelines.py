@@ -121,8 +121,14 @@ class SQLiteExportPipeline(object):
 	def spider_opened(self, spider):
 		self.conn = sqlite3.connect('sitecrawler.db')
 		self.c = self.conn.cursor()
+		self.node_tups = []
+		self.edge_tups = []
+		self.parent_tups = []
 	
 	def spider_closed(self, spider):
+		insert_rows(self.c, "INSERT INTO nodes (id, url, name, screenshot) VALUES (?, ?, ?, ?)", self.node_tups)
+		insert_rows(self.c, "INSERT INTO edges (id, source, target, level) VALUES (?, ?, ?, ?)", self.edge_tups)
+		insert_rows(self.c, "INSERT INTO parents (parent, child) VALUES (?, ?)", self.parent_tups)
 		self.conn.commit()
 		self.conn.close()
 	
@@ -138,7 +144,7 @@ class SQLiteExportPipeline(object):
 				self.completed_depth.append(item)
 			self.holding = []
 		
-		insert_row(self.c, "INSERT INTO nodes (id, url, name, screenshot) VALUES (?, ?, ?, ?)", (None, item['url'], item['name'], item['screenshot']))
+		self.node_tups.append((None, item['url'], item['name'], item['screenshot']))
 		
 		for link in item['links']:
 			self.holding.append(link.full)
@@ -146,5 +152,10 @@ class SQLiteExportPipeline(object):
 				level = "secondary"
 			else:
 				level = "primary"
-			insert_row(self.c, "INSERT INTO edges (id, source, target, level) VALUES (?, ?, ?, ?)", (None, item['url'], link.full, level))
+			self.edge_tups.append((None, item['url'], link.full, level))
+		
+		for tup in item['parents']:
+			if tup not in self.parent_tups:
+				self.parent_tups.append(tup)
+		
 		return item

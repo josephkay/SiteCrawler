@@ -35,6 +35,14 @@ def insert_row(connection, statement, items):
 		log.msg('-------------------------   INSERT FAILED   --------------------------')
 		log.msg("Insert failed: %s" % e)
 
+def insert_rows(connection, statement, items):
+	try:
+		connection.executemany(statement, items)
+	except Exception, e:
+		print "Insert failed: %s" % e
+		log.msg('-------------------------   INSERT FAILED   --------------------------')
+		log.msg("Insert failed: %s" % e)
+
 def test_url(url):
 	try:
 		code = urlopen('http://' + url).code
