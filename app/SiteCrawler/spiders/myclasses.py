@@ -26,6 +26,8 @@ class URL(object):
 		
 		self.set_path(url)
 		
+		self.parents = self.get_parents(url.split("/"), [], 0)
+		
 		self.full = self.protocol + self.subdomain + self.domain + self.path
 		
 		self.name = self.get_name(self.subdomain, self.path)
@@ -39,6 +41,23 @@ class URL(object):
 				url = url[:-1]
 		
 		self.path = url
+	
+	def get_parents(self, path_list, parents_list, n):
+		if n == 0:
+			new_path_list = []
+			for x in path_list:
+				if x != "":
+					new_path_list.append(x)
+		else:
+			new_path_list = path_list
+		
+		length = len(new_path_list)
+		if length > 1:
+			parents_list.append(["/".join(new_path_list[:length-1]), "/".join(new_path_list)])
+			self.get_parents(new_path_list[:length-1], parents_list, n+1)
+		elif length == 1:
+			parents_list.append(["root_page", new_path_list[0]])
+		return parents_list
 	
 	def set_domain(self, url, domain):
 		pos = url.find("/")

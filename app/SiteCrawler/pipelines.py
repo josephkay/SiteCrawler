@@ -54,7 +54,7 @@ class CsvExportPipeline(object):
 		return pipeline
 
 	def spider_opened(self, spider):
-		nodes = open(getcwd()+r'\%s_nodes.csv' % spider.name, 'w+b')
+		nodes = open(getcwd()+r'\nodes.csv', 'w+b')
 		self.files[spider] = nodes
 		self.exporter1 = CsvItemExporter(nodes, fields_to_export=['url','name','screenshot'])
 		self.exporter1.start_exporting()
@@ -62,6 +62,9 @@ class CsvExportPipeline(object):
 		self.edges = []
 		self.edges.append(['Source','Target','Type','ID','Label','Depth','Level','Weight'])
 		self.num = 1
+		
+		self.parents = []
+		self.parents.append(['Parent','Child'])
 	
 	def spider_closed(self, spider):
 		self.exporter1.finish_exporting()
@@ -69,6 +72,7 @@ class CsvExportPipeline(object):
 		file.close()
 		
 		writeCsvFile(getcwd()+r'\edges.csv', self.edges)
+		writeCsvFile(getcwd()+r'\parents.csv', self.parents)
 	
 	def process_item(self, item, spider):
 		self.exporter1.export_item(item)
@@ -90,8 +94,13 @@ class CsvExportPipeline(object):
 				level = "secondary"
 			else:
 				level = "primary"
-			self.edges.append([item['url'],link.full,'Directed',self.num,'',self.depth,level,1])
+			self.edges.append([item['url'].encode('utf-8'),link.full.encode('utf-8'),'Directed',self.num,'',self.depth,level,1])
 			self.num += 1
+		
+		for tup in item['parents']:
+			if tup not in self.parents:
+				self.parents.append(tup)
+		
 		return item
 
 class SQLiteExportPipeline(object):

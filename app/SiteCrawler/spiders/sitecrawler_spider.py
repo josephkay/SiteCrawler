@@ -34,6 +34,8 @@ class MySpider(CrawlSpider):
 		item['screenshot'] = item['name']+'.png'
 		item['depth'] = response.meta['depth']
 		item['links'] = []
+		item['path'] = item['url_obj'].path 
+		item['parents'] = item['url_obj'].parents
 		
 		for url in hxs.select('//a/@href').extract():
 			u = URL(url, parent=item['url_obj'])

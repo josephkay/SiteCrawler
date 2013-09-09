@@ -14,3 +14,5 @@ class SiteCrawlerItem(Item):
 	screenshot = Field()
 	links = Field()
 	depth = Field()
+	path = Field()
+	parents = Field()
