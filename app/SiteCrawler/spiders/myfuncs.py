@@ -1,5 +1,6 @@
 import csv
 from urllib2 import urlopen
+from scrapy import log
 
 def get_domain(url):
 	pos = url.find(".")
