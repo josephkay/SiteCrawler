@@ -18,11 +18,7 @@ dict = {}
 dict["name"] = "root_page"
 dict["children"] = []
 
-c.execute("SELECT child FROM parents WHERE parent = ?", ("root_page",))
-roots = c.fetchall()
+dict["children"].append(get_children(c, "root_page"))
 
-for (child) in roots:
-	dict["children"].append({"name":child, "children":[]})
-	dict["children"]["children"].append(get_children(c, child))
-
-jsonarray = json.dumps(dict)
+with open('sitemap.json', 'w') as outfile:
+  json.dump(dict, outfile)

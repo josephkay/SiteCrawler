@@ -140,8 +140,8 @@ class SQLiteExportPipeline(object):
 			self.depth = 0
 		elif item['depth'] != self.depth:
 			self.depth = item['depth']
-			for item in self.holding:
-				self.completed_depth.append(item)
+			for link in self.holding:
+				self.completed_depth.append(link)
 			self.holding = []
 		
 		self.node_tups.append((None, item['url'], item['name'], item['screenshot']))
