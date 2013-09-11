@@ -35,26 +35,23 @@ var i = 0,
     duration = 750,
     root;
 
-var tree = d3.layout.tree()
-    .size([height, width]);
-
 // --- This is to do with the curved course that the links take. The projection bit is to swap the x and y coordinates to make the tree go left to right.
 var diagonal = d3.svg.diagonal()
     .projection(function(d) { return [d.y, d.x]; });
 
-var svg = d3.select("body").append("svg")
-    .attr("width", width + margin.right + margin.left)
-    .attr("height", 100)
-  .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-	
-	
+var svg;
+
+var tree;
+
 
 d3.json("sitemap.json", function(error, flare) {
   root = flare;
   // --- These seem to set the starting position of the nodes
   root.x0 = height / 2;
   root.y0 = 0;
+  
+  var h = getHeight(root);
+  initiate(h);
 
   function collapse(d) {
     if (d.children) {
@@ -65,19 +62,62 @@ d3.json("sitemap.json", function(error, flare) {
   }
 
   root.children.forEach(collapse);
-  update(root);
+  update(root, );
 });
 
-d3.select(self.frameElement).style("height", "800px");
+// --- What does this do?
+//d3.select(self.frameElement).style("height", "800px");
 
-function update(source) {
-  
-  var h = 300;
+function getHeight(data) {
+	
+	var h = 0;
+	
+	var t = d3.layout.tree()
+		.size([0, 0]);
+
+	var c = d3.select("body").append("svg")
+		.attr("width", 0)
+		.attr("height", 0)
+		.append("g");
+	
+	var ns = t.nodes(data);
+	var ls = t.links(ns);
+	
+	var node = c.selectAll(".node")
+		.data(ns)
+		.enter()
+		.append("g")
+			.attr("class", "node");
+	
+	var num = {0:0, 1:0, 2:0, 3:0, 4:0};
+	d3.selectAll(".node").each(function(d) {
+		dep = d.depth
+		num[dep] = num[dep] + 1;
+	});
+	
+	for (var x=0; x<5; x++) {
+		if (num[x] > h) {
+			h = num[x];
+		}
+	}
+	
+	return h*20;
+}
+
+function initiate(h) {
   
   svg = d3.select("body").append("svg")
-    .attr("height", 200);
+    .attr("width", width + margin.right + margin.left)
+    .attr("height", h + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   
-  tree = tree.size([h, width]);
+  tree = d3.layout.tree()
+    .size([height, width]);
+
+}
+
+function update(source) {
   
   // Compute the new tree layout.
   var nodes = tree.nodes(root).reverse(),
