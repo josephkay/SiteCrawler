@@ -22,15 +22,24 @@
   stroke-width: 1.5px;
 }
 
+#thumb {
+  display: none;
+}
+
 </style>
 <body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
+
+<img id="thumb">
+
+<script src="d3/d3.v3.js"></script>
 <script>
 
 var margin = {top: 20, right: 120, bottom: 20, left: 120},
     width = 2000 - margin.right - margin.left,
     height = 3000 - margin.top - margin.bottom;
     
+var d_width = 300;
+	
 var i = 0,
     duration = 750,
     root;
@@ -50,8 +59,10 @@ d3.json("sitemap.json", function(error, flare) {
   root.x0 = height / 2;
   root.y0 = 0;
   
-  var h = getHeight(root);
-  initiate(h);
+  var hw = getHeight(root);
+  var h = hw[0]
+  var w = hw[1]
+  initiate(h, w);
 
   function collapse(d) {
     if (d.children) {
@@ -101,19 +112,22 @@ function getHeight(data) {
 		}
 	}
 	
-	return h*20;
+	var max_depth = d3.max(ns, function(x) { return x.depth;});
+	
+	return [h*30 + 400, max_depth * d_width + d_width];
 }
 
-function initiate(h) {
+function initiate(h, w) {
   
   svg = d3.select("body").append("svg")
-    .attr("width", width + margin.right + margin.left)
+    .attr("width", w + margin.right + margin.left)
     .attr("height", h + margin.top + margin.bottom)
   .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
   
   tree = d3.layout.tree()
-    .size([height, width]);
+    .size(null)
+	.elementsize([30,d_width]);
 
 }
 
@@ -125,7 +139,7 @@ function update(source) {
 
   // Normalize for fixed-depth.
   // --- d.depth tells you what level in the tree the node is - so this creates a gap of 180 between tree levels.
-  nodes.forEach(function(d) { d.y = d.depth * 180; });
+  nodes.forEach(function(d) { d.y = d.depth * d_width; });
 
   // Update the nodes…
   // --- I think this makes sure that all of the nodes are updated
@@ -135,9 +149,24 @@ function update(source) {
   // Enter any new nodes at the parent's previous position.
   // --- This determines where the new nodes first appear before transitioning. It's important for swapping the x and y to make the tree layout go from left to right.
   var nodeEnter = node.enter().append("g")
-      .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
-      .on("click", click);
+	  .attr("class", "node")
+	  .attr("transform", function(d) { return "translate(" + source.y0 + "," + source.x0 + ")"; })
+	  .on("click", click);
+  
+  d3.selectAll( ".node" ).on( "mouseover", function(d) {
+      if (!d.children && !d._children) {
+          // display thumbnail
+		  document.getElementById('thumb').src="screenshots/thumb.png";
+          document.getElementById('thumb').style.display='block';
+	  }
+  });
+  
+  d3.selectAll( ".node" ).on( "mouseout", function(d) {
+      if (!d.children && !d._children) {
+          // display thumbnail
+          document.getElementById('thumb').style.display='none';
+	  }
+  });
   
   // --- The number in attr() determines the size of the node as it transitions. Style() changes the node fill colour depending on whether the node has children.
   // --- 1e-6 means 0.000001
@@ -218,12 +247,16 @@ function update(source) {
 
 // Toggle children on click.
 function click(d) {
-  if (d.children) {
-    d._children = d.children;
-    d.children = null;
+  if (d.children || d._children) {
+	if (d.children) {
+	  d._children = d.children;
+	  d.children = null;
+	} else {
+	  d.children = d._children;
+	  d._children = null;
+	}
   } else {
-    d.children = d._children;
-    d._children = null;
+	window.open("http://www.google.com", '_blank', 'location=yes,height=800,width=800,scrollbars=yes,status=yes');
   }
   update(d);
 }

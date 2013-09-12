@@ -24,8 +24,8 @@
 
 </style>
 <body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" ></script>
+<!--<script src="http://d3js.org/d3.v3.min.js"></script>-->
+<script src="d3/d3.v3.js"></script>
 <script>
 
 var margin = {top: 20, right: 120, bottom: 20, left: 120},
@@ -33,7 +33,8 @@ var margin = {top: 20, right: 120, bottom: 20, left: 120},
     height = 3000 - margin.top - margin.bottom;
 
 var tree = d3.layout.tree()
-	.size([height, width]);
+	.size(null)
+	.elementsize([30, 300]);
 
 var canvas = d3.select("body").append("svg")
 	.attr("width", width + margin.right + margin.left)
