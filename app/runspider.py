@@ -23,6 +23,9 @@ def runspider():
 	
 	dispatcher.connect(stop_reactor, signal=signals.spider_closed)
 	route = request.args.get('route')
+	
+	# Check here for whether the domain is already in the database
+	
 	spider = MySpider(route)
 	
 	settings_module = importlib.import_module('SiteCrawler.settings')

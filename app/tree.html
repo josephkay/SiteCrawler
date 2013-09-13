@@ -29,6 +29,7 @@
 </style>
 <body>
 
+<h2 id="header"></h2>
 <img id="thumb">
 
 <script src="d3/d3.v3.js"></script>
@@ -154,18 +155,10 @@ function update(source) {
 	  .on("click", click);
   
   d3.selectAll( ".node" ).on( "mouseover", function(d) {
-      if (!d.children && !d._children) {
-          // display thumbnail
-		  document.getElementById('thumb').src="screenshots/thumb.png";
-          document.getElementById('thumb').style.display='block';
-	  }
-  });
-  
-  d3.selectAll( ".node" ).on( "mouseout", function(d) {
-      if (!d.children && !d._children) {
-          // display thumbnail
-          document.getElementById('thumb').style.display='none';
-	  }
+	  // display thumbnail
+	  document.getElementById('thumb').src="screenshots/thumb.png";
+	  document.getElementById('thumb').style.display='block';
+	  document.getElementById('header').innerHTML=d.name;
   });
   
   // --- The number in attr() determines the size of the node as it transitions. Style() changes the node fill colour depending on whether the node has children.

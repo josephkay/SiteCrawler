@@ -16,10 +16,7 @@ ITEM_PIPELINES = [
 	#'SiteCrawler.pipelines.ScreenshotPipeline',
 	'SiteCrawler.pipelines.CsvExportPipeline',
 	'SiteCrawler.pipelines.SQLiteExportPipeline'
-<<<<<<< HEAD
-	
-=======
->>>>>>> d7f884b662793d133d35529832cbcea8d900b8ce
+
 ]
 
 DEPTH_LIMIT = 0
