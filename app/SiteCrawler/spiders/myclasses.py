@@ -1,6 +1,6 @@
 class URL(object):
 
-	def __init__(self, url, parent=None, base=None):
+	def __init__(self, url, scrapeid, parent=None, base=None):
 		self.original = url
 		if parent:
 			protocol = parent.protocol
@@ -14,6 +14,8 @@ class URL(object):
 			protocol = "error"
 			subdomain = "error"
 			domain = "error"
+		
+		self.scrapeid = scrapeid
 		
 		self.domain = domain
 		
@@ -53,10 +55,10 @@ class URL(object):
 		
 		length = len(new_path_list)
 		if length > 1:
-			parents_list.append(["/".join(new_path_list[:length-1]), "/".join(new_path_list)])
+			parents_list.append([self.scrapeid, "/".join(new_path_list[:length-1]), "/".join(new_path_list)])
 			self.get_parents(new_path_list[:length-1], parents_list, n+1)
 		elif length == 1:
-			parents_list.append(["root_page", new_path_list[0]])
+			parents_list.append([self.scrapeid, "root_page", new_path_list[0]])
 		return parents_list
 	
 	def set_domain(self, url, domain):

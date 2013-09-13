@@ -21,7 +21,7 @@ def writeCsvFile(fname, data, *args, **kwargs):
     """
     @param fname: string, name of file to write
     @param data: list of list of items
-
+	
     Write data to file
     """
     mycsv = csv.writer(open(fname, 'wb'), *args, **kwargs)
@@ -43,6 +43,15 @@ def insert_rows(connection, statement, items):
 		print "Insert failed: %s" % e
 		log.msg('-------------------------   INSERT FAILED   --------------------------')
 		log.msg("Insert failed: %s" % e)
+
+def select_from(connection, statement, where):
+	try:
+		connection.executemany(statement, (where,))
+		return connection.fetchall()
+	except Exception, e:
+		print "Select failed: %s" % e
+		log.msg('-------------------------   SELECT FAILED   --------------------------')
+		log.msg("Seelct failed: %s" % e)
 
 def test_url(url):
 	try:

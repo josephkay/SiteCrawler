@@ -16,3 +16,4 @@ class SiteCrawlerItem(Item):
 	depth = Field()
 	path = Field()
 	parents = Field()
+	scrapeid = Field()

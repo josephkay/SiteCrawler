@@ -33,8 +33,7 @@ class ScreenshotPipeline(object):
 		self.s = Screenshooter()
 	
 	def process_item(self, item, spider):
-		image_folder = "screenshots\\"
-		self.s.capture(item['url'], image_folder + item['screenshot'])
+		self.s.capture(item['url'], "screenshots\\{1}\\{2}.png".format(item['url_obj'].domain, item['name']))
 		return item
 
 class CsvExportPipeline(object):
@@ -126,9 +125,16 @@ class SQLiteExportPipeline(object):
 		self.parent_tups = []
 	
 	def spider_closed(self, spider):
-		insert_rows(self.c, "INSERT INTO nodes (id, url, name, screenshot) VALUES (?, ?, ?, ?)", self.node_tups)
-		insert_rows(self.c, "INSERT INTO edges (id, source, target, level) VALUES (?, ?, ?, ?)", self.edge_tups)
-		insert_rows(self.c, "INSERT INTO parents (parent, child) VALUES (?, ?)", self.parent_tups)
+		insert_rows(self.c, "INSERT INTO nodes (id, scrapeid, url, name) VALUES (?, ?, ?, ?)", self.node_tups)
+		
+		new_edge_tups = []
+		for [x, source_url, target_url, level] in self.edge_tups:
+			sourceid = select_from(self.c, "SELECT id FROM nodes WHERE url = ?", source_url)
+			targetid = select_from(self.c, "SELECT id FROM nodes WHERE url = ?", target_url)
+			new_edge_tups.append((x, sourceid, targetid, level))
+		
+		insert_rows(self.c, "INSERT INTO edges (scrapeid, sourceid, targetid, level) VALUES (?, ?, ?, ?)", new_edge_tups)
+		insert_rows(self.c, "INSERT INTO parents (scrapeid, parent, child) VALUES (?, ?, ?)", self.parent_tups)
 		self.conn.commit()
 		self.conn.close()
 	
@@ -144,7 +150,7 @@ class SQLiteExportPipeline(object):
 				self.completed_depth.append(link)
 			self.holding = []
 		
-		self.node_tups.append((None, item['url'], item['name'], item['screenshot']))
+		self.node_tups.append((None, item['scrapeid'], item['url'], item['name']))
 		
 		for link in item['links']:
 			self.holding.append(link.full)
@@ -152,7 +158,7 @@ class SQLiteExportPipeline(object):
 				level = "secondary"
 			else:
 				level = "primary"
-			self.edge_tups.append((None, item['url'], link.full, level))
+			self.edge_tups.append((item['scrapeid'], item['url'], link.full, level))
 		
 		for tup in item['parents']:
 			if tup not in self.parent_tups:

@@ -1,5 +1,4 @@
 from twisted.internet import reactor
-
 from scrapy import log, signals
 from scrapy.crawler import Crawler
 from scrapy.settings import CrawlerSettings
@@ -23,8 +22,6 @@ def runspider():
 	
 	dispatcher.connect(stop_reactor, signal=signals.spider_closed)
 	route = request.args.get('route')
-	
-	# Check here for whether the domain is already in the database
 	
 	spider = MySpider(route)
 	
