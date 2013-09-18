@@ -3,6 +3,7 @@ import time
 from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4.QtWebKit import *
+from scrapy import log
 
 class Screenshooter(QWebView):
     def __init__(self):
@@ -22,8 +23,11 @@ class Screenshooter(QWebView):
         painter = QPainter(image)
         frame.render(painter)
         painter.end()
-        print 'saving', output_file
-        image.save(output_file)
+        log.msg("Saving: {0}".format(output_file))
+        try:
+            image.save(output_file)
+        except Exception, e:
+            log.msg("Screenshot saving failed: {0}".format(e))
 
     def wait_load(self, delay=0):
         # process app events until page loaded

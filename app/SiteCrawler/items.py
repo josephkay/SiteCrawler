@@ -17,3 +17,4 @@ class SiteCrawlerItem(Item):
 	path = Field()
 	parents = Field()
 	scrapeid = Field()
+	date = Field()

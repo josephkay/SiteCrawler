@@ -7,8 +7,15 @@
     <p>
         This domain has already been scraped.<br>
 		Do you want to scrape it anyway?<br>
-        {{form.answer(size=80)}}<br>
-    </p>
-    <p><input type="submit" value="Submit URL"></p>
+	</p>
+	<table>
+        {% for subfield in form.answer %}
+			<tr>
+				<td>{{ subfield }}</td>
+				<td>{{ subfield.label }}</td>
+			</tr>
+		{% endfor %}
+    </table>
+    <p><input type="submit" name="yes" value="Submit"></p>
 </form>
 </body>

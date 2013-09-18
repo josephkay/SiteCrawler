@@ -1,0 +1,19 @@
+<!doctype html>
+<title>Scrape Already Exists</title>
+<body>
+<h1>Scraper</h1>
+<form action="" method="post" name="rescrape">
+	{{form.hidden_tag()}}
+	<p>Please select the results you would like to view.<br></p>
+	<table>
+		{% for subfield in form.answer %}
+			<tr>
+				<td>{{ subfield }}</td>
+				<td>{{ subfield.label }}</td>
+			</tr>
+		{% endfor %}
+	</table>
+	
+	<p><input type="submit" name="yes" value="Submit"></p>
+</form>
+</body>

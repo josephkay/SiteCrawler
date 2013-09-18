@@ -34,7 +34,7 @@ def insert_row(connection, statement, items):
 	except Exception, e:
 		print "Insert failed: %s" % e
 		log.msg('-------------------------   INSERT FAILED   --------------------------')
-		log.msg("Insert failed: %s" % e)
+		log.msg("Insert ({0}) failed: {1}".format(statement, e))
 
 def insert_rows(connection, statement, items):
 	try:
@@ -42,16 +42,25 @@ def insert_rows(connection, statement, items):
 	except Exception, e:
 		print "Insert failed: %s" % e
 		log.msg('-------------------------   INSERT FAILED   --------------------------')
-		log.msg("Insert failed: %s" % e)
+		log.msg("Insert ({0}) failed: {1}".format(statement, e))
 
-def select_from(connection, statement, where):
+def select_from_and(connection, statement, where1, where2):
 	try:
-		connection.executemany(statement, (where,))
+		connection.execute(statement, (where1, where2))
 		return connection.fetchall()
 	except Exception, e:
 		print "Select failed: %s" % e
 		log.msg('-------------------------   SELECT FAILED   --------------------------')
-		log.msg("Seelct failed: %s" % e)
+		log.msg("Select ({0}) failed: {1}".format(statement, e))
+
+def select_from(connection, statement, where):
+	try:
+		connection.execute(statement, (where,))
+		return connection.fetchall()
+	except Exception, e:
+		print "Select failed: %s" % e
+		log.msg('-------------------------   SELECT FAILED   --------------------------')
+		log.msg("Select ({0}) failed: {1}".format(statement, e))
 
 def test_url(url):
 	try:
@@ -62,3 +71,16 @@ def test_url(url):
 		return False
 	else:
 		return True
+
+def get_children(connection, parent, scrapeid):
+	dict_list = []
+	children = select_from_and(connection, "SELECT child FROM parents WHERE parent = ? and scrapeid = ?", parent, scrapeid)
+	for tup in children:
+		child = tup[0]
+		dict = {}
+		dict["name"] = child
+		children_list = get_children(c, child, scrapeid)
+		if children_list:
+			dict["children"] = children_list
+		dict_list.append(dict)
+	return dict_list
