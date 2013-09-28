@@ -1,3 +1,5 @@
+from scrapy import log
+
 class URL(object):
 
 	def __init__(self, url, scrapeid, parent=None, base=None):
@@ -28,7 +30,7 @@ class URL(object):
 		
 		self.set_path(url)
 		
-		self.parents = self.get_parents(url.split("/"), [], 0)
+		self.parents = self.get_parents(self.subdomain[:-1], self.strip_bad_file_chars(url).split("/"), [], 0)
 		
 		self.full = self.protocol + self.subdomain + self.domain + self.path
 		
@@ -44,7 +46,7 @@ class URL(object):
 		
 		self.path = url
 	
-	def get_parents(self, path_list, parents_list, n):
+	def get_parents(self, subdomain, path_list, parents_list, n):
 		if n == 0:
 			new_path_list = []
 			for x in path_list:
@@ -55,10 +57,10 @@ class URL(object):
 		
 		length = len(new_path_list)
 		if length > 1:
-			parents_list.append([self.scrapeid, "/".join(new_path_list[:length-1]), "/".join(new_path_list)])
-			self.get_parents(new_path_list[:length-1], parents_list, n+1)
+			parents_list.append([self.scrapeid, subdomain + "--" + "/".join(new_path_list[:length-1]), subdomain + "--" + "/".join(new_path_list)])
+			self.get_parents(subdomain, new_path_list[:length-1], parents_list, n+1)
 		elif length == 1:
-			parents_list.append([self.scrapeid, "root_page", new_path_list[0]])
+			parents_list.append([self.scrapeid, "root_page", subdomain + "--" + new_path_list[0]])
 		return parents_list
 	
 	def set_domain(self, url, domain):
@@ -110,8 +112,17 @@ class URL(object):
 		if not path:
 			return "root_page"
 		else:
-			return subdomain[:-1] + "--" + self.replace_slashes(self.strip_outer_slashes(path),"--")
-		
+			return subdomain[:-1] + "--" + self.strip_bad_file_chars(self.replace_slashes(self.strip_outer_slashes(path),"--"))
+	
+	def strip_bad_file_chars(self, string):
+		bad_chars = ["?", "\\", '"', ":", "*", "<", ">", "|"]
+		for char in bad_chars:
+			if char in string:
+				log.msg("String before: {0}".format(string))
+				string = string.replace(char, "-")
+				log.msg("String after: {0}".format(string))
+		return string
+	
 	def strip_outer_slashes(self, string):
 		if string[0] == "/":
 			string = string[1:]

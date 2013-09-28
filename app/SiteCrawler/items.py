@@ -18,3 +18,4 @@ class SiteCrawlerItem(Item):
 	parents = Field()
 	scrapeid = Field()
 	date = Field()
+	social = Field()

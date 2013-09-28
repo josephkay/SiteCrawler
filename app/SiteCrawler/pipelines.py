@@ -34,8 +34,7 @@ class ScreenshotPipeline(object):
 		self.s = Screenshooter()
 	
 	def process_item(self, item, spider):
-		self.s.capture(item['url'], r"{0}\scrapes\{1}\{2}\{3}.png".format(getcwd(), item['url_obj'].domain, item['date'], item['name']))
-		#self.s.capture(item['url'], r"{0}\screenshots\{1}.png".format(getcwd(), item['name']))
+		self.s.capture(item['url'], r"{0}\initiator\static\scrapes\{1}\{2}\{3}.png".format(getcwd(), item['url_obj'].domain, item['date'], item['name']))
 		return item
 
 class CsvExportPipeline(object):
@@ -127,30 +126,34 @@ class SQLiteExportPipeline(object):
 		self.parent_tups = []
 	
 	def spider_closed(self, spider):
-		insert_rows(self.c, "INSERT INTO nodes (id, scrapeid, url, name) VALUES (?, ?, ?, ?)", list(self.node_tups))
+		insert_rows(self.c, "INSERT INTO nodes (id, scrapeid, url, name, social) VALUES (?, ?, ?, ?, ?)", list(self.node_tups))
 		
 		new_edge_tups = []
+		nlen = len(self.edge_tups)
+		n = 0
 		for [scrapeid, source_url, target_url, level] in self.edge_tups:
 			try:
 				sourceid = select_from_and(self.c, "SELECT id FROM nodes WHERE url = ? AND scrapeid = ?", source_url, scrapeid)[0][0]
 				targetid = select_from_and(self.c, "SELECT id FROM nodes WHERE url = ? AND scrapeid = ?", target_url, scrapeid)[0][0]
 				new_edge_tups.append((scrapeid, sourceid, targetid, level))
 			except Exception, e:
-				log.msg('-------------------------   INSERT FAILED   --------------------------')
-				log.msg("Select failed: {0}".format(e))
+				n += 1
+				log.msg('-------------------------   SELECT FAILED   --------------------------')
+				log.msg("Select failed: {0} --- failure: {1}/{2}".format(e, n, nlen))
 		
 		insert_rows(self.c, "INSERT INTO edges (scrapeid, sourceid, targetid, level) VALUES (?, ?, ?, ?)", new_edge_tups)
 		insert_rows(self.c, "INSERT INTO parents (scrapeid, parent, child) VALUES (?, ?, ?)", self.parent_tups)
 		
 		scrapeid = list(self.edge_tups)[0][0]
-		domain, date = select_from(self.c, "SELECT domain, date FROM scrapes WHERE scrapeid = ?", scrapeid)
+		results = select_from(self.c, "SELECT domain, date FROM scrapes WHERE id = ?", scrapeid)
+		domain, date = results[0]
 		
 		parents_dict = {}
 		parents_dict["name"] = "root_page"
-		parents_dict["children"] = get_children(c, "root_page", scrapeid)
+		parents_dict["children"] = get_children(self.c, "root_page", scrapeid)
 
-		with open(r'{0}\scrapes\{1}\{2}\sitemap.json'.format(getcwd(), domain, date), 'w') as outfile:
-			json.dump(dict, outfile)
+		with open(r'{0}\initiator\static\scrapes\{1}\{2}\sitemap.json'.format(getcwd(), domain, date), 'w') as outfile:
+			json.dump(parents_dict, outfile)
 		
 		self.conn.commit()
 		self.conn.close()
@@ -167,7 +170,7 @@ class SQLiteExportPipeline(object):
 				self.completed_depth.append(link)
 			self.holding = []
 		
-		self.node_tups.add((None, item['scrapeid'], item['url'], item['name']))
+		self.node_tups.add((None, item['scrapeid'], item['url'], item['name'], item['social']))
 		
 		for link in item['links']:
 			self.holding.append(link.full)
@@ -177,8 +180,9 @@ class SQLiteExportPipeline(object):
 				level = 1
 			self.edge_tups.add((item['scrapeid'], item['url'], link.full, level))
 		
-		for tup in item['parents']:
-			if tup not in self.parent_tups:
-				self.parent_tups.append(tup)
+		if not item['social']:
+			for tup in item['parents']:
+				if tup not in self.parent_tups:
+					self.parent_tups.append(tup)
 		
 		return item

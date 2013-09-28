@@ -6,8 +6,6 @@ from SiteCrawler.spiders.myfuncs import *
 import sqlite3
 import datetime
 
-# index view function suppressed for brevity
-
 @app.route('/', methods = ['GET', 'POST'])
 def start():
 	form = TextBox()
@@ -67,10 +65,12 @@ def choose_graph():
 	domain = request.args.get('domain')
 	date = request.args.get('date')
 	form = RadioForm()
-	form.answer.choices = [("sitemap","Sitemap with screenshots")]
+	form.answer.choices = [("sitemap","Sitemap with screenshots"), ("social","Social media screenshots")]
 	if form.validate_on_submit():
 		if form.answer.data == "sitemap":
 			return redirect(url_for('sitemap', domain = domain, date = date))
+		elif form.answer.data == "social":
+			return redirect(url_for('social', domain = domain, date = date))
 		else:
 			return redirect(url_for('choose_graph', domain = domain, date = date))
 	return render_template('choose_graph.html', form = form)
@@ -79,5 +79,17 @@ def choose_graph():
 def sitemap():
 	domain = request.args.get('domain')
 	date = request.args.get('date')
-	json_data = r"scrapes\{0}\{1}\sitemap.json".format(domain, date)
-	return render_template('tree.html', json_data = json_data)
+	json_data = r"scrapes/{0}/{1}/sitemap.json".format(domain, date)
+	image_path = r"/static/scrapes/{0}/{1}/".format(domain, date)
+	return render_template('tree.html', json_data = json_data, image_path = image_path, domain = domain)
+
+@app.route('/screenshot/', methods = ['GET', 'POST'])
+def screenshot():
+	image_path = request.args.get('image_path')
+	return render_template('screenshot.html', image_path = image_path)
+
+@app.route('/social/', methods = ['GET', 'POST'])
+def social():
+	domain = request.args.get('domain')
+	date = request.args.get('date')
+	return render_template('social.html')

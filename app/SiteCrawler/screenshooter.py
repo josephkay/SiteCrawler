@@ -4,6 +4,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 from PyQt4.QtWebKit import *
 from scrapy import log
+from spiders.myfuncs import *
 
 class Screenshooter(QWebView):
     def __init__(self):
@@ -12,7 +13,7 @@ class Screenshooter(QWebView):
         self._loaded = False
         self.loadFinished.connect(self._loadFinished)
 
-    def capture(self, url, output_file):
+    def capture(self, url, output_path):
         self.load(QUrl(url))
         self.wait_load()
         # set to webpage size
@@ -23,9 +24,10 @@ class Screenshooter(QWebView):
         painter = QPainter(image)
         frame.render(painter)
         painter.end()
-        log.msg("Saving: {0}".format(output_file))
+        log.msg("Saving: {0}".format(output_path))
         try:
-            image.save(output_file)
+            image.save(output_path)
+            crop_image(output_path)
         except Exception, e:
             log.msg("Screenshot saving failed: {0}".format(e))
 

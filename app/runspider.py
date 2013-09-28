@@ -9,7 +9,7 @@ from scrapy.xlib.pydispatch import dispatcher
 import logging
 import importlib
 from SiteCrawler.spiders.sitecrawler_spider import MySpider
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, url_for
 from initiator import app
 import os
 import datetime
@@ -26,7 +26,7 @@ def runspider():
 	route = request.args.get('route')
 	domain = request.args.get('domain')
 	
-	directory = r"{0}\scrapes\{1}\{2}".format(os.getcwd(), domain, unix_date)
+	directory = r"{0}\initiator\static\scrapes\{1}\{2}".format(os.getcwd(), domain, unix_date)
 	
 	if not os.path.exists(directory):
 		os.makedirs(directory)
@@ -51,5 +51,5 @@ def runspider():
 	log.msg('Running reactor...')
 	reactor.run()  # the script will block here until the spider is closed
 	log.msg('Reactor stopped.')
-	return redirect(url_for('choose_graph', domain = domain, date = date))
+	return redirect(url_for('choose_graph', domain = domain, date = unix_date))
 
