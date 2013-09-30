@@ -19,7 +19,7 @@ ITEM_PIPELINES = [
 
 ]
 
-DEPTH_LIMIT = 1
+DEPTH_LIMIT = 2
 
 # The following sets it to breadth-first crawling.
 DEPTH_PRIORITY = 1

@@ -1,1 +1,1 @@
-SELECT * FROM edges
+SELECT * FROM nodes ORDER BY scrapeid

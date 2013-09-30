@@ -118,9 +118,7 @@ class URL(object):
 		bad_chars = ["?", "\\", '"', ":", "*", "<", ">", "|"]
 		for char in bad_chars:
 			if char in string:
-				log.msg("String before: {0}".format(string))
 				string = string.replace(char, "-")
-				log.msg("String after: {0}".format(string))
 		return string
 	
 	def strip_outer_slashes(self, string):

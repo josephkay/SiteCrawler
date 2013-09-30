@@ -68,6 +68,7 @@ class MySpider(CrawlSpider):
 		return self.parse_item(response, item)
 	
 	def social_parse(self, response):
+		self.log("Bingo! Social page has been parsed!")
 		item = SiteCrawlerItem()
 		if "facebook" in response.url:
 			domain = "facebook.com"
@@ -75,5 +76,5 @@ class MySpider(CrawlSpider):
 			domain = "twitter.com"
 		item['url_obj'] = URL(response.url, self.scrapeid, base={'protocol':'http://', 'subdomain':'www.', 'domain':domain, 'path':''})
 		item['social'] = 1
-		return self.parse_item(response)
+		return self.parse_item(response, item)
 	

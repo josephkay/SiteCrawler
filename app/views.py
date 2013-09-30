@@ -92,4 +92,14 @@ def screenshot():
 def social():
 	domain = request.args.get('domain')
 	date = request.args.get('date')
-	return render_template('social.html')
+	
+	conn = sqlite3.connect('sitecrawler.db')
+	c = conn.cursor()
+	social_names = select_from(c, "SELECT name FROM nodes WHERE social = 1", domain)
+	
+	image_paths = []
+	if social_names:
+		for name in social_names:
+			image_paths.append(r"/static/scrapes/{0}/{1}/{2}.png".format(domain, date, name))
+	
+	return render_template('social.html', image_paths = image_paths)
