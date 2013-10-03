@@ -1,5 +1,6 @@
-from flask.ext.wtf import Form, TextField, BooleanField, SubmitField, RadioField
-from flask.ext.wtf import Required
+from flask.ext.wtf import Form
+from wtforms import TextField, BooleanField, SubmitField, RadioField
+from wtforms.validators import Required
 
 class TextBox(Form):
     url = TextField('url', validators = [Required()])

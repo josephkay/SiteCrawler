@@ -23,6 +23,7 @@ class MySpider(CrawlSpider):
 		CrawlSpider.__init__(self, **kwargs)
 		
 		domain = get_domain(root)
+		self.scrape_domain = domain
 		self.unix_date = date
 		
 		conn = sqlite3.connect('sitecrawler.db')
@@ -54,6 +55,7 @@ class MySpider(CrawlSpider):
 		item['parents'] = item['url_obj'].parents
 		item['scrapeid'] = self.scrapeid
 		item['date'] = self.unix_date
+		item['scrape_domain'] = self.scrape_domain
 		
 		for url in hxs.select('//a/@href').extract():
 			u = URL(url, self.scrapeid, parent=item['url_obj'])

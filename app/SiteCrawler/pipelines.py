@@ -34,7 +34,7 @@ class ScreenshotPipeline(object):
 		self.s = Screenshooter()
 	
 	def process_item(self, item, spider):
-		self.s.capture(item['url'], r"{0}\initiator\static\scrapes\{1}\{2}\{3}.png".format(getcwd(), item['url_obj'].domain, item['date'], item['name']))
+		self.s.capture(item['url'], r"{0}\initiator\static\scrapes\{1}\{2}\{3}.png".format(getcwd(), item['scrape_domain'], item['date'], item['name']))
 		return item
 
 class CsvExportPipeline(object):
