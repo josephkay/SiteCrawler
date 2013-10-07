@@ -13,3 +13,5 @@ class SiteCrawlerItem(Item):
 	date = Field()
 	social = Field()
 	scrape_domain = Field()
+	sentences = Field()
+	words = Field()

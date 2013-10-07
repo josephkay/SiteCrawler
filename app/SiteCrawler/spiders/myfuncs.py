@@ -2,6 +2,11 @@ import csv
 from urllib2 import urlopen
 from scrapy import log
 from PIL import Image
+import BeautifulSoup
+import re
+from nltk.tokenize import sent_tokenize
+from nltk.corpus import cmudict
+from nltk.tokenize import RegexpTokenizer
 
 def get_domain(url):
 	pos = url.find(".")
@@ -86,28 +91,66 @@ def get_children(connection, parent, scrapeid):
 		dict_list.append(dict)
 	return dict_list
 
-def crop_image(image_path):
-	img = Image.open(image_path)
-	pixels = img.load()
-	width, height = img.size
-	new_height = get_blank_rows(height-1, width-1, pixels)
-	if new_height+40 < height-1:
-		new_img = img.crop((0,0,width,new_height+40))
-		new_img.save(image_path)
-	log.msg("Crop: {0},{1}".format(new_height, width))
-	
+### --- text manipulation functions --- ###
 
-def get_blank_rows(height, width, pixels):
-	rows = []
-	for h in range(0, height+1):
-		row = []
-		for w in range(0, width+1, 10):
-			row.append(pixels[w, h])
-		rows.append(row)
-	
-	last_row = rows[height - 40]
-	for r in range(40, height):
-		if rows[height-r] != last_row:
-			return height - r
-		last_row = rows[height-r]
-	return 0
+def get_texts(url):
+	html = urlopen(url).read()
+	soup = BeautifulSoup.BeautifulSoup(html)
+	return soup.findAll(text=True)
+
+def visible(element):
+    if element.parent.name in ['style', 'script', '[document]', 'head', 'title']:
+        return False
+    elif re.match('<!--.*-->', str(element)):
+        return False
+    return True
+
+def sentence(element):
+	sentence_chars = [".","!","?"]
+	for char in sentence_chars:
+		if char in str(element):
+			return True
+	return False
+
+def length(element):
+	if len(str(element).split()) < 5:
+		return False
+	return True
+
+def filters(filter_list, texts):
+	for f in filter_list:
+		texts = filter(f, texts)
+	return texts
+
+def sentence_split(text_list):
+	new_list = []
+	for text in text_list:
+		sents = sent_tokenize(text)
+		for sent in sents:
+			new_list.append(sent)
+	return new_list
+
+def word_split(text_list):
+	tokenizer = RegexpTokenizer(r'\w+')
+	new_list = []
+	for text in text_list:
+		for word in tokenizer.tokenize(text):
+			new_list.append(word)
+	return new_list
+
+def syllables(text_list):
+	d = cmudict.dict()
+	tokenizer = RegexpTokenizer(r'\w+')
+	new_set = set()
+	error_count = 0
+	s_list = []
+	for text in text_list:
+		for word in tokenizer.tokenize(text):
+			try:
+				syllables = [len(list(y for y in x if y[-1].isdigit())) for x in d[word.lower()]]
+				s_list.append(float(syllables[0]))
+			except:
+				syllables = (-1,)
+				error_count += 1
+			new_set.add((word, syllables[0]))
+	return list(new_set), error_count, sum(s_list)/len(s_list)

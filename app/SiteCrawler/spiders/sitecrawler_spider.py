@@ -51,6 +51,12 @@ class MySpider(CrawlSpider):
 			u = URL(url, self.scrapeid, parent=item['url_obj'])
 			if u.domain:
 				item['links'].append(u)
+		
+		visible_texts = filters([visible], get_texts(item['url_obj'].full))
+		sentences = filters([sentence,length], visible_texts)
+		item['sentences'] = sentence_split(sentences)
+		item['words'] = word_split(visible_texts)
+		
 		return item
 	
 	def main_parse(self, response):
@@ -69,4 +75,3 @@ class MySpider(CrawlSpider):
 		item['url_obj'] = URL(response.url, self.scrapeid, base={'protocol':'http://', 'subdomain':'www.', 'domain':domain, 'path':''})
 		item['social'] = 1
 		return self.parse_item(response, item)
-	
