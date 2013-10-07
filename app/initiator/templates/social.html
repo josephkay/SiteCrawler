@@ -1,10 +1,24 @@
 <!doctype html>
 <title>Screenshot</title>
+<style>
+
+#img_holder {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;
+  margin: 20px;
+}
+
+#thumb {
+  width: 400px;
+}
+
+</style>
 <body>
 <h1>Social screenshots</h1>
 
 {% for path in image_paths %}
-	<img src="{{ path }}">
+	<div id="img_holder"><a href="/screenshot/?image_path={{ path }}" target="_blank"><img src="{{ path }}" id="thumb"></a></div>
 {% endfor %}
 
 </body>

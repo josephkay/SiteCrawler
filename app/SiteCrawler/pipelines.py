@@ -22,10 +22,10 @@ class DuplicatesPipeline(object):
 		self.urls_seen = set()
 	
 	def process_item(self, item, spider):
-		if item['url'] in self.urls_seen:
+		if item['url_obj'].full in self.urls_seen:
 			raise DropItem("Duplicate item found: %s" % item)
 		else:
-			self.urls_seen.add(item['url'])
+			self.urls_seen.add(item['url_obj'].full)
 			return item
 
 class ScreenshotPipeline(object):
@@ -34,7 +34,7 @@ class ScreenshotPipeline(object):
 		self.s = Screenshooter()
 	
 	def process_item(self, item, spider):
-		self.s.capture(item['url'], r"{0}\initiator\static\scrapes\{1}\{2}\{3}.png".format(getcwd(), item['scrape_domain'], item['date'], item['name']))
+		self.s.capture(item['url_obj'].full, r"{0}\initiator\static\scrapes\{1}\{2}\{3}.png".format(getcwd(), item['scrape_domain'], item['date'], item['url_obj'].name))
 		return item
 
 class CsvExportPipeline(object):
@@ -77,8 +77,8 @@ class CsvExportPipeline(object):
 	def process_item(self, item, spider):
 		self.exporter1.export_item(item)
 		
-		if item['url'] not in self.urls_seen:
-			self.urls_seen.add(item['url'])
+		if item['url_obj'].full not in self.urls_seen:
+			self.urls_seen.add(item['url_obj'].full)
 		
 		if self.depth == -1:
 			self.depth = 0
@@ -94,10 +94,10 @@ class CsvExportPipeline(object):
 				level = "secondary"
 			else:
 				level = "primary"
-			self.edges.append([item['url'].encode('utf-8'),link.full.encode('utf-8'),'Directed',self.num,'',self.depth,level,1])
+			self.edges.append([item['url_obj'].full.encode('utf-8'),link.full.encode('utf-8'),'Directed',self.num,'',self.depth,level,1])
 			self.num += 1
 		
-		for tup in item['parents']:
+		for tup in item['url_obj'].parents:
 			if tup not in self.parents:
 				self.parents.append(tup)
 		
@@ -149,8 +149,8 @@ class SQLiteExportPipeline(object):
 		domain, date = results[0]
 		
 		parents_dict = {}
-		parents_dict["name"] = "root_page"
-		parents_dict["children"] = get_children(self.c, "root_page", scrapeid)
+		parents_dict["name"] = domain
+		parents_dict["children"] = get_children(self.c, domain, scrapeid)
 
 		with open(r'{0}\initiator\static\scrapes\{1}\{2}\sitemap.json'.format(getcwd(), domain, date), 'w') as outfile:
 			json.dump(parents_dict, outfile)
@@ -159,8 +159,8 @@ class SQLiteExportPipeline(object):
 		self.conn.close()
 	
 	def process_item(self, item, spider):
-		if item['url'] not in self.urls_seen:
-			self.urls_seen.add(item['url'])
+		if item['url_obj'].full not in self.urls_seen:
+			self.urls_seen.add(item['url_obj'].full)
 		
 		if self.depth == -1:
 			self.depth = 0
@@ -170,7 +170,7 @@ class SQLiteExportPipeline(object):
 				self.completed_depth.append(link)
 			self.holding = []
 		
-		self.node_tups.add((None, item['scrapeid'], item['url'], item['name'], item['social']))
+		self.node_tups.add((None, item['scrapeid'], item['url_obj'].full, item['url_obj'].name, item['social']))
 		
 		for link in item['links']:
 			self.holding.append(link.full)
@@ -178,10 +178,10 @@ class SQLiteExportPipeline(object):
 				level = 2
 			else:
 				level = 1
-			self.edge_tups.add((item['scrapeid'], item['url'], link.full, level))
+			self.edge_tups.add((item['scrapeid'], item['url_obj'].full, link.full, level))
 		
 		if not item['social']:
-			for tup in item['parents']:
+			for tup in item['url_obj'].parents:
 				if tup not in self.parent_tups:
 					self.parent_tups.append(tup)
 		

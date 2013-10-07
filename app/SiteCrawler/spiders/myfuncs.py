@@ -90,17 +90,24 @@ def crop_image(image_path):
 	img = Image.open(image_path)
 	pixels = img.load()
 	width, height = img.size
-	row_height = get_blank_rows(None, height-1, width-1, pixels)
-	if row_height+20 < height:
-		new_img = img.crop((0,0,width,row_height+20))
+	new_height = get_blank_rows(height-1, width-1, pixels)
+	if new_height+40 < height-1:
+		new_img = img.crop((0,0,width,new_height+40))
 		new_img.save(image_path)
+	log.msg("Crop: {0},{1}".format(new_height, width))
+	
 
-def get_blank_rows(last_row, row_height, width, pixels):
-	row = []
-	for n in range(0, width+1, 10):
-		row.append(pixels[n, row_height])
-	if last_row == None or row == last_row:
-		output = get_blank_rows(row, row_height-10, width, pixels)
-	else:
-		output = row_height
-	return output
+def get_blank_rows(height, width, pixels):
+	rows = []
+	for h in range(0, height+1):
+		row = []
+		for w in range(0, width+1, 10):
+			row.append(pixels[w, h])
+		rows.append(row)
+	
+	last_row = rows[height - 40]
+	for r in range(40, height):
+		if rows[height-r] != last_row:
+			return height - r
+		last_row = rows[height-r]
+	return 0

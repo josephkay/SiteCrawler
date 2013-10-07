@@ -35,24 +35,14 @@ class MySpider(CrawlSpider):
 		conn.close()
 		
 		self.seed = URL(root, self.scrapeid, base={'protocol':'http://', 'subdomain':'', 'domain':domain, 'path':''})
-		#self.root = root
 		self.start_urls = [self.seed.full]
 		self.allowed_domains = [domain, "facebook.com", "twitter.com"]
 	
 	def parse_item(self, response, item):
-		#self.urls_seen = set()
-		#self.log('Hi, this is an item page! %s' % response.url)
 		
 		hxs = HtmlXPathSelector(response)
-		#item = SiteCrawlerItem()
-		#item['url_obj'] = URL(response.url, self.scrapeid, parent=self.seed)
-		item['url'] = item['url_obj'].full
-		item['name'] = item['url_obj'].name
-		item['screenshot'] = item['name']+'.png'
 		item['depth'] = response.meta['depth']
 		item['links'] = []
-		item['path'] = item['url_obj'].path 
-		item['parents'] = item['url_obj'].parents
 		item['scrapeid'] = self.scrapeid
 		item['date'] = self.unix_date
 		item['scrape_domain'] = self.scrape_domain

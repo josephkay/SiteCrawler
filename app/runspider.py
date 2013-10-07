@@ -26,7 +26,7 @@ def runspider():
 	route = request.args.get('route')
 	domain = request.args.get('domain')
 	
-	directory = r"{0}\initiator\static\scrapes\{1}\{2}\social".format(os.getcwd(), domain, unix_date)
+	directory = r"{0}\initiator\static\scrapes\{1}\{2}".format(os.getcwd(), domain, unix_date)
 	
 	if not os.path.exists(directory):
 		os.makedirs(directory)

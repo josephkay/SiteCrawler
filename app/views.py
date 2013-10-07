@@ -95,11 +95,12 @@ def social():
 	
 	conn = sqlite3.connect('sitecrawler.db')
 	c = conn.cursor()
-	social_names = select_from(c, "SELECT name FROM nodes WHERE social = 1", domain)
+	scrapeid = select_from(c, "SELECT id FROM scrapes WHERE date = ?", date)[0][0]
+	social_names = select_from(c, "SELECT name FROM nodes WHERE social = 1 AND scrapeid = ?", scrapeid)
 	
 	image_paths = []
 	if social_names:
 		for name in social_names:
-			image_paths.append(r"/static/scrapes/{0}/{1}/{2}.png".format(domain, date, name))
+			image_paths.append(r"/static/scrapes/{0}/{1}/{2}.png".format(domain, date, name[0]))
 	
 	return render_template('social.html', image_paths = image_paths)
