@@ -56,18 +56,18 @@ class TextAnalysisPipeline(object):
 		self.words = []
 	
 	def spider_closed(self, spider):
-		
-		
+		insert_rows(self.c, "INSERT INTO words (scrapeid, url, word, freq) VALUES (?, ?, ?, ?)", self.words)
+		insert_rows(self.c, "INSERT INTO sentences (scrapeid, url, sentence) VALUES (?, ?, ?)", self.sentences)
 		
 		self.conn.commit()
 		self.conn.close()
 	
 	def process_item(self, item, spider):
 		for sentence in item['sentences']:
-			self.sentences.append(sentence)
+			self.sentences.append(item['scrapeid'], item['url_obj'].full, sentence)
 			
-		for word in item['words']:
-			self.words.append(word)
+		for word, freq in item['words'].iteritems():
+			self.words.append(item['scrapeid'], item['url_obj'].full, word, freq)
 		
 		return item
 

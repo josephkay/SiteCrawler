@@ -58,11 +58,24 @@ def syllables(text_list):
 			new_set.add((word, syllables[0]))
 	return list(new_set), error_count, sum(s_list)/len(s_list)
 			
+def word_split(text_list):
+	tokenizer = RegexpTokenizer(r'\w+')
+	new_dict = {}
+	for text in text_list:
+		for word in tokenizer.tokenize(text):
+			word = word.lower()
+			if word in new_dict:
+				new_dict[word] += 1
+			else:
+				new_dict[word] = 1
+	return new_dict
 
 visible_texts = filters([visible,sentence,length], texts)
 
 sentences = sentence_split(visible_texts)
 
-print len(sentences)
-print sentences
-print syllables(sentences)
+print word_split(visible_texts)
+
+#print len(sentences)
+#print sentences
+#print syllables(sentences)

@@ -132,11 +132,15 @@ def sentence_split(text_list):
 
 def word_split(text_list):
 	tokenizer = RegexpTokenizer(r'\w+')
-	new_list = []
+	new_dict = {}
 	for text in text_list:
 		for word in tokenizer.tokenize(text):
-			new_list.append(word)
-	return new_list
+			word = word.lower()
+			if word in new_dict:
+				new_dict[word] += 1
+			else:
+				new_dict[word] = 1
+	return new_dict
 
 def syllables(text_list):
 	d = cmudict.dict()
