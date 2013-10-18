@@ -1,0 +1,3 @@
+Determine: Is __init__() necessary in the classes in pipelines.py when you use spider_opened()?
+
+Change: Look into separating out the SQLiteExportPipeline into its distinct roles.
