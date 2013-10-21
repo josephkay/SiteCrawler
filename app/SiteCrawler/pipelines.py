@@ -50,7 +50,7 @@ class TextAnalysisPipeline(object):
 		return pipeline
 	
 	def spider_opened(self, spider):
-		self.conn = sqlite3.connect('sitecrawler.db')
+		self.conn = sqlite3.connect(db_file)
 		self.c = self.conn.cursor()
 		self.sentences = []
 		self.words = []
@@ -64,10 +64,10 @@ class TextAnalysisPipeline(object):
 	
 	def process_item(self, item, spider):
 		for sentence in item['sentences']:
-			self.sentences.append(item['scrapeid'], item['url_obj'].full, sentence)
+			self.sentences.append((item['scrapeid'], item['url_obj'].full, sentence))
 			
 		for word, freq in item['words'].iteritems():
-			self.words.append(item['scrapeid'], item['url_obj'].full, word, freq)
+			self.words.append((item['scrapeid'], item['url_obj'].full, word, freq))
 		
 		return item
 
@@ -87,7 +87,7 @@ class SQLiteExportPipeline(object):
 		return pipeline
 
 	def spider_opened(self, spider):
-		self.conn = sqlite3.connect('sitecrawler.db')
+		self.conn = sqlite3.connect(db_file)
 		self.c = self.conn.cursor()
 		self.node_tups = set()
 		self.edge_tups = set()

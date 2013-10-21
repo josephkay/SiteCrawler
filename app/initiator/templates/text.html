@@ -1,0 +1,17 @@
+<!doctype html>
+<title>Screenshot</title>
+<body>
+<h1>Social screenshots</h1>
+
+<table>
+<tr><th>url</th><th>Average word length</th><th>Average sentence length</th></tr>
+{% for url, w_len, s_len in url_stats %}
+	<tr><td>{{ url }}</td><td>{{ w_len }}</td><td>{{ s_len }}</td></tr>
+{% endfor %}
+</table>
+
+<p>{{ test }}</p>
+
+<p>{{ sentences }}</p>
+
+</body>

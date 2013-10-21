@@ -26,7 +26,7 @@ class MySpider(CrawlSpider):
 		self.scrape_domain = domain
 		self.unix_date = date
 		
-		conn = sqlite3.connect('sitecrawler.db')
+		conn = sqlite3.connect(db_file)
 		c = conn.cursor()
 		insert_row(c, "INSERT INTO scrapes (id, domain, date) VALUES (?, ?, ?)", (None, domain, self.unix_date))
 		self.scrapeid = c.lastrowid
@@ -53,9 +53,10 @@ class MySpider(CrawlSpider):
 				item['links'].append(u)
 		
 		visible_texts = filters([visible], get_texts(item['url_obj'].full))
-		sentences = filters([sentence,length], visible_texts)
+		stripped = replace_breaks(strip_tags(convert_entities(visible_texts)))
+		sentences = filters([sentence,length], stripped)
 		item['sentences'] = sentence_split(sentences)
-		item['words'] = word_split(visible_texts)
+		item['words'] = word_split(stripped)
 		
 		return item
 	

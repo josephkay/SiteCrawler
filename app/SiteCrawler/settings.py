@@ -15,7 +15,8 @@ ITEM_PIPELINES = [
 	'SiteCrawler.pipelines.DuplicatesPipeline',
 	'SiteCrawler.pipelines.ScreenshotPipeline',
 	#'SiteCrawler.pipelines.CsvExportPipeline',
-	'SiteCrawler.pipelines.SQLiteExportPipeline'
+	'SiteCrawler.pipelines.SQLiteExportPipeline',
+	'SiteCrawler.pipelines.TextAnalysisPipeline'
 
 ]
 

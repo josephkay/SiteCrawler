@@ -1,1 +1,0 @@
-SELECT * FROM nodes ORDER BY scrapeid

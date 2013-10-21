@@ -8,6 +8,7 @@ from nltk.tokenize import RegexpTokenizer
 html = urllib2.urlopen('http://www.premierinn.com/en/business.html').read()
 soup = BeautifulSoup.BeautifulSoup(html)
 texts = soup.findAll(text=True)
+print type(texts)
 
 def visible(element):
     if element.parent.name in ['style', 'script', '[document]', 'head', 'title']:

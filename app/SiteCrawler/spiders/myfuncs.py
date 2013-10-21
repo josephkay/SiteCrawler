@@ -7,6 +7,9 @@ import re
 from nltk.tokenize import sent_tokenize
 from nltk.corpus import cmudict
 from nltk.tokenize import RegexpTokenizer
+from HTMLParser import HTMLParser
+
+db_file = "sitecrawlerdb.db"
 
 def get_domain(url):
 	pos = url.find(".")
@@ -108,12 +111,12 @@ def visible(element):
 def sentence(element):
 	sentence_chars = [".","!","?"]
 	for char in sentence_chars:
-		if char in str(element):
+		if char in element:
 			return True
 	return False
 
 def length(element):
-	if len(str(element).split()) < 5:
+	if len(element.split()) < 5:
 		return False
 	return True
 
@@ -158,3 +161,32 @@ def syllables(text_list):
 				error_count += 1
 			new_set.add((word, syllables[0]))
 	return list(new_set), error_count, sum(s_list)/len(s_list)
+
+def sentence_length(sentence):
+	tokenizer = RegexpTokenizer(r'\w+')
+	return len(tokenizer.tokenize(sentence))
+
+class MLStripper(HTMLParser):
+	def __init__(self):
+		self.reset()
+		self.fed = []
+	def handle_data(self, d):
+		self.fed.append(d)
+	def get_data(self):
+		self.fed, output = [], self.fed
+		return ''.join(output)
+
+def strip_tags(texts):
+	s = MLStripper()
+	new_list = []
+	for text in texts:
+		s.feed(text)
+		new_list.append(s.get_data())
+	return new_list
+
+def convert_entities(texts):
+	h = HTMLParser()
+	return [h.unescape(text) for text in texts]
+
+def replace_breaks(texts):
+	return [re.sub(r"\s+", " ", text) for text in texts]
