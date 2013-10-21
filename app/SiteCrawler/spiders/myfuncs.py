@@ -190,3 +190,10 @@ def convert_entities(texts):
 
 def replace_breaks(texts):
 	return [re.sub(r"\s+", " ", text) for text in texts]
+
+def real_word(word):
+	non_word_chars = [".","/","\\","_"]
+	for char in non_word_chars:
+		if char in word:
+			return False
+	return True

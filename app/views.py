@@ -123,28 +123,60 @@ def text():
 	sentences = select_from(c, "SELECT url, sentence FROM sentences WHERE scrapeid = ?", scrapeid)
 	url_word_count = select_from(c, "SELECT url, SUM(freq) FROM words WHERE scrapeid = ? GROUP BY url", scrapeid)
 	url_sentence_count = select_from(c, "SELECT url, COUNT(*) FROM sentences WHERE scrapeid = ? GROUP BY url", scrapeid)
-	url_stats = {}
+	url_stats = {"w_len":{}, "s_len":{}}
 	word_len_freqs = {}
 	sent_len_freqs = {}
 	
 	for url, word, freq in words:
-		length = len(word)
-		if url not in url_stats:
-			url_stats[url] = [length*freq, freq, 0, 1]
-		else:
-			url_stats[url][1] += freq
-			url_stats[url][0] += length*freq
+		if real_word(word):
+			length = len(word)
+			if url not in url_stats["w_len"]:
+				url_stats["w_len"][url] = {}
+				url_stats["s_len"][url] = {}
+			if length not in url_stats["w_len"][url]:
+				url_stats["w_len"][url][length] = freq
+			else:
+				url_stats["w_len"][url][length] += freq
 	
 	for url, sentence in sentences:
 		length = sentence_length(sentence)
-		if url not in url_stats:
-			url_stats[url] = [0, 1, length, 1]
+		if url not in url_stats["s_len"]:
+			url_stats["s_len"][url] = {}
+			url_stats["w_len"][url] = {}
+		if length not in url_stats["s_len"][url]:
+			url_stats["s_len"][url][length] = 1
 		else:
-			if url_stats[url][2] != 0:
-				url_stats[url][3] += 1
-			url_stats[url][2] += length
+			url_stats["s_len"][url][length] += 1
 	
-	url_stats = [[url, stats[0]/stats[1], stats[2]/stats[3]] for [url, stats] in url_stats.iteritems()]
+	for key in url_stats:
+		for url in url_stats[key]:
+			total, count = 0, 0
+			for length, freq in url_stats[key][url].iteritems():
+				total += length*freq
+				count += freq
+			if count == 0:
+				url_stats[key][url]["average"] = 0
+			else:
+				url_stats[key][url]["average"] = total/float(count)
+	
+#	for url, word, freq in words:
+#		length = len(word)
+#		if url not in url_stats:
+#			url_stats[url] = [length*freq, freq, 0, 1]
+#		else:
+#			url_stats[url][1] += freq
+#			url_stats[url][0] += length*freq
+#	
+#	for url, sentence in sentences:
+#		length = sentence_length(sentence)
+#		if url not in url_stats:
+#			url_stats[url] = [0, 1, length, 1]
+#		else:
+#			if url_stats[url][2] != 0:
+#				url_stats[url][3] += 1
+#			url_stats[url][2] += length
+#	
+#	url_stats = [[url, stats[0]/stats[1], stats[2]/stats[3]] for [url, stats] in url_stats.iteritems()]
 	
 	for length, freq in [[len(word), freq] for word, freq, url in words]:
 		if length not in word_len_freqs:
@@ -159,5 +191,7 @@ def text():
 		else:
 			sent_len_freqs[length] += 1
 	
+	#test = url_stats["http://www.premierinn.com/en/disabledgo.html"]["w_len"]
+	
 	conn.close()
-	return render_template('text.html', url_stats = url_stats, word_len_freqs = word_len_freqs, sent_len_freqs = sent_len_freqs, sentences = [[sentence_length(sent), url, sent] for [url, sent] in sentences if sentence_length(sent) >= 40])
+	return render_template('text.html', url_stats = url_stats, sentences = [[sentence_length(sent), url, sent] for [url, sent] in sentences if sentence_length(sent) >= 40])

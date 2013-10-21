@@ -1,12 +1,12 @@
 <!doctype html>
-<title>Screenshot</title>
+<title>Text Analysis</title>
 <body>
-<h1>Social screenshots</h1>
+<h1>Text Analysis</h1>
 
 <table>
 <tr><th>url</th><th>Average word length</th><th>Average sentence length</th></tr>
-{% for url, w_len, s_len in url_stats %}
-	<tr><td>{{ url }}</td><td>{{ w_len }}</td><td>{{ s_len }}</td></tr>
+{% for url in url_stats["w_len"] %}
+	<tr><td>{{ url }}</td><td>{{ "{0:.1f}".format(url_stats["w_len"][url]["average"]) }}</td><td>{{ "{0:.1f}".format(url_stats["s_len"][url]["average"]) }}</td></tr>
 {% endfor %}
 </table>
 
