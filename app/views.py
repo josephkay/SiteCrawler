@@ -123,13 +123,17 @@ def text():
 	sentences = select_from(c, "SELECT url, sentence FROM sentences WHERE scrapeid = ?", scrapeid)
 	url_word_count = select_from(c, "SELECT url, SUM(freq) FROM words WHERE scrapeid = ? GROUP BY url", scrapeid)
 	url_sentence_count = select_from(c, "SELECT url, COUNT(*) FROM sentences WHERE scrapeid = ? GROUP BY url", scrapeid)
-	url_stats = {"w_len":{}, "s_len":{}}
+	url_stats = {"w_len":{"Total":{} }, "s_len":{"Total":{} }}
 	word_len_freqs = {}
 	sent_len_freqs = {}
+	
+	longest_word = 1
 	
 	for url, word, freq in words:
 		if real_word(word):
 			length = len(word)
+			if length > longest_word:
+				longest_word = length
 			if url not in url_stats["w_len"]:
 				url_stats["w_len"][url] = {}
 				url_stats["s_len"][url] = {}
@@ -137,9 +141,17 @@ def text():
 				url_stats["w_len"][url][length] = freq
 			else:
 				url_stats["w_len"][url][length] += freq
+			if length not in url_stats["w_len"]["Total"]:
+				url_stats["w_len"]["Total"][length] = freq
+			else:
+				url_stats["w_len"]["Total"][length] += freq
+	
+	longest_sentence = 1
 	
 	for url, sentence in sentences:
 		length = sentence_length(sentence)
+		if length > longest_sentence:
+			longest_sentence = length
 		if url not in url_stats["s_len"]:
 			url_stats["s_len"][url] = {}
 			url_stats["w_len"][url] = {}
@@ -147,6 +159,10 @@ def text():
 			url_stats["s_len"][url][length] = 1
 		else:
 			url_stats["s_len"][url][length] += 1
+		if length not in url_stats["s_len"]["Total"]:
+			url_stats["s_len"]["Total"][length] = freq
+		else:
+			url_stats["s_len"]["Total"][length] += freq
 	
 	for key in url_stats:
 		for url in url_stats[key]:
@@ -193,5 +209,8 @@ def text():
 	
 	#test = url_stats["http://www.premierinn.com/en/disabledgo.html"]["w_len"]
 	
+	w_len_labels = range(1, longest_word)
+	s_len_labels = range(1, longest_sentence)
+	
 	conn.close()
-	return render_template('text.html', url_stats = url_stats, sentences = [[sentence_length(sent), url, sent] for [url, sent] in sentences if sentence_length(sent) >= 40])
+	return render_template('text.html', w_len_labels = w_len_labels, s_len_labels = s_len_labels,  url_stats = url_stats, sentences = [[sentence_length(sent), url, sent] for [url, sent] in sentences if sentence_length(sent) >= 40])

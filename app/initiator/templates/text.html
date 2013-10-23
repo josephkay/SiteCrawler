@@ -1,17 +1,164 @@
 <!doctype html>
-<title>Text Analysis</title>
+<meta charset="utf-8">
+
+<html>
+
+<head>
+	<title>Text Analysis</title>
+	<script src="{{ url_for('static', filename='Chart.js') }}" type="text/javascript"></script>
+	<script src="{{ url_for('static', filename='jquery.min.js') }}" type="text/javascript"></script>
+	<style>
+	
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+	
+	tr.hoverable:hover {
+		background-color: #EEE;
+	}
+	
+	td {
+		padding: 2px;
+	}
+	
+	td:hover {
+		background-color: #DDD;
+	}
+	
+	th {
+		padding: 10px;
+	}
+	
+	.clicky {
+		text-align: center;
+	}
+	
+	</style>
+</head>
+
 <body>
-<h1>Text Analysis</h1>
+	<h1>Text Analysis</h1>
+	
+	<canvas id="myChart" width="1200" height="200"></canvas>
+	
+	<table>
+		<tr><th>url</th><th>Av. word length</th><th>Av. sentence length</th></tr>
+		<tr class="hoverable"><td>Total</td><td class="clicky" type="w_len" url="Total" >{{ "{0:.1f}".format(url_stats["w_len"]["Total"]["average"]) }}</td><td class="clicky" type="s_len" url="Total" >{{ "{0:.1f}".format(url_stats["s_len"]["Total"]["average"]) }}</td></tr>
+		{% for url in url_stats["w_len"] %}
+			{% if url != "Total" %}
+				<tr class="hoverable"><td >{{ url }}</td><td class="clicky" type="w_len" url={{ url }} >{{ "{0:.1f}".format(url_stats["w_len"][url]["average"]) }}</td><td class="clicky" type="s_len" url={{ url }} >{{ "{0:.1f}".format(url_stats["s_len"][url]["average"]) }}</td></tr>
+			{% endif %}
+		{% endfor %}
+	</table>
 
-<table>
-<tr><th>url</th><th>Average word length</th><th>Average sentence length</th></tr>
-{% for url in url_stats["w_len"] %}
-	<tr><td>{{ url }}</td><td>{{ "{0:.1f}".format(url_stats["w_len"][url]["average"]) }}</td><td>{{ "{0:.1f}".format(url_stats["s_len"][url]["average"]) }}</td></tr>
-{% endfor %}
-</table>
+	<p>{{ w_len_labels }}</p>
 
-<p>{{ test }}</p>
+	<p>{{ s_len_labels }}</p>
 
-<p>{{ sentences }}</p>
-
+	
+	<script>
+		var data_dict = {{ url_stats|tojson|safe }}
+		
+		var w_len_labels = {{ w_len_labels }}
+		var s_len_labels = {{ s_len_labels }}
+		
+		//$('tr').hover( function() {
+		//	$(this).css('background-color','#EEE');
+		//; return false; } );
+		
+		$('.clicky').click( function() {
+			$(this).parent().parent().find('tr').find('td').css('background-color','');
+			$(this).parent().parent().find('tr').css('background-color','');
+			$(this).parent().css('background-color','rgba(187,216,235,0.5)');
+			$(this).css('background-color','#BBD8EB');
+			
+			var type = $(this).attr('type');
+			var url = $(this).attr('url');
+			
+			if (type == "w_len") {
+				var labels = w_len_labels;
+			} else if (type == "s_len") {
+				var labels = s_len_labels;
+			}
+			
+			var used_labels = new Array();
+			var data = new Array();
+			
+			for (var length in data_dict[type][url]) {
+				if (data_dict[type][url].hasOwnProperty(length)) {
+					if (length != "average") {
+						used_labels.push(length);
+					}
+				}
+			}
+			
+			for (length in labels) {
+				if ($.inArray(length, used_labels) !== -1) {
+					data.push(data_dict[type][url][length]);
+				} else {
+					data.push(0);
+				}
+	
+			}
+			
+			var options = {
+				//Boolean - If we want to override with a hard coded scale
+				scaleOverride : true,
+		
+				//** Required if scaleOverride is true **
+				//Number - The number of steps in a hard coded scale
+				scaleSteps : 10,
+				//Number - The value jump in the hard coded scale
+				scaleStepWidth : 10,
+				//Number - The scale starting value
+				scaleStartValue : 0,
+				//barShowStroke : false,
+				barValueSpacing : 1,
+				yAxisFixedWidth : 50,
+				scaleLineColor : "rgba(0,0,0,.5)",
+				scaleOverlay : true
+			}
+			
+			var max = Math.max.apply(Math, data);
+			
+			var level = 10;
+			var l_count = 2;
+			
+			while (true) {
+				if (max <= level) {
+					operator = level/10
+					unit = Math.ceil(max/operator); 
+					options.scaleSteps = unit;
+					options.scaleStepWidth = operator;
+					break;
+				} else if (l_count%3 == 0) {
+					level *= 2.5;
+				} else {
+					level *= 2;
+				}
+				l_count += 1;
+			}
+			
+			document.getElementById('tester').innerHTML = type;
+			
+			var data = {
+				labels : labels,
+				datasets : [
+					{
+						fillColor : "rgba(187,216,235,0.5)",
+						strokeColor : "rgba(187,216,235,1)",
+						data : data
+					}
+				]
+			}
+			
+			//Get the context of the canvas element we want to select
+			var ctx = document.getElementById("myChart").getContext("2d");
+			var myNewChart = new Chart(ctx).Bar(data, options);
+		; return false; } );
+	</script>
+	
+	<p id="tester">Here</p>
 </body>
+</html>
