@@ -326,7 +326,10 @@ window.Chart = function(context){
 			scaleStepWidth : null,
 			scaleStartValue : null,
 			scaleLineColor : "rgba(0,0,0,.1)",
-			scaleLineWidth : 1,
+			xAxisLineWidth : 1,
+			yAxisLineWidth : 1,
+			xAxisOverlap : 5,
+			yAxisOverlap : 5,
 			scaleShowLabels : true,
 			scaleLabel : "<%=value%>",
 			scaleFontFamily : "'Arial'",
@@ -1072,11 +1075,11 @@ window.Chart = function(context){
 		}
 		function drawScale(){
 			//X axis line
-			ctx.lineWidth = config.scaleLineWidth;
+			ctx.lineWidth = config.xAxisLineWidth;
 			ctx.strokeStyle = config.scaleLineColor;
 			ctx.beginPath();
 			ctx.moveTo(width-widestXLabel/2+5,xAxisPosY);
-			ctx.lineTo(width-(widestXLabel/2)-xAxisLength-5,xAxisPosY);
+			ctx.lineTo(width-(widestXLabel/2)-xAxisLength-config.xAxisOverlap,xAxisPosY);
 			ctx.stroke();
 			
 			
@@ -1112,10 +1115,10 @@ window.Chart = function(context){
 			}
 			
 			//Y axis
-			ctx.lineWidth = config.scaleLineWidth;
+			ctx.lineWidth = config.yAxisLineWidth;
 			ctx.strokeStyle = config.scaleLineColor;
 			ctx.beginPath();
-			ctx.moveTo(yAxisPosX,xAxisPosY+5);
+			ctx.moveTo(yAxisPosX,xAxisPosY+config.yAxisOverlap);
 			ctx.lineTo(yAxisPosX,5);
 			ctx.stroke();
 			
