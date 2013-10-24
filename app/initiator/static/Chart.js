@@ -1078,8 +1078,13 @@ window.Chart = function(context){
 			ctx.lineWidth = config.xAxisLineWidth;
 			ctx.strokeStyle = config.scaleLineColor;
 			ctx.beginPath();
-			ctx.moveTo(width-widestXLabel/2+5,xAxisPosY);
-			ctx.lineTo(width-(widestXLabel/2)-xAxisLength-config.xAxisOverlap,xAxisPosY);
+			if (config.yAxisFixedWidth) {
+				ctx.moveTo(width,xAxisPosY);
+				ctx.lineTo(width-xAxisLength-config.xAxisOverlap,xAxisPosY);
+			} else {
+				ctx.moveTo(width-widestXLabel/2+5,xAxisPosY);
+				ctx.lineTo(width-(widestXLabel/2)-xAxisLength-config.xAxisOverlap,xAxisPosY);
+			}
 			ctx.stroke();
 			
 			
@@ -1160,15 +1165,17 @@ window.Chart = function(context){
 			// Joe entered this.
 			if (config.yAxisFixedWidth) {
 				xAxisLength = width - config.yAxisFixedWidth;
+				yAxisPosX = width-xAxisLength;
 			} else {
 				xAxisLength = width - longestText - widestXLabel;
+				yAxisPosX = width-widestXLabel/2-xAxisLength;
 			}
 			
 			valueHop = Math.floor(xAxisLength/(data.labels.length));	
 			
 			barWidth = (valueHop - config.scaleGridLineWidth*2 - (config.barValueSpacing*2) - (config.barDatasetSpacing*data.datasets.length-1) - ((config.barStrokeWidth/2)*data.datasets.length-1))/data.datasets.length;
 			
-			yAxisPosX = width-widestXLabel/2-xAxisLength;
+			
 			xAxisPosY = scaleHeight + config.scaleFontSize/2;				
 		}		
 		function calculateDrawingSizes(){

@@ -34,6 +34,13 @@
 		text-align: center;
 	}
 	
+	.labelclick {
+		display: inline-block;
+		height: 20px;
+		width: 20px;
+		background-color: #EEE;
+	}
+	
 	</style>
 </head>
 
@@ -41,6 +48,9 @@
 	<h1>Text Analysis</h1>
 	
 	<canvas id="myChart" width="1200" height="200"></canvas>
+	
+	<div id="label_list"></div>
+	<div id="word_list"></div>
 	
 	<table>
 		<tr><th>url</th><th>Av. word length</th><th>Av. sentence length</th></tr>
@@ -52,22 +62,22 @@
 		{% endfor %}
 	</table>
 
-	<p>{{ w_len_labels }}</p>
+	<p>{{ word_len_urls["https://secure.premierinn.com/en/mypremierinn/home.action"][6] }}</p>
 
 	<p>{{ s_len_labels }}</p>
 
 	
 	<script>
-		var data_dict = {{ url_stats|tojson|safe }}
+		var data_dict = {{ url_stats|tojson|safe }};
 		
-		var w_len_labels = {{ w_len_labels }}
-		var s_len_labels = {{ s_len_labels }}
+		var w_len_labels = {{ w_len_labels }};
+		var s_len_labels = {{ s_len_labels }};
 		
 		//$('tr').hover( function() {
 		//	$(this).css('background-color','#EEE');
 		//; return false; } );
 		
-		$('.clicky').click( function() {
+		$('.clicky').on('click', function() {
 			$(this).parent().parent().find('tr').find('td').css('background-color','');
 			$(this).parent().parent().find('tr').css('background-color','');
 			$(this).parent().css('background-color','rgba(187,216,235,0.5)');
@@ -107,10 +117,11 @@
 				var newdata = new Array();
 				var old_i = 1;
 				var holdingdata = 0;
+				var group_size = 5;
 				
-				for (var i=1;i<=Math.ceil(labels.length/5)*5;i++) {
-					if (i%5 == 0) {
-						newlabels.push(old_i." - ".i);
+				for (var i=1;i<=Math.ceil(labels.length/group_size)*group_size;i++) {
+					if (i%group_size == 0) {
+						newlabels.push(old_i+" - "+i);
 						old_i = i+1;
 						newdata.push(holdingdata);
 						holdingdata = 0;
@@ -118,6 +129,8 @@
 						holdingdata += data[i-1];
 					}
 				}
+				labels = newlabels;
+				data = newdata;
 			}
 			
 			var options = {
@@ -156,6 +169,14 @@
 			
 			document.getElementById('tester').innerHTML = type;
 			
+			
+			document.getElementById('label_list').innerHTML = "";
+			
+			for (x in labels) {
+				y = " <div class='labelclick' type="+type+" url="+url+" value="+labels[x]+" >"+labels[x]+"</div>";
+				document.getElementById('label_list').innerHTML += y;
+			}
+			
 			var data = {
 				labels : labels,
 				datasets : [
@@ -170,6 +191,20 @@
 			//Get the context of the canvas element we want to select
 			var ctx = document.getElementById("myChart").getContext("2d");
 			var myNewChart = new Chart(ctx).Bar(data, options);
+		; return false; } );
+		
+		$('#word_list').on('click', '.labelclick', function() {
+			var length = $(this).attr('value');
+			var type = $(this).attr('type');
+			var url = $(this).attr('url');
+			
+			if (type == "w_len") {
+				var label_urls = {{ word_len_urls|tojson|safe }};
+			} else if (type == "s_len") {
+				var label_urls = {{ sent_len_urls|tojson|safe }};
+			}
+			
+			document.getElementById('word_list').innerHTML = "FISH!";
 		; return false; } );
 	</script>
 	
