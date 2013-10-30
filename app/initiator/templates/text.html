@@ -37,8 +37,9 @@
 	.labelclick {
 		display: inline-block;
 		height: 20px;
-		width: 20px;
+		padding: 2px 5px;
 		background-color: #EEE;
+		text-align: center;
 	}
 	
 	</style>
@@ -49,8 +50,10 @@
 	
 	<canvas id="myChart" width="1200" height="200"></canvas>
 	
-	<div id="label_list"></div>
-	<div id="word_list"></div>
+	<div id="data_container">
+		<div id="label_list"><span>Lengths: </span></div>
+		<div id="word_list"></div>
+	</div>
 	
 	<table>
 		<tr><th>url</th><th>Av. word length</th><th>Av. sentence length</th></tr>
@@ -62,9 +65,11 @@
 		{% endfor %}
 	</table>
 
-	<p>{{ word_len_urls["https://secure.premierinn.com/en/mypremierinn/home.action"][6] }}</p>
+	<p>{{ word_len_urls["http://www.premierinn.com/en/dublin-hotels.html"] }}</p>
 
-	<p>{{ s_len_labels }}</p>
+	<p>{{ url_stats["w_len"]["http://www.premierinn.com/en/dublin-hotels.html"] }}</p>
+	
+	<p id="extratest"></p>
 
 	
 	<script>
@@ -98,16 +103,19 @@
 			for (var length in data_dict[type][url]) {
 				if (data_dict[type][url].hasOwnProperty(length)) {
 					if (length != "average") {
-						used_labels.push(length);
+						used_labels.push(parseInt(length));
 					}
 				}
 			}
 			
-			for (length in labels) {
-				if ($.inArray(length, used_labels) !== -1) {
-					data.push(data_dict[type][url][length]);
+			document.getElementById('extratest').innerHTML = "";
+			for (var i = 0; i < labels.length; i++) {
+				if ($.inArray(labels[i], used_labels) !== -1) {
+					data.push(data_dict[type][url][labels[i]]);
+					document.getElementById('extratest').innerHTML += labels[i]+", ";
 				} else {
 					data.push(0);
+					document.getElementById('extratest').innerHTML += "-"+labels[i]+"-, ";
 				}
 	
 			}
@@ -118,10 +126,17 @@
 				var old_i = 1;
 				var holdingdata = 0;
 				var group_size = 5;
+				var newlabel;
 				
 				for (var i=1;i<=Math.ceil(labels.length/group_size)*group_size;i++) {
 					if (i%group_size == 0) {
-						newlabels.push(old_i+" - "+i);
+						newlabel = old_i+" - "+i;
+						newlabels.push(newlabel);
+						window.label_ref_dict = {};
+						window.label_ref_dict[newlabel] = [];
+						for (var j=old_i;j<=i;j++) {
+							window.label_ref_dict[newlabel].push(j);
+						}
 						old_i = i+1;
 						newdata.push(holdingdata);
 						holdingdata = 0;
@@ -167,15 +182,17 @@
 				l_count += 1;
 			}
 			
-			document.getElementById('tester').innerHTML = type;
+			
+			document.getElementById('label_list').innerHTML = "<span>Lengths: </span>";
+			document.getElementById('word_list').innerHTML = "";
 			
 			
-			document.getElementById('label_list').innerHTML = "";
-			
-			for (x in labels) {
+			for (x in labels.reverse()) {
 				y = " <div class='labelclick' type="+type+" url="+url+" value="+labels[x]+" >"+labels[x]+"</div>";
-				document.getElementById('label_list').innerHTML += y;
+				$("#label_list span:last").after(y);
 			}
+			
+			labels.reverse()
 			
 			var data = {
 				labels : labels,
@@ -193,21 +210,23 @@
 			var myNewChart = new Chart(ctx).Bar(data, options);
 		; return false; } );
 		
-		$('#word_list').on('click', '.labelclick', function() {
-			var length = $(this).attr('value');
+		$('#data_container').delegate('.labelclick', 'click', function() {
+			var label = $(this).attr('value');
 			var type = $(this).attr('type');
 			var url = $(this).attr('url');
 			
 			if (type == "w_len") {
 				var label_urls = {{ word_len_urls|tojson|safe }};
+				document.getElementById('word_list').innerHTML = label_urls[url][label];
 			} else if (type == "s_len") {
 				var label_urls = {{ sent_len_urls|tojson|safe }};
 			}
 			
-			document.getElementById('word_list').innerHTML = "FISH!";
+			
 		; return false; } );
+		
 	</script>
 	
-	<p id="tester">Here</p>
+	<p id="tester"></p>
 </body>
 </html>
