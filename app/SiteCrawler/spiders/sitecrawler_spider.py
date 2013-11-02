@@ -52,10 +52,10 @@ class MySpider(CrawlSpider):
 			if u.domain:
 				item['links'].append(u)
 		
-		visible_texts = filters([visible], get_texts(item['url_obj'].full))
-		stripped = replace_breaks(strip_tags(convert_entities(visible_texts)))
+		visible_texts = filters([visible], get_texts(remove_comments(item['url_obj'].full)))
+		stripped = replace_breaks(convert_entities(visible_texts))
 		sentences = filters([sentence,length], stripped)
-		item['sentences'] = sentence_split(sentences)
+		item['sentences'] = [sent.strip() for sent in sentence_split(sentences)]
 		item['words'] = word_split(stripped)
 		
 		return item

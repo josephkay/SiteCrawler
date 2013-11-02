@@ -1,0 +1,26 @@
+https://secure.premierinn.com/en/mypremierinn/home.action
+PAGE_ASSET_PREFIX is / HOST_PREFIX is http://www.premierinn.com/ SECURE_HOST_PREFIX is https://secure.premierinn.com/ 
+
+http://www.premierinn.com/en/norwich-hotels.html  (Only the one sentence makes it through - same results for all in this format)
+[if IE 6]> DD_belatedPNG.fix('.info-alert'); DD_belatedPNG.fix('.corners'); DD_belatedPNG.fix('.quick-inner'); DD_belatedPNG.fix('.route-inner'); DD_belatedPNG.fix('.form-wrapper'); DD_belatedPNG.fix('.form-wrapper-btm'); 
+
+http://www.premierinn.com/en/parkAndFly.action?intcmp=DMC_HPST_SleepParkFly
+For details about the parking facilities available at your selected airport
+
+http://www.premierinn.com/en/offers.action
+View full
+
+http://www.premierinn.com/en/short_breaks.html
+, you’re never far from a good night’s sleep.
+And with over 600 hotels across the UK, Ireland and even
+and king-size beds in most rooms, from only £29 a night.
+
+http://www.premierinn.com/en/disabled-access.html
+3.
+4.
+5.
+7.
+Main entrance and reception
+Public areas - general (internal)
+Arrival and car parking facilities
+Meeting, function and conference rooms

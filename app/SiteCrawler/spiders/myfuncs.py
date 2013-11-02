@@ -8,6 +8,7 @@ from nltk.tokenize import sent_tokenize
 from nltk.corpus import cmudict
 from nltk.tokenize import RegexpTokenizer
 from HTMLParser import HTMLParser
+import json
 
 db_file = "sitecrawlerdb.db"
 
@@ -197,3 +198,16 @@ def real_word(word):
 		if char in word:
 			return False
 	return True
+
+def remove_comments(html):
+	while True:
+		start = html.find("<!--")
+		if start == -1:
+			break
+		end = html.find("-->", start)
+		html = html[:start] + html[end+3:]
+	return html
+	
+def save_json(location, object):
+	with open(location, 'w') as outfile:
+		json.dump(object, outfile)

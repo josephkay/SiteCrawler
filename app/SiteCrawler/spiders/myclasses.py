@@ -109,9 +109,6 @@ class URL(object):
 		return url
 	
 	def get_name(self, subdomain, path):
-		#if not path:
-		#	return "root_page"
-		#else:
 		path = self.strip_bad_file_chars(self.replace_slashes(self.strip_outer_slashes(path),"--"))
 		if path:
 			return subdomain + self.domain + "--" + path
