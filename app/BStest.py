@@ -1,4 +1,4 @@
-import BeautifulSoup
+from BeautifulSoup import BeautifulSoup, NavigableString
 import urllib2
 import re
 from nltk.tokenize import sent_tokenize
@@ -18,14 +18,39 @@ def remove_comments(html):
 		html = html[:start] + html[end+3:]
 	return html
 
+def ignore_tags(soup, tags_list):
+	for tag in tags_list:
+		tags = soup.findAll(tag)
+		for t in tags:
+			if t.string:
+				t.replaceWith(t.string)
+			else:
+				t.replaceWith("")
+	return BeautifulSoup(str(soup))
+
 html = remove_comments(html)
 
 h = open("newhtml.txt", "w")
 h.write(html)
 h.close()
 
-soup = BeautifulSoup.BeautifulSoup(html)
+soup = BeautifulSoup(html)
+
+sp = open("bstestfile0.txt", "w")
+sp.writelines([str(s)+"\n---------------\n" for s in soup])
+sp.close()
+
+soup = ignore_tags(soup, ['b', 'i', 'u', 'a', 'span'])
+
+sp = open("bstestfile00.txt", "w")
+sp.writelines([str(s)+"\n---------------\n" for s in soup])
+sp.close()
+
 texts = soup.findAll(text=True)
+
+sp = open("bstestfile000.txt", "w")
+sp.writelines([str(s)+"\n---------------\n" for s in texts])
+sp.close()
 
 def visible(element):
     if element.parent.name in ['style', 'script', '[document]', 'head', 'title']:
@@ -35,12 +60,12 @@ def visible(element):
 def sentence(element):
 	sentence_chars = [".","!","?"]
 	for char in sentence_chars:
-		if char in element:
+		if element and element[-1] == char:
 			return True
 	return False
 
 def length(element):
-	if len(element.split()) < 5:
+	if len(word_split([element])) < 2:
 		return False
 	return True
 
@@ -75,16 +100,19 @@ def syllables(text_list):
 	return list(new_set), error_count, sum(s_list)/len(s_list)
 			
 def word_split(text_list):
-	tokenizer = RegexpTokenizer(r'\w+')
+	tokenizer = RegexpTokenizer(r'[/\s+]', gaps=True)
 	new_dict = {}
+	word_list= []
 	for text in text_list:
 		for word in tokenizer.tokenize(text):
-			word = word.lower()
-			if word in new_dict:
-				new_dict[word] += 1
-			else:
-				new_dict[word] = 1
-	return new_dict
+			word = word.lower().strip('\'\"-_,.:;!?()*\\/[]{}|<>~=')
+			if word:
+				word_list.append("-"+word+"-")
+				if word in new_dict:
+					new_dict[word] += 1
+				else:
+					new_dict[word] = 1
+	return word_list
 
 def replace_breaks(texts):
 	return [re.sub(r"\s+", " ", text) for text in texts]
@@ -115,7 +143,6 @@ visible_texts = filters([visible], texts)
 #stripped = replace_breaks(strip_tags(convert_entities(visible_texts)))
 #sentences = filters([sentence,length], stripped)
 
-
 f_list = []
 for text in texts:
 	text = text.replace('\n', '')
@@ -124,22 +151,39 @@ for text in texts:
 		f_list.append(text+"\n")
 		f_list.append("-----------------------------------\n")
 
-f = open("bstestfile.txt", "w")
+f_list = [item.encode("utf-8", errors="ignore") for item in f_list]
+
+f = open("bstestfile1.txt", "w")
 f.writelines(f_list)
 f.close()
 
-stripped = [item.encode("utf-8").strip() for item in replace_breaks(convert_entities(visible_texts))]
+converted = replace_breaks(convert_entities(visible_texts))
+stripped = [item.encode("utf-8").strip() for item in sentence_split(converted)]
 
 st = open("bstestfile2.txt", "w")
 st.writelines([strip + "\n" for strip in stripped])
 st.close()
 
+
+#s = open("bstestfile3.txt", "w")
+#s.writelines([sent + "\n\n" for sent in sentences])
+#s.close()
+
+#visible_texts = filters([visible], get_texts(remove_comments(item['url_obj'].full)))
+#stripped = replace_breaks(convert_entities(visible_texts))
+#sentences = filters([sentence,length], stripped)
+
+#sentence_list = [sent.strip() for sent in sentence_split(sentences)]
+	
 sentences = filters([sentence,length], stripped)
+	
+w = open("bstestfile4.txt", "w")
+w.writelines([sent.strip() + "\n\n" for sent in sentence_split(sentences)])
+w.close()
 
-s = open("bstestfile3.txt", "w")
-s.writelines([sent + "\n\n" for sent in sentences])
-s.close()
-
+w = open("bstestfile5.txt", "w")
+w.writelines([word + "\n\n" for word in word_split(stripped)])
+w.close()
 
 #print len(sentences)
 #print sentences

@@ -1,0 +1,2550 @@
+
+
+---------------
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Norwich Hotels - Book Cheap Hotels in Norwich UK - Premier Inn
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+	var LOCALE = "en";
+
+---------------
+
+
+---------------
+
+
+---------------
+
+	
+	function gup(name)	{
+		name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+		var regexS = "[\\?&amp;]"+name+"=([^&amp;#]*)";
+		var regex = new RegExp( regexS );
+		var results = regex.exec( window.location.href );
+		if (results === null) {
+			return null;
+		} else {
+			return results[1];
+		}
+	}
+	
+	function setCookie(c_name, value, expiredays) {
+		var c_domain=".premierinn.com"; 
+		var exdate=new Date();
+		exdate.setDate(exdate.getDate()+expiredays);
+		document.cookie = c_name+ "=" +escape(value)+
+			((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+			+";Domain="+c_domain+";Path=/";
+	}
+ 
+	var p36 = gup('P36');
+	if (p36 !== null) {setCookie("P36", p36, 14);}
+	var purl = gup('PURL');
+	if (purl !== null) {setCookie("PURL", purl, 14);}
+	
+	function readCookie(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(';');
+		for (var i=0;i &lt; ca.length;i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') {c = c.substring(1,c.length);}
+			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		}
+		return null;
+	}
+	
+
+---------------
+
+
+---------------
+
+
+---------------
+
+#contentcolumn h4 {
+font-weight:bold;
+}
+#contentcolumn p,
+#contentcolumn h4 {
+padding-bottom:0.5em;
+}
+
+---------------
+
+
+---------------
+
+
+
+
+var CQ_EXT = "/assets/.html";
+CQ_ASSETS_URL = CQ_EXT.substring(0,CQ_EXT.indexOf(".html"));
+
+$('html').addClass('js'); 
+
+$(document).ready(function(){
+	$("#nav-container .lang").langdropdown();
+	$("form:has(fieldset.room-select)").not('#dialog-content form').roomrequirements();
+	$(".linkedDates").not('.htmlLibrary .linkedDates').datepickerinit();
+	$(".quickSearchField").piautocomplete(".quickSearchHiddenField");
+	$().opentriggeredlinks(".quickSearchHiddenFieldForTriggerUrl");
+	$(".utils","#nav-container").loginutils();
+	$('html .magic').show();
+	$('.popuplink').popuplink();
+	$().tooltipinit();
+});
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+ Skip to content
+---------------
+
+Go to navigation
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+$(function(){
+
+
+var swfSrc = "/en.swf.headerFlashPromo.Single.FlashFile.tmp/spool.swf";
+if (typeof window.headerFlashPromo !== "undefined") {
+	swfSrc = window.headerFlashPromo.Single || swfSrc;
+}
+
+	
+var flashvars = {xmlFile:"/en.xml.headerFlashPromo.Single.XmlDataFile.tmp/spool.xml",targetUrl:""};
+var params = {
+	flashvars:""
+};
+params.wmode = "transparent";
+
+var attributes = {};
+
+var checkFlag = "headerFlashPromo.Single";
+
+if((checkFlag.indexOf("quickflash") === -1) || !((typeof window.disableFlash === "undefined") &amp;&amp; (window.disableFlash === true))){
+swfobject.embedSWF(
+	swfSrc, 
+	"flashAlternativeContent_headerFlashPromo.Single", 
+	"457", 
+	"64", 
+	"6.0.0", 
+	false, 
+	flashvars, params, attributes
+);
+}
+});
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Language and Country selection form
+---------------
+
+
+---------------
+Choose a language and country
+---------------
+
+
+---------------
+
+
+---------------
+UK &amp; Ireland hotels | English
+---------------
+
+
+---------------
+UK &amp; Ireland hotels | French
+---------------
+
+
+---------------
+UK &amp; Ireland hotels | Spanish
+---------------
+
+
+---------------
+UK &amp; Ireland hotels | Italian
+---------------
+
+
+---------------
+UK &amp; Ireland hotels | German
+---------------
+
+
+---------------
+Arabian Gulf hotels | English
+---------------
+
+
+---------------
+India hotels | English
+---------------
+
+
+---------------
+
+
+---------------
+Submit
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Main Navigation
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+var SITE_CHANNEL = "Why we're Premier";
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Why we&#39;re Premier
+---------------
+
+
+---------------
+ 
+---------------
+New iPhone and iPad app
+---------------
+Watch the TV Ad
+---------------
+Premier Inn bookings in European languages
+---------------
+Good Together
+---------------
+Comfortable rooms
+---------------
+Quality restaurants
+---------------
+Filling breakfasts
+---------------
+Located everywhere 
+---------------
+ 
+---------------
+Premier Inn location directory
+---------------
+Sat Nav downloads
+---------------
+Hotels near UK Attractions
+---------------
+ 
+---------------
+
+
+---------------
+Family friendly
+---------------
+Great for groups
+---------------
+Great value
+---------------
+Ideal for lone travellers
+---------------
+Speedy check-in
+---------------
+Wi-Fi
+---------------
+Contact us
+---------------
+ 
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Norwich Hotels
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+		var popUpTitle = I18N.SELECT_ARRIVAL_DATE;
+		var WS_URL = "/services/en/";
+		var CONTEXT_PATH = "";
+		var LOCALE = "en_GB";
+	
+---------------
+
+
+---------------
+
+//&lt;![CDATA[
+$(function() {
+
+	$(".linkedDates").datepickerinit();
+	
+	$('.static-map-container').roundedcorners();
+	
+	$('#static-map').click(function(){
+	$('.static-map-container').hide();
+	
+	//
+	var trackBeacon = $("&lt;div /&gt;");
+	var hotelBeacon = $("&lt;div /&gt;");
+	var offerBeacon = $("&lt;div /&gt;");
+	var interactionBeacon = $("&lt;div /&gt;");
+	var toastBeacon = new Tally();
+	var requirementsBeacon = $('&lt;div /&gt;');
+	
+	var networkFunnel = new NetworkFunnel(hotelBeacon, requirementsBeacon, offerBeacon, toastBeacon);
+	
+	var initial = new VELatLong(52.6259777871871, 1.295013427734391);
+	initial.zoom = 13;
+	var map = new MapPanel($("#msveMap"), initial, networkFunnel, hotelBeacon, offerBeacon, interactionBeacon, requirementsBeacon, toastBeacon, trackBeacon, false, undefined, undefined, "Arh8S7vnLu8US3nbDQAACxCmEp7z7LJc6oCldE9pbqQM0V49wESwER_p3K2Ssb_Z");
+	map.showAsClusters();
+	networkFunnel.getAllHotels();
+	
+	$('.MSVE_PoweredByLogo').css('bottom','20px');
+	//
+	
+	});
+});
+
+$(document).ready(function(){
+	$(".home-radios").dcCheckboxHome();
+	
+	if(jQuery().validate) {
+		$("#quickbooking").validate();
+	}
+	
+	$('#msveMap').css('height','342px');
+	$('.mapContainer').css('height','342px');
+});
+
+//]]&gt;
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Show full map
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Check availability of hotels in Norwich
+---------------
+
+
+---------------
+
+
+---------------
+Search here
+---------------
+
+
+---------------
+Search by postcode, place or hotel name
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Enter a location, postcode or hotel name
+---------------
+
+
+---------------
+
+
+---------------
+Your stay details
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Arrival date
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Fields to set your arrival month
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Depart midday,on your day of departure
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+You can choose the number of rooms and nights after selecting your hotel.
+---------------
+
+
+---------------
+Room requirements
+---------------
+
+
+---------------
+
+
+---------------
+How many nights would you like to stay?
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Nights
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+1
+---------------
+
+
+---------------
+2
+---------------
+
+
+---------------
+3
+---------------
+
+
+---------------
+4
+---------------
+
+
+---------------
+5
+---------------
+
+
+---------------
+6
+---------------
+
+
+---------------
+7
+---------------
+
+
+---------------
+8
+---------------
+
+
+---------------
+9
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+How many rooms do you require?
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Rooms
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+1
+---------------
+
+
+---------------
+2
+---------------
+
+
+---------------
+3
+---------------
+
+
+---------------
+4
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+5+ rooms
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Room requirements
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+&nbsp;
+---------------
+
+
+---------------
+Adults
+---------------
+
+
+---------------
+Children*
+---------------
+
+
+---------------
+Cot
+---------------
+
+
+---------------
+Type
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Room&nbsp;1
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+1
+---------------
+
+
+---------------
+2
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+0
+---------------
+
+
+---------------
+1
+---------------
+
+
+---------------
+2
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Yes
+---------------
+
+
+---------------
+No
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Single
+---------------
+
+
+---------------
+Twin
+---------------
+
+
+---------------
+Double
+---------------
+
+
+---------------
+Family
+---------------
+
+
+---------------
+Disabled
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Room&nbsp;2
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+1
+---------------
+
+
+---------------
+2
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+0
+---------------
+
+
+---------------
+1
+---------------
+
+
+---------------
+2
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Yes
+---------------
+
+
+---------------
+No
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Single
+---------------
+
+
+---------------
+Twin
+---------------
+
+
+---------------
+Double
+---------------
+
+
+---------------
+Family
+---------------
+
+
+---------------
+Disabled
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Room&nbsp;3
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+1
+---------------
+
+
+---------------
+2
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+0
+---------------
+
+
+---------------
+1
+---------------
+
+
+---------------
+2
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Yes
+---------------
+
+
+---------------
+No
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Single
+---------------
+
+
+---------------
+Twin
+---------------
+
+
+---------------
+Double
+---------------
+
+
+---------------
+Family
+---------------
+
+
+---------------
+Disabled
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Room&nbsp;4
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+1
+---------------
+
+
+---------------
+2
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+0
+---------------
+
+
+---------------
+1
+---------------
+
+
+---------------
+2
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Yes
+---------------
+
+
+---------------
+No
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Single
+---------------
+
+
+---------------
+Twin
+---------------
+
+
+---------------
+Double
+---------------
+
+
+---------------
+Family
+---------------
+
+
+---------------
+Disabled
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+*under 16 in beds
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Check availability
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Hotels in Norwich
+---------------
+
+
+---------------
+An English cathedral city, Norwich is a beautiful spot that every visitor is bound to adore. Whatever reason you're visiting this gorgeous city, we have fantastic hotels in Norwich that are perfect for your stay.
+---------------
+
+
+---------------
+
+
+---------------
+Norwich hotels
+---------------
+
+
+---------------
+
+
+---------------
+
+		.hotel-desc-txt p {margin-top:.5em;}
+		#chargesmeta h3 {font-weight:bold;margin:0.3em 0;}
+	
+---------------
+
+
+---------------
+	
+	$(function() {	
+		$('.popup-content').css('display','none');	
+		$('.phonecostinfo').dialoginit($('#chargesmeta'));	
+	});	
+	
+---------------
+
+
+---------------
+
+
+---------------
+Norwich (Showground/A47)
+---------------
+
+
+---------------
+
+
+---------------
+
+
+					Longwater Interchange,
+				
+				
+					Dereham Road,
+				
+				
+					New Costessey,
+				
+				
+					Norfolk,
+				
+		NR5 0TP,
+ United Kingdom
+
+---------------
+
+
+---------------
+Tel: 0871 527  8834 *
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+					Room only from 	
+		&pound;35.00
+
+
+---------------
+
+
+---------------
+
+
+---------------
+View details and book
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Norwich Airport
+---------------
+
+
+---------------
+
+
+---------------
+
+
+					Delft Way,
+				
+				
+					Norwich Airport,
+				
+				
+					Norwich,
+				
+		NR6 6BB,
+ United Kingdom
+
+---------------
+
+
+---------------
+Tel: 0871 527  8836 *
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+					Room only from 	
+		&pound;39.00
+
+
+---------------
+
+
+---------------
+
+
+---------------
+View details and book
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Norwich (Broadlands Business Park)
+---------------
+
+
+---------------
+
+
+---------------
+
+
+					Broadland Business Park,
+				
+				
+					Old Chapel Way,
+				
+				
+					Norwich,
+				
+		NR7 0WG,
+ United Kingdom
+
+---------------
+
+
+---------------
+Tel: 0871 527  8838 *
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+					Room only from 	
+		&pound;39.00
+
+
+---------------
+
+
+---------------
+
+
+---------------
+View details and book
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Norwich City Centre (Duke Street)
+---------------
+
+
+---------------
+
+
+---------------
+
+
+					Duke Street,
+				
+				
+					Norwich,
+				
+				
+					Norfolk,
+				
+		NR3 3AP,
+ United Kingdom
+
+---------------
+
+
+---------------
+Tel: 0871 527 8840 *
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+					Room only from 	
+		&pound;35.00
+
+
+---------------
+
+
+---------------
+
+
+---------------
+View details and book
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Norwich Nelson City Centre
+---------------
+
+
+---------------
+
+
+---------------
+
+
+					Prince Of Wales Road,
+				
+				
+					Norwich,
+				
+				
+					Norfolk,
+				
+		NR1 1DX,
+ United Kingdom
+
+---------------
+
+
+---------------
+Tel: 0871 527  8842 *
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+					Room only from 	
+		&pound;35.00
+
+
+---------------
+
+
+---------------
+
+
+---------------
+View details and book
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+Call charges
+---------------
+
+
+---------------
+Calls are charged at 10 pence per minute + network extras.
+---------------
+ 
+			Premier Inn lines are open 24 hours a day, 7 days a week.
+---------------
+
+			The Customer Contact Centre is open 8am to 10pm Mon - Sat &amp; 9am to 10pm on Sun.
+---------------
+
+			Tel: 0871 527 9222
+		
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+See all that Norwich has to offer
+---------------
+
+
+---------------
+There's plenty to see in Norwich - and now you won't miss a minute of the action with a well-located Premier Inn hotel. 
+---------------
+Home to stunning sights, Norwich has myriad attractions, including the Norwich Cathedral, Norwich Castle and the large outdoor Norwich Market that takes place six days per week. 
+---------------
+Football fans can catch a Norwich City FC and enjoy the thrill of this city's much-loved team. Don't worry if football's not your thing - Norwich offers plenty for everyone and is also considered one of the top ten shopping destinations in the UK.
+---------------
+With plenty of convenient transit points - from train stations to an airport and major motorway links, it's easy to get around Norwich and to all our hotels. 
+---------------
+And for business travellers, our hotels in Norwich are close to Norwich's thriving  business sector, putting you right where you need to be for your work in Norwich. 
+---------------
+
+
+---------------
+Easy online booking with Premier Inn
+---------------
+
+
+---------------
+Choose us for your trip to Norwich and you can be rest assured knowing you're staying at a convenient and comfortable Premier Inn hotel. Our hotels in the area include business hotels and budget hotels in Norwich that are sure to please. Book your hotel in Norwich today and enjoy a wonderful stay with Premier Inn.
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+ 
+---------------
+
+FAQs
+
+---------------
+
+Contact us
+
+---------------
+
+Sitemap
+
+---------------
+
+Disabled access
+
+
+
+---------------
+
+Privacy policy
+
+
+
+---------------
+
+How we use cookies
+
+
+
+---------------
+
+
+---------------
+
+Affiliate programme
+
+---------------
+
+International Development
+
+---------------
+
+
+---------------
+
+Terms and conditions
+
+
+
+---------------
+
+
+---------------
+
+
+---------------
+A Great Night's Sleep Guaranteed
+---------------
+
+
+---------------
+Premier Inn is the UK and Ireland's biggest and fastest growing hotel company. With over 650 budget hotels offering quality accommodation at affordable hotel prices.
+---------------
+
+
+---------------
+
+
+---------------
+ Premier stays 
+---------------
+in the UK and Ireland's top cities
+---------------
+ 
+---------------
+
+Budget hotels Norwich
+
+---------------
+
+Family hotels Norwich
+
+---------------
+
+Business hotels Norwich
+
+---------------
+
+Weekend breaks Norwich
+
+---------------
+
+Norwich City Centre (Duke St)
+
+---------------
+
+Norwich Central South
+
+---------------
+
+Norwich Nelson
+
+---------------
+
+Norwich Airport
+
+---------------
+
+Norwich (Showground/A47)
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+setCookie("oactive","true");
+
+---------------
+
+
+---------------
+
+
+---------------
+
+if (typeof pio === 'undefined') {
+	var pio = window.pio || {};
+}
+
+if(pio.pageName) {
+s.pageName="Premier Inn:Why we're Premier:Located everywhere:Norwich Hotels - Book Cheap Hotels in Norwich UK - Premier Inn"+":"+pio.pageName} else {
+s.pageName="Premier Inn:Why we're Premier:Located everywhere:Norwich Hotels - Book Cheap Hotels in Norwich UK - Premier Inn"
+}
+
+
+s.channel=((typeof SITE_CHANNEL === 'undefined')?"":SITE_CHANNEL);
+
+s.pageType="";
+
+if(pio.prop1 &amp;&amp; !s.prop1){s.prop1=pio.prop1;}
+
+if(pio.prop2 &amp;&amp; !s.prop2){s.prop2=pio.prop2;}
+
+if(pio.prop3 &amp;&amp; !s.prop3){s.prop3=pio.prop3;}
+
+if(pio.prop4 &amp;&amp; !s.prop4){s.prop4=pio.prop4;}
+if(pio.prop5 &amp;&amp; !s.prop5){s.prop5=pio.prop5;}
+if(pio.prop6 &amp;&amp; !s.prop6){s.prop6=pio.prop6;}
+if(pio.prop7 &amp;&amp; !s.prop7){s.prop7=pio.prop7;}
+if(pio.prop8 &amp;&amp; !s.prop8){s.prop8=pio.prop8;}
+if(pio.prop9!==undefined &amp;&amp; !s.prop9){s.prop9=String(pio.prop9);}
+if(pio.prop10 &amp;&amp; !s.prop10){s.prop10=pio.prop10;}
+if(pio.prop11 &amp;&amp; !s.prop11){s.prop11=pio.prop11;}
+
+if(pio.prop12 &amp;&amp; !s.prop12){s.prop12=pio.prop12;}
+
+if(pio.prop13 &amp;&amp; !s.prop13){s.prop13=pio.prop13;}
+
+if(pio.prop14 &amp;&amp; !s.prop14){s.prop14=pio.prop14;}
+if(pio.prop15 &amp;&amp; !s.prop15){s.prop15=pio.prop15;}
+
+if(pio.prop16 &amp;&amp; !s.prop16){s.prop16=pio.prop16;}
+
+
+if(pio.prop18 &amp;&amp; !s.prop18){s.prop18=pio.prop18;}
+
+if(pio.prop19 &amp;&amp; !s.prop19){s.prop19=pio.prop19;}
+
+if(pio.prop21 &amp;&amp; !s.prop21){s.prop21=pio.prop21;}
+
+if(pio.prop22 &amp;&amp; !s.prop22){s.prop22=pio.prop22;}
+
+if(pio.prop24 &amp;&amp; !s.prop24){s.prop24=pio.prop24;}
+
+if(pio.prop25 &amp;&amp; !s.prop25){s.prop25=pio.prop25;}
+
+if(pio.prop33 &amp;&amp; !s.prop33){s.prop33=pio.prop33;}
+
+s.prop27="UK";
+
+if(pio.prop41 &amp;&amp; !s.prop41){s.prop41=pio.prop41;}
+/* Conversion Variables */
+if(pio.zip &amp;&amp; !s.zip){s.zip=pio.zip;}
+
+if(pio.events &amp;&amp; !s.events){s.events=pio.events;}
+
+if(pio.products &amp;&amp; !s.products){s.products=pio.products;}
+if(pio.purchaseID &amp;&amp; !s.purchaseID){s.purchaseID=pio.purchaseID;}
+
+if(pio.eVar17 &amp;&amp; !s.eVar17){s.eVar17=pio.eVar17;}
+
+if(pio.eVar18 &amp;&amp; !s.eVar18){s.eVar18=pio.eVar18;}
+
+if(pio.eVar19 &amp;&amp; !s.eVar19){s.eVar19=pio.eVar19;}
+
+if(pio.eVar21 &amp;&amp; !s.eVar21){
+	s.eVar21=pio.eVar21;
+	s.eVar50=sc_append(s.eVar21,"sc_v50");
+}
+
+if(pio.eVar22 &amp;&amp; !s.eVar22){s.eVar22=s.pageName+":"+pio.eVar22;}
+if(pio.prop20 &amp;&amp; !s.prop20){s.prop20=s.pageName+":"+pio.prop20;}
+if(pio.eVar24 &amp;&amp; !s.eVar24){s.eVar24=pio.eVar24;}
+
+
+if(pio.eVar20 &amp;&amp; !s.eVar20){s.eVar20=s.pageName+":"+pio.eVar20;}
+if(pio.eVar25 &amp;&amp; !s.eVar25){s.eVar25=pio.eVar25;}
+
+
+if(pio.eVar23 &amp;&amp; !s.eVar23){s.eVar23=pio.eVar23;}
+
+s.eVar27=s.prop27
+
+if(pio.eVar29 &amp;&amp; !s.eVar29){s.eVar29=pio.eVar29;}
+
+if(pio.eVar31 &amp;&amp; !s.eVar31){s.eVar31=pio.eVar31;}
+
+if(pio.eVar39 &amp;&amp; !s.eVar39){s.eVar39=pio.eVar39;}
+
+if(pio.eVar41 &amp;&amp; !s.eVar41){s.eVar41=pio.eVar41;}
+
+if(pio.eVar50 &amp;&amp; !s.eVar50){
+	s.eVar50=pio.eVar50;
+	s.eVar50=sc_append(s.eVar50,"sc_v50");
+}
+
+if(pio.eVar60 &amp;&amp; !s.eVar60){
+	s.eVar60=pio.eVar60;
+}
+
+if(pio.eVar67 &amp;&amp; !s.eVar67){s.eVar67=pio.eVar67;}
+if(pio.eVar68 &amp;&amp; !s.eVar68){s.eVar68=s.pageName+":"+pio.eVar68;}
+
+
+if(pio.eVar73 &amp;&amp; !s.eVar73){s.eVar73=pio.eVar73;}
+if(pio.eVar74 &amp;&amp; !s.eVar74){s.eVar74=pio.eVar74;}
+
+
+if(pio.eVar51 &amp;&amp; !s.eVar51){s.eVar51=pio.eVar51;}
+if(pio.eVar56 &amp;&amp; !s.eVar56){s.eVar56=pio.eVar56;}
+if(pio.eVar30 &amp;&amp; !s.eVar30){s.eVar30=pio.eVar30;}
+if(pio.eVar25 &amp;&amp; !s.eVar25){s.eVar25=pio.eVar25;}
+
+
+if(pio.state &amp;&amp; !s.state){s.state=pio.state;}
+
+if(pio.zip &amp;&amp; !s.zip){s.zip=pio.zip;}
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+setCookie("gactive","true");
+
+---------------
+
+
+---------------
+
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+
+---------------
+
+
+---------------
+
+var pageTracker;
+var googleTrackerTimeout;
+var totalGoogleTrackerTries = 0;
+function tryGoogleTracker() {
+	if (typeof(_gat) != 'undefined') {
+		pageTracker = _gat._getTracker("UA-8208115-1");
+		pageTracker._initData();
+		
+		pageTracker._trackPageview(s.pageName);
+	} else {
+		if (totalGoogleTrackerTries++ &lt; 5) {
+			googleTrackerTimeout = setTimeout("tryGoogleTracker()", 1000);
+		}
+	}
+}
+tryGoogleTracker();
+
+---------------
+
+
+---------------
+
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+var dartPageCode = "undefined";
+var ordCode = "";
+
+try { 
+	if (typeof(bookingDartPageCode) != 'undefined') {
+		if (bookingDartPageCode != "") {
+			dartPageCode = bookingDartPageCode;
+		} else {
+			ordCode = ";ord=1";
+		}
+	} else {
+		ordCode = ";ord=1";
+	}
+} catch (e) {
+}
+document.write('&lt;iframe src="http'+(document.location.protocol=='https:'?'s':'')+'://fls.doubleclick.net/activityi;src=2190810;' + dartPageCode + ordCode + ';num=' + a + '?" width="1" height="1" frameborder="0"&gt;&lt;/iframe&gt;');
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------
+
+	var _mTrack = _mTrack || [];
+	_mTrack.push(['trackPage']);
+	(function() { 
+		var mClientId = 'gzq1x9b860';
+		var mProto = ('https:' == document.location.protocol ? 'https://' : 'http://');
+		var mHost = 'tracker.marinsm.com'; 
+		var mt = document.createElement('script'); 
+		mt.type = 'text/javascript'; 
+		mt.async = true; 
+		mt.src = mProto + mHost + '/tracker/async/' + mClientId + '.js'; 
+		var fscr = document.getElementsByTagName('script')[0]; fscr.parentNode.insertBefore(mt, fscr); 
+	})(); 
+
+---------------
+
+
+---------------
+
+
+---------------
+
+
+---------------

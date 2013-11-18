@@ -1,3 +1,9 @@
 Determine: Is __init__() necessary in the classes in pipelines.py when you use spider_opened()?
 
 Change: Look into separating out the SQLiteExportPipeline into its distinct roles.
+
+Change: Is the current "name" string doing its job? Merge it with the method being used to make urls safe for saving as json files.
+
+Add: Put word count and sentence count into the text analysis view.
+
+Determine: What are the most interesting sentence analysis methods that you could use with NLTK?

@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<meta charset="utf-8">
+<meta>
+<head>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 <style>
 
 .node {
@@ -22,23 +24,15 @@
   stroke-width: 1.5px;
 }
 
-h1 {
-  font-size: 30px;
-  font-family: helvetica, arial, sans-serif;
-  text-align: center;
-}
-
-#img_link {
-  
-}
-
 #img_holder {
   width: 400px;
-  height: 400px;
+  height: 100%;
   overflow: hidden;
   position: fixed;
-  right: 20px;
-  top: 20px;
+  padding: 100px 20px 20px 20px;
+  right: 0;
+  top: 0;
+  background-color: #DDD;
 }
 
 #thumb {
@@ -47,6 +41,7 @@ h1 {
 }
 
 </style>
+</head>
 <body>
 
 <h1 id="header">Sitemap: {{ domain }}</h1>
@@ -58,7 +53,7 @@ h1 {
 <script src="{{ url_for('static', filename='d3.js') }}" type="text/javascript"></script>
 <script>
 
-var margin = {top: 20, right: 120, bottom: 20, left: 120},
+var margin = {top: 100, right: 500, bottom: 20, left: 120},
     width = 2000 - margin.right - margin.left,
     height = 3000 - margin.top - margin.bottom;
     
@@ -181,12 +176,12 @@ function update(source) {
   var img_link
   d3.selectAll( ".node" ).on( "mouseover", function(d) {
 	  // display thumbnail
-	  img_path = "{{ image_path }}" + d.name.split("/").join("--") + ".png";
+	  img_path = "{{ image_path }}" + d.name + ".png";
 	  img_link = "/screenshot/?image_path=" + img_path
 	  document.getElementById('thumb').src=img_path;
 	  document.getElementById('thumb').style.display='block';
 	  document.getElementById('img_link').href=img_link;
-	  document.getElementById('header').innerHTML=full_image_path;   // change back to d.name
+	  //document.getElementById('header').innerHTML=d.name;   // change back to d.name
   });
   
   // --- The number in attr() determines the size of the node as it transitions. Style() changes the node fill colour depending on whether the node has children.
@@ -204,7 +199,7 @@ function update(source) {
 	  .attr("y", function(d) { return d.children || d._children ? -10 : 0; })
       .attr("dy", ".35em")
       .attr("text-anchor", function(d) { return d.children || d._children ? "end" : "start"; })
-      .text(function(d) { return d.name; })
+      .text(function(d) { return d.url; })
       .style("fill-opacity", 1e-6);
 
   // Transition nodes to their new position.
@@ -277,7 +272,8 @@ function click(d) {
 	  d._children = null;
 	}
   } else {
-    img_path = "{{ image_path }}" + d.name.split("/").join("--") + ".png";
+    //img_path = "{{ image_path }}" + d.name.split("/").join("--") + ".png";
+    img_path = "{{ image_path }}" + d.name + ".png";
 	var page = "/screenshot/?image_path=" + img_path
 	window.open(page, '_blank', 'location=yes,height=800,width=800,scrollbars=yes,status=yes');
   }

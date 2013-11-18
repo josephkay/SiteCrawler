@@ -4,33 +4,31 @@
 <html>
 
 <head>
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
 	<title>Text Analysis</title>
 	<script src="{{ url_for('static', filename='Chart.js') }}" type="text/javascript"></script>
 	<script src="{{ url_for('static', filename='jquery.min.js') }}" type="text/javascript"></script>
+	<script src="{{ url_for('static', filename='jquery.tablesorter.js') }}" type="text/javascript"></script>
 	<style>
-	
-	table {
-		border-collapse: collapse;
-		border-spacing: 0;
-	}
 	
 	.hoverable:hover {
 		background-color: #EEE;
-	}
-	
-	td {
-		padding: 2px;
 	}
 	
 	td:hover {
 		background-color: #DDD;
 	}
 	
+	.clicky:hover {
+		background-color: rgba(187,216,235,0.5);
+		cursor: pointer;
+	}
+	
 	th {
 		padding: 10px;
 	}
 	
-	.clicky {
+	.centre {
 		text-align: center;
 	}
 	
@@ -47,176 +45,195 @@
 		padding: 0 30px 0 0;
 	}
 	
+	#chart_holder {
+		position: fixed;
+		background-color: white;
+		top: 80px;
+		padding: 10px 0;
+		width: 100%;
+	}
+	
 	</style>
 </head>
 
 <body>
-	<h1>Text Analysis</h1>
-	
-	<canvas id="myChart" width="1200" height="200"></canvas>
-	
-	<div id="data_container">
-		<div id="label_list"><span>Lengths: </span></div>
-		<div id="word_list"></div>
+	<h1 id="header">Text Analysis</h1>
+	<div id="main">
+		<div id="chart_holder">
+			<canvas id="myChart" width="1200" height="200"></canvas>
+		</div>
+		
+		<div id="data_container" class="section up_buffer">
+			<div id="label_list" class="section"><span>Lengths: </span></div>
+			<div id="word_list"></div>
+		</div>
+		
+		<table id="sorted">
+			<thead><tr><th>url</th><th>Av. word length</th><th>Av. sentence length</th><th>Word count</th><th>Sentence count</th></tr></thead>
+			<tbody><tr class="hoverable"><td>Total</td><td class="clicky centre" type="word" url="Total" >{{ "{0:.1f}".format(text_data["total"]["av_word_len"]) }}</td><td class="clicky centre" type="sent" url="Total" >{{ "{0:.1f}".format(text_data["total"]["av_sent_len"]) }}</td><td class="centre">{{ "{0}".format(text_data["total"]["word_count"]) }}</td><td class="centre">{{ "{0}".format(text_data["total"]["sent_count"]) }}</td></tr>
+			{% for url in text_data %}
+				{% if url != "total" %}
+					<tr class="hoverable"><td >{{ url }}</td><td class="clicky centre" type="word" url={{ url }} >{{ "{0:.1f}".format(text_data[url]["av_word_len"]) }}</td><td class="clicky centre" type="sent" url={{ url }} >{{ "{0:.1f}".format(text_data[url]["av_sent_len"]) }}</td><td class="centre">{{ "{0}".format(text_data[url]["word_count"]) }}</td><td class="centre">{{ "{0}".format(text_data[url]["sent_count"]) }}</td></tr>
+				{% endif %}
+			{% endfor %}
+		</tbody></table>
+		
+		<p id="extratest"></p>
 	</div>
-	
-	<table>
-		<tr><th>url</th><th>Av. word length</th><th>Av. sentence length</th></tr>
-		<tr class="hoverable"><td>Total</td><td class="clicky" type="word" url="Total" >{{ "{0:.1f}".format(url_stats["Total"]["length"]["word"]["average"]) }}</td><td class="clicky" type="sent" url="Total" >{{ "{0:.1f}".format(url_stats["Total"]["length"]["sent"]["average"]) }}</td></tr>
-		{% for url in url_stats["urls"] %}
-			<tr class="hoverable"><td >{{ url }}</td><td class="clicky" type="word" url={{ url }} >{{ "{0:.1f}".format(url_stats["urls"][url]["length"]["word"]["average"]) }}</td><td class="clicky" type="sent" url={{ url }} >{{ "{0:.1f}".format(url_stats["urls"][url]["length"]["sent"]["average"]) }}</td></tr>
-		{% endfor %}
-	</table>
 
-	<p></p>
-
-	<p></p>
-	
-	<p id="extratest"></p>
-
-	
 	<script>
-		var url_stats = {{ url_stats|tojson|safe }};
+		$(document).ready(function(){
+			$('#sorted').tablesorter();
+		});
+	
+		var date = {{ date }};
+		var domain = "{{ domain }}";
+		var scrapeid = {{ scrapeid }};
+		var folder_path = "{{ folder_path }}";
 		
-		var w_labels = {{ w_labels|safe }};
-		var s_labels = {{ s_labels|safe }};
+		$.getJSON("{{ url_for('static', filename=extra_data_path) }}", function(response) {
+			var extra_data = response;
 		
-		$('.clicky').on('click', function() {
-			$(this).parent().parent().find('tr').find('td').css('background-color','');
-			$(this).parent().parent().find('tr').css('background-color','');
-			$(this).parent().css('background-color','rgba(187,216,235,0.5)');
-			$(this).css('background-color','#BBD8EB');
+			var url_name_dict = extra_data['url_name_dict'];
+			var w_labels = extra_data['w_labels'];
+			var s_labels = extra_data['s_labels'];
 			
-			var type = $(this).attr('type');
-			var url = $(this).attr('url');
+			$('.clicky').on('click', function() {
 			
-			if (type == "word") {
-				var labels = w_labels;
-			} else if (type == "sent") {
-				var labels = s_labels;
-			}
-			
-			var dataset = new Array();
-			var labels_in_use = new Array();
-			
-			for (var i = 0; i < labels.length; i++) {
-				var value = 0;
+				$(this).parent().parent().find('tr').find('td').css('background-color','');
+				$(this).parent().parent().find('tr').css('background-color','');
+				$(this).parent().css('background-color','rgba(187,216,235,0.5)');
+				$(this).css('background-color','#BBD8EB');
+				
+				var type = $(this).attr('type');
+				var url = $(this).attr('url');
+				var url_name;
+				
 				if (url == "Total") {
-					for (length in url_stats["Total"]["length"][type]["labels"][labels[i]]) {
-						value += url_stats["Total"]["length"][type]["labels"][labels[i]][length]["freq"];
-					}
+					url_name = "total";
 				} else {
-					for (length in url_stats["urls"][url]["length"][type]["labels"][labels[i]]) {
-						value += url_stats["urls"][url]["length"][type]["labels"][labels[i]][length]["freq"];
+					url_name = url_name_dict[url];
+				}
+					
+				$.getJSON("{{ url_for('static', filename=folder_path) }}"+url_name+".json", function(url_stats) {
+					
+					if (type == "word") {
+						var labels = w_labels;
+					} else if (type == "sent") {
+						var labels = s_labels;
 					}
-				}
-				if (value > 0) {
-					labels_in_use.push(labels[i])
-				}
-				dataset.push(value)
-			}
-			
-			//document.getElementById('extratest').innerHTML = dataset;
-			
-			var options = {
-				scaleOverride : true,
-				scaleStartValue : 0,
-				//barShowStroke : false,
-				barStrokeWidth : 2,
-				barValueSpacing : 1,
-				yAxisFixedWidth : 50,
-				scaleLineColor : "rgba(200,200,200,1)",
-				xAxisLineWidth : 5,
-				scaleOverlay : true,
-				xAxisOverlap : 5,
-				yAxisOverlap : 0,
-			}
-			
-			var max = Math.max.apply(Math, dataset);
-			
-			document.getElementById('extratest').innerHTML = labels_in_use;
-			
-			var level = 10;
-			var l_count = 2;
-			
-			while (true) {
-				if (max <= level) {
-					operator = level/10
-					unit = Math.ceil(max/operator); 
-					options.scaleSteps = unit;
-					options.scaleStepWidth = operator;
-					break;
-				} else if (l_count%3 == 0) {
-					level *= 2.5;
-				} else {
-					level *= 2;
-				}
-				l_count += 1;
-			}
-			
-			
-			document.getElementById('label_list').innerHTML = "<span>Lengths: </span>";
-			document.getElementById('word_list').innerHTML = "";
-			
-			var label;
-			for (x in labels.reverse()) {
-				label = labels[x];
-				for (var m = 0; m < labels_in_use.length; m++) {
-					if (label == labels_in_use[m]) {
-						y = " <div class='labelclick hoverable' type="+type+" url="+url+" value='"+label+"' >"+label+"</div>";
-						$("#label_list span:last").after(y);
-				}
-				}
-			}
-			
-			labels.reverse()
-			
-			var data = {
-				labels : labels,
-				datasets : [
-					{
-						fillColor : "rgba(187,216,235,0.5)",
-						strokeColor : "rgba(187,216,235,1)",
-						data : dataset
+					
+					var dataset = new Array();
+					var labels_in_use = new Array();
+					
+					for (var i = 0; i < labels.length; i++) {
+						var value = 0;
+						for (length in url_stats["length"][type]["labels"][labels[i]]) {
+							value += url_stats["length"][type]["labels"][labels[i]][length]["freq"];
+						}
+						if (value > 0) {
+							labels_in_use.push(labels[i])
+						}
+						dataset.push(value)
 					}
-				]
-			}
-			
-			//Get the context of the canvas element we want to select
-			var ctx = document.getElementById("myChart").getContext("2d");
-			var myNewChart = new Chart(ctx).Bar(data, options);
-		; return false; } );
-		
-		$('#data_container').delegate('.labelclick', 'click', function() {
-			$(this).parent().find('div').css('background-color','');
-			$(this).css('background-color','#BBD8EB');
-			
-			var label = $(this).attr('value');
-			var type = $(this).attr('type');
-			var url = $(this).attr('url');
-			
-			document.getElementById('word_list').innerHTML = "";
-			
-			//document.getElementById('tester').innerHTML += url_stats["Total"]["length"]["sent"]["labels"][label][length]["items"]
-			
-			if (url == "Total") {
-				for (length in url_stats["Total"]["length"][type]["labels"][label]) {
-					for (var k= 0; k < url_stats["Total"]["length"][type]["labels"][label][length]["items"].length; k++) {
-						item = url_stats["Total"]["length"][type]["labels"][label][length]["items"][k];
-						document.getElementById('word_list').innerHTML += "<div class='item_block'>"+item+"</div>";
+					
+					//document.getElementById('extratest').innerHTML = dataset;
+					
+					var options = {
+						scaleOverride : true,
+						scaleStartValue : 0,
+						//barShowStroke : false,
+						barStrokeWidth : 2,
+						barValueSpacing : 1,
+						yAxisFixedWidth : 50,
+						scaleLineColor : "rgba(200,200,200,1)",
+						xAxisLineWidth : 5,
+						scaleOverlay : true,
+						xAxisOverlap : 5,
+						yAxisOverlap : 0,
 					}
-				}
-			} else {
-				for (length in url_stats["urls"][url]["length"][type]["labels"][label]) {
-					for (var k= 0; k < url_stats["urls"][url]["length"][type]["labels"][label][length]["items"].length; k++) {
-						item = url_stats["urls"][url]["length"][type]["labels"][label][length]["items"][k];
-						document.getElementById('word_list').innerHTML += "<div class='item_block'>"+item+"</div>";
+					
+					var max = Math.max.apply(Math, dataset);
+					
+					//document.getElementById('extratest').innerHTML = labels_in_use;
+					
+					var level = 10;
+					var l_count = 2;
+					
+					while (true) {
+						if (max <= level) {
+							operator = level/10
+							unit = Math.ceil(max/operator); 
+							options.scaleSteps = unit;
+							options.scaleStepWidth = operator;
+							break;
+						} else if (l_count%3 == 0) {
+							level *= 2.5;
+						} else {
+							level *= 2;
+						}
+						l_count += 1;
 					}
-				}
-			}
-			
-			
-		; return false; } );
+					
+					
+					document.getElementById('label_list').innerHTML = "<span>Lengths: </span>";
+					document.getElementById('word_list').innerHTML = "";
+					
+					var label;
+					for (x in labels.reverse()) {
+						label = labels[x];
+						for (var m = 0; m < labels_in_use.length; m++) {
+							if (label == labels_in_use[m]) {
+								y = " <div class='labelclick hoverable' type="+type+" value='"+label+"' >"+label+"</div>";
+								$("#label_list span:last").after(y);
+						}
+						}
+					}
+					
+					labels.reverse()
+					
+					var data = {
+						labels : labels,
+						datasets : [
+							{
+								fillColor : "rgba(187,216,235,0.5)",
+								strokeColor : "rgba(187,216,235,1)",
+								data : dataset
+							}
+						]
+					}
+					
+					//Get the context of the canvas element we want to select
+					var ctx = document.getElementById("myChart").getContext("2d");
+					var myNewChart = new Chart(ctx).Bar(data, options);
+					
+					
+						$('#data_container').delegate('.labelclick', 'click', function() {
+							$(this).parent().find('div').css('background-color','');
+							$(this).css('background-color','#BBD8EB');
+							
+							var label = $(this).attr('value');
+							var type = $(this).attr('type');
+							//var url = $(this).attr('url');
+							
+							document.getElementById('word_list').innerHTML = "";
+							
+							//document.getElementById('tester').innerHTML += url_stats["Total"]["length"]["sent"]["labels"][label][length]["items"]
+							
+							for (length in url_stats["length"][type]["labels"][label]) {
+								for (var k= 0; k < url_stats["length"][type]["labels"][label][length]["items"].length; k++) {
+									item = url_stats["length"][type]["labels"][label][length]["items"][k];
+									document.getElementById('word_list').innerHTML += "<div class='item_block'>"+item+"</div>";
+								}
+							}
+							
+							
+						; return false; } );
+					
+					
+				});
+			; return false; } );
+		});
 		
 	</script>
 	

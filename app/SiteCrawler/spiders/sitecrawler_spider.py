@@ -34,12 +34,16 @@ class MySpider(CrawlSpider):
 		conn.commit()
 		conn.close()
 		
-		self.seed = URL(root, self.scrapeid, base={'protocol':'http://', 'subdomain':'', 'domain':domain, 'path':''})
+		self.long_count = 0
+		self.seed = URL(root, self.scrapeid, self.long_count, base={'protocol':'http://', 'subdomain':'', 'domain':domain, 'path':''})
 		self.start_urls = [self.seed.full]
 		self.allowed_domains = [domain, "facebook.com", "twitter.com"]
+		self.long_count = self.seed.long_count
 	
 	def parse_item(self, response, item):
 		
+		log.msg("parse item")
+		log.msg("URL: {0}".format(item['url_obj'].full))
 		hxs = HtmlXPathSelector(response)
 		item['depth'] = response.meta['depth']
 		item['links'] = []
@@ -47,32 +51,33 @@ class MySpider(CrawlSpider):
 		item['date'] = self.unix_date
 		item['scrape_domain'] = self.scrape_domain
 		
-		for url in hxs.select('//a/@href').extract():
-			u = URL(url, self.scrapeid, parent=item['url_obj'])
-			if u.domain:
-				item['links'].append(u)
+		#for url in hxs.select('//a/@href').extract():
+		#	u = URL(url, self.scrapeid, parent=item['url_obj'])
+		#	if u.domain:
+		#		item['links'].append(u)
 		
-		visible_texts = filters([visible], get_texts(remove_comments(item['url_obj'].full)))
-		stripped = replace_breaks(convert_entities(visible_texts))
-		sentences = filters([sentence,length], stripped)
-		item['sentences'] = [sent.strip() for sent in sentence_split(sentences)]
+		visible_texts = filters([visible], get_texts(item['url_obj'].full))
+		converted = replace_breaks(convert_entities(visible_texts))
+		stripped = [sent.strip() for sent in sentence_split(converted)]
+		item['sentences'] = filters([sentence,length], stripped)
 		item['words'] = word_split(stripped)
+		self.long_count = item['url_obj'].long_count
 		
 		return item
 	
 	def main_parse(self, response):
 		item = SiteCrawlerItem()
-		item['url_obj'] = URL(response.url, self.scrapeid, parent=self.seed)
+		item['url_obj'] = URL(response.url, self.scrapeid, self.long_count, parent=self.seed)
 		item['social'] = 0
 		return self.parse_item(response, item)
 	
 	def social_parse(self, response):
-		self.log("Bingo! Social page has been parsed!")
+		#self.log("Bingo! Social page has been parsed!")
 		item = SiteCrawlerItem()
 		if "facebook" in response.url:
 			domain = "facebook.com"
 		elif "twitter" in response.url:
 			domain = "twitter.com"
-		item['url_obj'] = URL(response.url, self.scrapeid, base={'protocol':'http://', 'subdomain':'www.', 'domain':domain, 'path':''})
+		item['url_obj'] = URL(response.url, self.scrapeid, self.long_count, base={'protocol':'http://', 'subdomain':'www.', 'domain':domain, 'path':''})
 		item['social'] = 1
 		return self.parse_item(response, item)

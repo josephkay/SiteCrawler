@@ -1,0 +1,1036 @@
+
+
+---------------
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+---------------
+
+
+---------------
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Norwich Hotels - Book Cheap Hotels in Norwich UK - Premier Inn</title>
+<meta name="encoding" content="utf-8" />
+<meta name="description" content="Choose from a range of Norwich hotels and book rooms from just £29 online. Premier Inn, everything's Premier but the Price" />
+<meta name="keywords" content="norwich hotels, hotels in norwich, cheap hotel in norwich, accommodation norwich, premier inn" />
+<meta name="date" content="2013-11-07" />
+<meta name="DC.Title" content="Norwich" />
+<meta name="DC.Subject" content="norwich hotels, hotels in norwich, cheap hotel in norwich, accommodation norwich, premier inn" />
+<meta name="DC.Description" content="Choose from a range of Norwich hotels and book rooms from just £29 online. Premier Inn, everything's Premier but the Price" />
+<meta name="DC.Date" content="2013-11-07" />
+<meta name="DC.Publisher" content="J Whitter" />
+<link rel="stylesheet" type="text/css" href="/assets/css/reset-min.css" />
+<script type="text/javascript" src="/assets/js/mbox.js"></script>
+<script type="text/javascript" src="//nexus.ensighten.com/whitbread/Bootstrap.js"></script>
+<link rel="SHORTCUT ICON" href="/assets/images/favicon.ico" type="image/x-icon" />
+<link rel="icon" href="/assets/images/favicon.png" type="image/png" />
+<link rel="stylesheet" type="text/css" href="/assets/css/global.css" />
+<link rel="stylesheet" type="text/css" href="/assets/css/screen.css" />
+<link rel="stylesheet" type="text/css" href="/assets/css/premierinn.datepicker.css" />
+<link rel="stylesheet" type="text/css" href="/assets/css/autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="/assets/css/cq.css" />
+<link rel="stylesheet" type="text/css" href="/assets/css/print.css" media="print" />
+<link rel="stylesheet" type="text/css" href="/assets/css/autocomplete.css" />
+<script type="text/javascript" src="/assets/js/minimal.js"></script>
+<script type="text/javascript">
+	var LOCALE = "en";
+</script>
+<script type="text/javascript" src="/assets/js/pi-en.js"></script>
+<script type="text/javascript">
+	
+	function gup(name)	{
+		name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");
+		var regexS = "[\\?&amp;]"+name+"=([^&amp;#]*)";
+		var regex = new RegExp( regexS );
+		var results = regex.exec( window.location.href );
+		if (results === null) {
+			return null;
+		} else {
+			return results[1];
+		}
+	}
+	
+	function setCookie(c_name, value, expiredays) {
+		var c_domain=".premierinn.com"; 
+		var exdate=new Date();
+		exdate.setDate(exdate.getDate()+expiredays);
+		document.cookie = c_name+ "=" +escape(value)+
+			((expiredays==null) ? "" : ";expires="+exdate.toGMTString())
+			+";Domain="+c_domain+";Path=/";
+	}
+ 
+	var p36 = gup('P36');
+	if (p36 !== null) {setCookie("P36", p36, 14);}
+	var purl = gup('PURL');
+	if (purl !== null) {setCookie("PURL", purl, 14);}
+	
+	function readCookie(name) {
+		var nameEQ = name + "=";
+		var ca = document.cookie.split(';');
+		for (var i=0;i &lt; ca.length;i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') {c = c.substring(1,c.length);}
+			if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+		}
+		return null;
+	}
+	
+</script>
+<link href="/assets/css/justforbusiness.css" type="text/css" rel="stylesheet" />
+<style type="text/css">
+#contentcolumn h4 {
+font-weight:bold;
+}
+#contentcolumn p,
+#contentcolumn h4 {
+padding-bottom:0.5em;
+}
+</style>
+<script type="text/javascript">
+
+
+
+var CQ_EXT = "/assets/.html";
+CQ_ASSETS_URL = CQ_EXT.substring(0,CQ_EXT.indexOf(".html"));
+
+$('html').addClass('js'); 
+
+$(document).ready(function(){
+	$("#nav-container .lang").langdropdown();
+	$("form:has(fieldset.room-select)").not('#dialog-content form').roomrequirements();
+	$(".linkedDates").not('.htmlLibrary .linkedDates').datepickerinit();
+	$(".quickSearchField").piautocomplete(".quickSearchHiddenField");
+	$().opentriggeredlinks(".quickSearchHiddenFieldForTriggerUrl");
+	$(".utils","#nav-container").loginutils();
+	$('html .magic').show();
+	$('.popuplink').popuplink();
+	$().tooltipinit();
+});
+</script>
+</head><body>
+<div id="wrapper">
+<div id="picontainer">
+<div class="screenhide"> Skip to content<br />
+Go to navigation
+</div>
+<div id="nav-container">
+<div class="nav-lhs">
+<h2></h2>
+</div>
+<div class="nav-banner">
+<script type="text/javascript">
+$(function(){
+
+
+var swfSrc = "/en.swf.headerFlashPromo.Single.FlashFile.tmp/spool.swf";
+if (typeof window.headerFlashPromo !== "undefined") {
+	swfSrc = window.headerFlashPromo.Single || swfSrc;
+}
+
+	
+var flashvars = {xmlFile:"/en.xml.headerFlashPromo.Single.XmlDataFile.tmp/spool.xml",targetUrl:""};
+var params = {
+	flashvars:""
+};
+params.wmode = "transparent";
+
+var attributes = {};
+
+var checkFlag = "headerFlashPromo.Single";
+
+if((checkFlag.indexOf("quickflash") === -1) || !((typeof window.disableFlash === "undefined") &amp;&amp; (window.disableFlash === true))){
+swfobject.embedSWF(
+	swfSrc, 
+	"flashAlternativeContent_headerFlashPromo.Single", 
+	"457", 
+	"64", 
+	"6.0.0", 
+	false, 
+	flashvars, params, attributes
+);
+}
+});
+</script>
+<div id="flashAlternativeContent_headerFlashPromo.Single">
+</div>
+</div>
+<div class="nav-rhs">
+<div class="utils magic">
+<ul>
+<li class="viewcancel lout"></li>
+<li class="login"></li>
+<li class="logout"></li>
+</ul>
+</div>
+<div class="lang magic">
+<form id="book" action="http://www.premierinn.com/en/siteSwitch.action" method="post">
+<fieldset>
+<legend>Language and Country selection form</legend>
+<label for="opts">Choose a language and country</label>
+<select name="selection" id="opts">
+<option value="0" class="lsel {lang:'en',external:true}">UK &amp; Ireland hotels | English</option>
+<option value="3" class="lsel {lang:'fr',external:true}">UK &amp; Ireland hotels | French</option>
+<option value="4" class="lsel {lang:'es',external:true}">UK &amp; Ireland hotels | Spanish</option>
+<option value="5" class="lsel {lang:'it',external:true}">UK &amp; Ireland hotels | Italian</option>
+<option value="1337" class="lsel {lang:'de',external:true}">UK &amp; Ireland hotels | German</option>
+<option value="1" class="lsel {lang:'en'}">Arabian Gulf hotels | English</option>
+<option value="2" class="lsel {lang:'en'}">India hotels | English</option>
+</select>
+<button type="submit" class="ctabutton">Submit</button>
+</fieldset>
+</form>
+</div>
+</div>
+<div class="nav-tabs">
+<div class="nav-tabs">
+<h3>Main Navigation</h3>
+<ul>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+<li></li>
+</ul>
+</div>
+<script type="text/javascript">
+var SITE_CHANNEL = "Why we're Premier";
+
+</script>
+</div>
+</div>
+<div id="body-container">
+<div id="body-inner">
+<div class="lhs-container">
+<div class="lhmenu-top">
+<h2 class="justforbusiness">Why we&#39;re Premier</h2>
+<ul class="jfbleftnav"> <li>New iPhone and iPad app</li><li>Watch the TV Ad</li><li>Premier Inn bookings in European languages</li><li>Good Together</li><li>Comfortable rooms</li><li>Quality restaurants</li><li>Filling breakfasts</li><li class="hassub">Located everywhere <ul class="sub"> <li>Premier Inn location directory</li><li>Sat Nav downloads</li><li>Hotels near UK Attractions</li> </ul>
+</li><li>Family friendly</li><li>Great for groups</li><li>Great value</li><li>Ideal for lone travellers</li><li>Speedy check-in</li><li>Wi-Fi</li><li>Contact us</li> </ul>
+</div>
+<div class="clear"></div>
+<img height="170" alt="A Good Night Guaranteed" width="215" src="/en/why/locations/norwich.ImageRef.childrenbodyleftnavsys.94223.ImageRef.jpg" border="0" /><img height="170" alt="Lowest prices online" width="215" src="/en/why/locations/norwich.ImageRef.childrenbodyleftnavsys.30602.ImageRef.jpg" border="0" /></div>
+<div id="contentcolumn">
+<div id="jfb_facilities_landing">
+<img height="100" alt="norwich_header_640x100.jpg" width="640" src="/en/why/locations/norwich.ImageRef.bodypagetitle.Single.ImageRef.jpg" border="0" />
+<h1>Norwich Hotels</h1>
+<div class="clear"></div>
+<div id="flashfindahotel">
+<link href="/assets/css/booking.css" rel="stylesheet" type="text/css" />
+<link href="/assets/css/seo.css" rel="stylesheet" type="text/css" />
+<link href="/assets/css/premierinn.datepicker.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="http://ecn.dev.virtualearth.net/mapcontrol/mapcontrol.ashx?v=6.2&amp;mkt=en-uk"></script>
+<script type="text/javascript" src="/assets/js/mapping.js"></script>
+<script type="text/javascript">
+		var popUpTitle = I18N.SELECT_ARRIVAL_DATE;
+		var WS_URL = "/services/en/";
+		var CONTEXT_PATH = "";
+		var LOCALE = "en_GB";
+	</script>
+<script type="text/javascript">
+//&lt;![CDATA[
+$(function() {
+
+	$(".linkedDates").datepickerinit();
+	
+	$('.static-map-container').roundedcorners();
+	
+	$('#static-map').click(function(){
+	$('.static-map-container').hide();
+	
+	//
+	var trackBeacon = $("&lt;div /&gt;");
+	var hotelBeacon = $("&lt;div /&gt;");
+	var offerBeacon = $("&lt;div /&gt;");
+	var interactionBeacon = $("&lt;div /&gt;");
+	var toastBeacon = new Tally();
+	var requirementsBeacon = $('&lt;div /&gt;');
+	
+	var networkFunnel = new NetworkFunnel(hotelBeacon, requirementsBeacon, offerBeacon, toastBeacon);
+	
+	var initial = new VELatLong(52.6259777871871, 1.295013427734391);
+	initial.zoom = 13;
+	var map = new MapPanel($("#msveMap"), initial, networkFunnel, hotelBeacon, offerBeacon, interactionBeacon, requirementsBeacon, toastBeacon, trackBeacon, false, undefined, undefined, "Arh8S7vnLu8US3nbDQAACxCmEp7z7LJc6oCldE9pbqQM0V49wESwER_p3K2Ssb_Z");
+	map.showAsClusters();
+	networkFunnel.getAllHotels();
+	
+	$('.MSVE_PoweredByLogo').css('bottom','20px');
+	//
+	
+	});
+});
+
+$(document).ready(function(){
+	$(".home-radios").dcCheckboxHome();
+	
+	if(jQuery().validate) {
+		$("#quickbooking").validate();
+	}
+	
+	$('#msveMap').css('height','342px');
+	$('.mapContainer').css('height','342px');
+});
+
+//]]&gt;
+</script>
+<div class="mapContainer">
+<div id="msveMap">
+<div class="static-map-container">
+<img src="http://dev.virtualearth.net/REST/v1/Imagery/Map/Road/52.6259777871871,1.295013427734391/13?mapSize=285,342&amp;key=Arh8S7vnLu8US3nbDQAACxCmEp7z7LJc6oCldE9pbqQM0V49wESwER_p3K2Ssb_Z" id="static-map" />
+</div>
+</div>
+<div class="showfullmap">Show full map</div>
+</div>
+<div id="quickbookingcontainer">
+<form method="post" action="/en/search.action" id="quickbooking">
+<h2>Check availability of hotels in Norwich</h2>
+<fieldset class="main-search">
+<legend>Search here</legend>
+<label for="searchModel_searchTerm" id="mainlabel">Search by postcode, place or hotel name</label>
+<input id="searchModel_searchTerm" name="searchModel.searchTerm" class="required quickSearchField" />
+<input type="hidden" name="searchModel.typeAheadSearchVal" class="quickSearchHiddenField" />
+<input type="hidden" name="suggestionUrl" class="quickSearchHiddenFieldForUrl" />
+<div class="forexample">Enter a location, postcode or hotel name</div>
+</fieldset>
+<h3 class="hidden your-stay">Your stay details</h3>
+<div class="standout clearfix"><div class="top"></div>
+<div class="inr">
+<div class="clearfix">
+<fieldset class="arrival-date">
+<label class="visible-label" style="margin-bottom:2px;">Arrival date</label>
+<div id="wwgrp_home_availabilityModel_day" class="wwgrp">
+</div>
+<fieldset class="arrival-date-month">
+<legend>Fields to set your arrival month</legend>
+<div id="wwgrp_home_availabilityModel_selectedMonthAndYear" class="wwgrp">
+</div>
+<input class="linkedDates" size="10" type="hidden" value="" />
+</fieldset>
+<div class="depart-date">Depart midday,on your day of departure</div>
+</fieldset>
+</div>
+<fieldset class="home-radios"></fieldset>
+</div>
+<div class="btm"></div>
+</div>
+<div class="secondary clearfix">
+<div class="booking-note"><p>You can choose the number of rooms and nights after selecting your hotel.</p></div>
+<h3 class="hidden your-stay">Room requirements</h3>
+<fieldset class="nights">
+<legend>How many nights would you like to stay?</legend>
+<div class="">
+<div id="wwgrp_home_availabilityModel_nights" class="wwgrp">
+<div id="wwlbl_home_availabilityModel_nights" class="wwlbl">
+<label for="home_availabilityModel_nights" class="label">Nights</label>
+</div>
+<div id="wwctrl_home_availabilityModel_nights" class="wwctrl">
+<select name="availabilityModel.nights" id="home_availabilityModel_nights" class="nights ie6dropdownfix">
+<option value="1" selected="selected">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+</select>
+</div>
+</div>
+</div>
+</fieldset>
+<fieldset class="room-number">
+<legend>How many rooms do you require?</legend>
+<div>
+<div id="wwgrp_home_availabilityModel_numOfRooms" class="wwgrp">
+<div id="wwlbl_home_availabilityModel_numOfRooms" class="wwlbl">
+<label for="home_availabilityModel_numOfRooms" class="label">Rooms</label>
+</div>
+<div id="wwctrl_home_availabilityModel_numOfRooms" class="wwctrl">
+<select name="availabilityModel.numOfRooms" id="home_availabilityModel_numOfRooms" class="numberOfRooms ie6dropdownfix">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+</select>
+</div>
+</div>
+5+ rooms
+</div>
+</fieldset>
+<fieldset class="room-select">
+<legend>Room requirements</legend>
+<table border="0" cellpadding="0" cellspacing="0" class="roomrequirements" summary="Room requirements">
+<thead>
+<tr class="heading">
+<td>&nbsp;</td>
+<th class="roomAdults" style="padding-top:12px;">Adults</th>
+<th class="roomChildren">Children*</th>
+<th class="roomCots" style="padding-top:12px;">Cot</th>
+<th class="roomType" style="padding-top:12px;">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr class="roomDetails roomsrow0">
+<th class="hdr"><div class="room-id">Room&nbsp;1</div></th>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_0__adults" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_0__adults" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[0].adults" id="home_availabilityModel_roomRequirementList_0__adults" class="roomAdults ie6dropdownfix">
+<option value="1" selected="selected">1</option>
+<option value="2">2</option>
+</select>
+</div>
+</div>
+</td>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_0__children" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_0__children" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[0].children" id="home_availabilityModel_roomRequirementList_0__children" class="roomChildren ie6dropdownfix">
+<option value="0" selected="selected">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+</select>
+</div>
+</div>
+</td>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_0__cot" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_0__cot" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[0].cot" id="home_availabilityModel_roomRequirementList_0__cot" class="roomCots ie6dropdownfix">
+<option value="true">Yes</option>
+<option value="false" selected="selected">No</option>
+</select>
+</div>
+</div>
+</td>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_0__occupancy" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_0__occupancy" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[0].occupancy" id="home_availabilityModel_roomRequirementList_0__occupancy" class="roomType ie6dropdownfix">
+<option value="SINGLE">Single</option>
+<option value="TWIN">Twin</option>
+<option value="DOUBLE" selected="selected">Double</option>
+<option value="FAMILY">Family</option>
+<option value="DISABLED">Disabled</option>
+</select>
+</div>
+</div>
+</td>
+</tr>
+<tr class="roomDetails roomsrow1">
+<th class="hdr"><div class="room-id">Room&nbsp;2</div></th>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_1__adults" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_1__adults" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[1].adults" id="home_availabilityModel_roomRequirementList_1__adults" class="roomAdults ie6dropdownfix">
+<option value="1" selected="selected">1</option>
+<option value="2">2</option>
+</select>
+</div>
+</div>
+</td>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_1__children" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_1__children" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[1].children" id="home_availabilityModel_roomRequirementList_1__children" class="roomChildren ie6dropdownfix">
+<option value="0" selected="selected">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+</select>
+</div>
+</div>
+</td>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_1__cot" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_1__cot" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[1].cot" id="home_availabilityModel_roomRequirementList_1__cot" class="roomCots ie6dropdownfix">
+<option value="true">Yes</option>
+<option value="false" selected="selected">No</option>
+</select>
+</div>
+</div>
+</td>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_1__occupancy" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_1__occupancy" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[1].occupancy" id="home_availabilityModel_roomRequirementList_1__occupancy" class="roomType ie6dropdownfix">
+<option value="SINGLE">Single</option>
+<option value="TWIN">Twin</option>
+<option value="DOUBLE" selected="selected">Double</option>
+<option value="FAMILY">Family</option>
+<option value="DISABLED">Disabled</option>
+</select>
+</div>
+</div>
+</td>
+</tr>
+<tr class="roomDetails roomsrow2">
+<th class="hdr"><div class="room-id">Room&nbsp;3</div></th>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_2__adults" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_2__adults" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[2].adults" id="home_availabilityModel_roomRequirementList_2__adults" class="roomAdults ie6dropdownfix">
+<option value="1" selected="selected">1</option>
+<option value="2">2</option>
+</select>
+</div>
+</div>
+</td>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_2__children" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_2__children" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[2].children" id="home_availabilityModel_roomRequirementList_2__children" class="roomChildren ie6dropdownfix">
+<option value="0" selected="selected">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+</select>
+</div>
+</div>
+</td>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_2__cot" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_2__cot" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[2].cot" id="home_availabilityModel_roomRequirementList_2__cot" class="roomCots ie6dropdownfix">
+<option value="true">Yes</option>
+<option value="false" selected="selected">No</option>
+</select>
+</div>
+</div>
+</td>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_2__occupancy" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_2__occupancy" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[2].occupancy" id="home_availabilityModel_roomRequirementList_2__occupancy" class="roomType ie6dropdownfix">
+<option value="SINGLE">Single</option>
+<option value="TWIN">Twin</option>
+<option value="DOUBLE" selected="selected">Double</option>
+<option value="FAMILY">Family</option>
+<option value="DISABLED">Disabled</option>
+</select>
+</div>
+</div>
+</td>
+</tr>
+<tr class="roomDetails roomsrow3">
+<th class="hdr"><div class="room-id">Room&nbsp;4</div></th>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_3__adults" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_3__adults" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[3].adults" id="home_availabilityModel_roomRequirementList_3__adults" class="roomAdults ie6dropdownfix">
+<option value="1" selected="selected">1</option>
+<option value="2">2</option>
+</select>
+</div>
+</div>
+</td>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_3__children" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_3__children" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[3].children" id="home_availabilityModel_roomRequirementList_3__children" class="roomChildren ie6dropdownfix">
+<option value="0" selected="selected">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+</select>
+</div>
+</div>
+</td>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_3__cot" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_3__cot" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[3].cot" id="home_availabilityModel_roomRequirementList_3__cot" class="roomCots ie6dropdownfix">
+<option value="true">Yes</option>
+<option value="false" selected="selected">No</option>
+</select>
+</div>
+</div>
+</td>
+<td>
+<div id="wwgrp_home_availabilityModel_roomRequirementList_3__occupancy" class="wwgrp">
+<div id="wwctrl_home_availabilityModel_roomRequirementList_3__occupancy" class="wwctrl">
+<select name="availabilityModel.roomRequirementList[3].occupancy" id="home_availabilityModel_roomRequirementList_3__occupancy" class="roomType ie6dropdownfix">
+<option value="SINGLE">Single</option>
+<option value="TWIN">Twin</option>
+<option value="DOUBLE" selected="selected">Double</option>
+<option value="FAMILY">Family</option>
+<option value="DISABLED">Disabled</option>
+</select>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="children_beds">
+<p>*under 16 in beds</p>
+</div>
+</fieldset>
+<div class="quick-button-holder clearfix">
+<input type="hidden" name="action" value="search" />
+<div class="clearfix">
+<input type="hidden" name="availabilityModel.bookingReturnUrl" value="http://www.premierinn.com/en/norwich-hotels.html" />
+</div>
+<div class="quick-home-button clearfix">
+<div><button type="submit" id="home_0" class="ctabutton">Check availability</button></div>
+</div>
+</div>
+</div>
+</form>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<h4>Hotels in Norwich</h4>
+<p>An English cathedral city, Norwich is a beautiful spot that every visitor is bound to adore. Whatever reason you're visiting this gorgeous city, we have fantastic hotels in Norwich that are perfect for your stay.</p>
+<div class="lavthickerbox">
+<h4 class="boxtop">Norwich hotels</h4>
+<div id="ourhotels">
+<style type="text/css">
+		.hotel-desc-txt p {margin-top:.5em;}
+		#chargesmeta h3 {font-weight:bold;margin:0.3em 0;}
+	</style>
+<script type="text/javascript">	
+	$(function() {	
+		$('.popup-content').css('display','none');	
+		$('.phonecostinfo').dialoginit($('#chargesmeta'));	
+	});	
+	</script>
+<div class="hotel regularpod">
+<h5>Norwich (Showground/A47)</h5>
+<div class="info">
+<div class="adr">
+
+					Longwater Interchange,
+				
+				
+					Dereham Road,
+				
+				
+					New Costessey,
+				
+				
+					Norfolk,
+				
+		NR5 0TP,
+ United Kingdom
+</div>
+<p>Tel: 0871 527  8834 *</p>
+<p class="phonecostinfo"></p>
+</div>
+<div class="priceandbook">
+<div class="pricebox"><div class="pricebox2">
+					Room only from 	
+		&pound;35.00
+
+</div></div>
+<form action="/en/hotel/NORSHO/norwich-showground/a47" method="get"><fieldset>
+<button type="submit" class="ctabutton">View details and book</button>
+</fieldset></form>
+</div>
+</div>
+<div class="hotel regularpod">
+<h5>Norwich Airport</h5>
+<div class="info">
+<div class="adr">
+
+					Delft Way,
+				
+				
+					Norwich Airport,
+				
+				
+					Norwich,
+				
+		NR6 6BB,
+ United Kingdom
+</div>
+<p>Tel: 0871 527  8836 *</p>
+<p class="phonecostinfo"></p>
+</div>
+<div class="priceandbook">
+<div class="pricebox"><div class="pricebox2">
+					Room only from 	
+		&pound;39.00
+
+</div></div>
+<form action="/en/hotel/NOROAK/norwich-airport" method="get"><fieldset>
+<button type="submit" class="ctabutton">View details and book</button>
+</fieldset></form>
+</div>
+</div>
+<div class="hotel regularpod">
+<h5>Norwich (Broadlands Business Park)</h5>
+<div class="info">
+<div class="adr">
+
+					Broadland Business Park,
+				
+				
+					Old Chapel Way,
+				
+				
+					Norwich,
+				
+		NR7 0WG,
+ United Kingdom
+</div>
+<p>Tel: 0871 527  8838 *</p>
+<p class="phonecostinfo"></p>
+</div>
+<div class="priceandbook">
+<div class="pricebox"><div class="pricebox2">
+					Room only from 	
+		&pound;39.00
+
+</div></div>
+<form action="/en/hotel/NORBRO/norwich-broadlands-business-park" method="get"><fieldset>
+<button type="submit" class="ctabutton">View details and book</button>
+</fieldset></form>
+</div>
+</div>
+<div class="hotel regularpod">
+<h5>Norwich City Centre (Duke Street)</h5>
+<div class="info">
+<div class="adr">
+
+					Duke Street,
+				
+				
+					Norwich,
+				
+				
+					Norfolk,
+				
+		NR3 3AP,
+ United Kingdom
+</div>
+<p>Tel: 0871 527 8840 *</p>
+<p class="phonecostinfo"></p>
+</div>
+<div class="priceandbook">
+<div class="pricebox"><div class="pricebox2">
+					Room only from 	
+		&pound;35.00
+
+</div></div>
+<form action="/en/hotel/NORCIT/norwich-city-centre-duke-street" method="get"><fieldset>
+<button type="submit" class="ctabutton">View details and book</button>
+</fieldset></form>
+</div>
+</div>
+<div class="hotel lastpod">
+<h5>Norwich Nelson City Centre</h5>
+<div class="info">
+<div class="adr">
+
+					Prince Of Wales Road,
+				
+				
+					Norwich,
+				
+				
+					Norfolk,
+				
+		NR1 1DX,
+ United Kingdom
+</div>
+<p>Tel: 0871 527  8842 *</p>
+<p class="phonecostinfo"></p>
+</div>
+<div class="priceandbook">
+<div class="pricebox"><div class="pricebox2">
+					Room only from 	
+		&pound;35.00
+
+</div></div>
+<form action="/en/hotel/NORNEL/norwich-nelson-city-centre" method="get"><fieldset>
+<button type="submit" class="ctabutton">View details and book</button>
+</fieldset></form>
+</div>
+</div>
+<div class="popup-content" id="chargesmeta" style="clear:left;">
+<h3>Call charges</h3>
+<p>Calls are charged at 10 pence per minute + network extras.<br /> 
+			Premier Inn lines are open 24 hours a day, 7 days a week.<br />
+			The Customer Contact Centre is open 8am to 10pm Mon - Sat &amp; 9am to 10pm on Sun.<br />
+			Tel: 0871 527 9222
+		</p>
+</div>
+</div>
+<div class="boxbottom">
+</div>
+</div>
+<h4>See all that Norwich has to offer</h4>
+<p>There's plenty to see in Norwich - and now you won't miss a minute of the action with a well-located Premier Inn hotel. <br />Home to stunning sights, Norwich has myriad attractions, including the Norwich Cathedral, Norwich Castle and the large outdoor Norwich Market that takes place six days per week. <br />Football fans can catch a Norwich City FC and enjoy the thrill of this city's much-loved team. Don't worry if football's not your thing - Norwich offers plenty for everyone and is also considered one of the top ten shopping destinations in the UK.<br />With plenty of convenient transit points - from train stations to an airport and major motorway links, it's easy to get around Norwich and to all our hotels. <br /><br />And for business travellers, our hotels in Norwich are close to Norwich's thriving  business sector, putting you right where you need to be for your work in Norwich. </p>
+<h4>Easy online booking with Premier Inn</h4>
+<p>Choose us for your trip to Norwich and you can be rest assured knowing you're staying at a convenient and comfortable Premier Inn hotel. Our hotels in the area include business hotels and budget hotels in Norwich that are sure to please. Book your hotel in Norwich today and enjoy a wonderful stay with Premier Inn.</p>
+<p></p>
+</div>
+<div class="clear"></div>
+</div>
+</div>
+<div id="footer-container">
+<div class="col first"><ul class="utils"> <li>
+FAQs
+</li><li>
+Contact us
+</li><li>
+Sitemap
+</li><li>
+Disabled access
+
+
+</li><li>
+Privacy policy
+
+
+</li><li>
+How we use cookies
+
+
+</li><li>
+</li><li>
+Affiliate programme
+</li><li>
+International Development
+</li><li>
+</li><li>
+Terms and conditions
+
+
+</li></ul></div>
+<div class="col">
+<h3>A Great Night's Sleep Guaranteed</h3>
+<p>Premier Inn is the UK and Ireland's biggest and fastest growing hotel company. With over 650 budget hotels offering quality accommodation at affordable hotel prices.</p>
+</div>
+<div class="col"><h3> Premier stays </h3><h4>in the UK and Ireland's top cities</h4><ul class="hotel-links"> <li>
+Budget hotels Norwich
+</li><li>
+Family hotels Norwich
+</li><li>
+Business hotels Norwich
+</li><li>
+Weekend breaks Norwich
+</li><li>
+Norwich City Centre (Duke St)
+</li></ul></div><div class="col"><ul class="hotel-links last"><li>
+Norwich Central South
+</li><li>
+Norwich Nelson
+</li><li>
+Norwich Airport
+</li><li>
+Norwich (Showground/A47)
+</li></ul></div>
+</div>
+</div>
+</div>
+<script type="text/javascript">
+setCookie("oactive","true");
+</script>
+<script language="JavaScript" type="text/javascript" src="/assets/js/s_code.js"></script>
+<script type="text/javascript">
+if (typeof pio === 'undefined') {
+	var pio = window.pio || {};
+}
+
+if(pio.pageName) {
+s.pageName="Premier Inn:Why we're Premier:Located everywhere:Norwich Hotels - Book Cheap Hotels in Norwich UK - Premier Inn"+":"+pio.pageName} else {
+s.pageName="Premier Inn:Why we're Premier:Located everywhere:Norwich Hotels - Book Cheap Hotels in Norwich UK - Premier Inn"
+}
+
+
+s.channel=((typeof SITE_CHANNEL === 'undefined')?"":SITE_CHANNEL);
+
+s.pageType="";
+
+if(pio.prop1 &amp;&amp; !s.prop1){s.prop1=pio.prop1;}
+
+if(pio.prop2 &amp;&amp; !s.prop2){s.prop2=pio.prop2;}
+
+if(pio.prop3 &amp;&amp; !s.prop3){s.prop3=pio.prop3;}
+
+if(pio.prop4 &amp;&amp; !s.prop4){s.prop4=pio.prop4;}
+if(pio.prop5 &amp;&amp; !s.prop5){s.prop5=pio.prop5;}
+if(pio.prop6 &amp;&amp; !s.prop6){s.prop6=pio.prop6;}
+if(pio.prop7 &amp;&amp; !s.prop7){s.prop7=pio.prop7;}
+if(pio.prop8 &amp;&amp; !s.prop8){s.prop8=pio.prop8;}
+if(pio.prop9!==undefined &amp;&amp; !s.prop9){s.prop9=String(pio.prop9);}
+if(pio.prop10 &amp;&amp; !s.prop10){s.prop10=pio.prop10;}
+if(pio.prop11 &amp;&amp; !s.prop11){s.prop11=pio.prop11;}
+
+if(pio.prop12 &amp;&amp; !s.prop12){s.prop12=pio.prop12;}
+
+if(pio.prop13 &amp;&amp; !s.prop13){s.prop13=pio.prop13;}
+
+if(pio.prop14 &amp;&amp; !s.prop14){s.prop14=pio.prop14;}
+if(pio.prop15 &amp;&amp; !s.prop15){s.prop15=pio.prop15;}
+
+if(pio.prop16 &amp;&amp; !s.prop16){s.prop16=pio.prop16;}
+
+
+if(pio.prop18 &amp;&amp; !s.prop18){s.prop18=pio.prop18;}
+
+if(pio.prop19 &amp;&amp; !s.prop19){s.prop19=pio.prop19;}
+
+if(pio.prop21 &amp;&amp; !s.prop21){s.prop21=pio.prop21;}
+
+if(pio.prop22 &amp;&amp; !s.prop22){s.prop22=pio.prop22;}
+
+if(pio.prop24 &amp;&amp; !s.prop24){s.prop24=pio.prop24;}
+
+if(pio.prop25 &amp;&amp; !s.prop25){s.prop25=pio.prop25;}
+
+if(pio.prop33 &amp;&amp; !s.prop33){s.prop33=pio.prop33;}
+
+s.prop27="UK";
+
+if(pio.prop41 &amp;&amp; !s.prop41){s.prop41=pio.prop41;}
+/* Conversion Variables */
+if(pio.zip &amp;&amp; !s.zip){s.zip=pio.zip;}
+
+if(pio.events &amp;&amp; !s.events){s.events=pio.events;}
+
+if(pio.products &amp;&amp; !s.products){s.products=pio.products;}
+if(pio.purchaseID &amp;&amp; !s.purchaseID){s.purchaseID=pio.purchaseID;}
+
+if(pio.eVar17 &amp;&amp; !s.eVar17){s.eVar17=pio.eVar17;}
+
+if(pio.eVar18 &amp;&amp; !s.eVar18){s.eVar18=pio.eVar18;}
+
+if(pio.eVar19 &amp;&amp; !s.eVar19){s.eVar19=pio.eVar19;}
+
+if(pio.eVar21 &amp;&amp; !s.eVar21){
+	s.eVar21=pio.eVar21;
+	s.eVar50=sc_append(s.eVar21,"sc_v50");
+}
+
+if(pio.eVar22 &amp;&amp; !s.eVar22){s.eVar22=s.pageName+":"+pio.eVar22;}
+if(pio.prop20 &amp;&amp; !s.prop20){s.prop20=s.pageName+":"+pio.prop20;}
+if(pio.eVar24 &amp;&amp; !s.eVar24){s.eVar24=pio.eVar24;}
+
+
+if(pio.eVar20 &amp;&amp; !s.eVar20){s.eVar20=s.pageName+":"+pio.eVar20;}
+if(pio.eVar25 &amp;&amp; !s.eVar25){s.eVar25=pio.eVar25;}
+
+
+if(pio.eVar23 &amp;&amp; !s.eVar23){s.eVar23=pio.eVar23;}
+
+s.eVar27=s.prop27
+
+if(pio.eVar29 &amp;&amp; !s.eVar29){s.eVar29=pio.eVar29;}
+
+if(pio.eVar31 &amp;&amp; !s.eVar31){s.eVar31=pio.eVar31;}
+
+if(pio.eVar39 &amp;&amp; !s.eVar39){s.eVar39=pio.eVar39;}
+
+if(pio.eVar41 &amp;&amp; !s.eVar41){s.eVar41=pio.eVar41;}
+
+if(pio.eVar50 &amp;&amp; !s.eVar50){
+	s.eVar50=pio.eVar50;
+	s.eVar50=sc_append(s.eVar50,"sc_v50");
+}
+
+if(pio.eVar60 &amp;&amp; !s.eVar60){
+	s.eVar60=pio.eVar60;
+}
+
+if(pio.eVar67 &amp;&amp; !s.eVar67){s.eVar67=pio.eVar67;}
+if(pio.eVar68 &amp;&amp; !s.eVar68){s.eVar68=s.pageName+":"+pio.eVar68;}
+
+
+if(pio.eVar73 &amp;&amp; !s.eVar73){s.eVar73=pio.eVar73;}
+if(pio.eVar74 &amp;&amp; !s.eVar74){s.eVar74=pio.eVar74;}
+
+
+if(pio.eVar51 &amp;&amp; !s.eVar51){s.eVar51=pio.eVar51;}
+if(pio.eVar56 &amp;&amp; !s.eVar56){s.eVar56=pio.eVar56;}
+if(pio.eVar30 &amp;&amp; !s.eVar30){s.eVar30=pio.eVar30;}
+if(pio.eVar25 &amp;&amp; !s.eVar25){s.eVar25=pio.eVar25;}
+
+
+if(pio.state &amp;&amp; !s.state){s.state=pio.state;}
+
+if(pio.zip &amp;&amp; !s.zip){s.zip=pio.zip;}
+
+</script>
+<script type="text/javascript" src="/assets/js/s_code_endofpage.js"></script>
+<script type="text/javascript" src="/assets/js/mbox.js"></script>
+<script type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript"></script>
+<script type="text/javascript">
+setCookie("gactive","true");
+</script>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+var pageTracker;
+var googleTrackerTimeout;
+var totalGoogleTrackerTries = 0;
+function tryGoogleTracker() {
+	if (typeof(_gat) != 'undefined') {
+		pageTracker = _gat._getTracker("UA-8208115-1");
+		pageTracker._initData();
+		
+		pageTracker._trackPageview(s.pageName);
+	} else {
+		if (totalGoogleTrackerTries++ &lt; 5) {
+			googleTrackerTimeout = setTimeout("tryGoogleTracker()", 1000);
+		}
+	}
+}
+tryGoogleTracker();
+</script>
+<script type="text/javascript">
+var axel = Math.random() + "";
+var a = axel * 10000000000000;
+var dartPageCode = "undefined";
+var ordCode = "";
+
+try { 
+	if (typeof(bookingDartPageCode) != 'undefined') {
+		if (bookingDartPageCode != "") {
+			dartPageCode = bookingDartPageCode;
+		} else {
+			ordCode = ";ord=1";
+		}
+	} else {
+		ordCode = ";ord=1";
+	}
+} catch (e) {
+}
+document.write('&lt;iframe src="http'+(document.location.protocol=='https:'?'s':'')+'://fls.doubleclick.net/activityi;src=2190810;' + dartPageCode + ordCode + ';num=' + a + '?" width="1" height="1" frameborder="0"&gt;&lt;/iframe&gt;');
+</script>
+<noscript>
+</noscript>
+<script type="text/javascript">
+	var _mTrack = _mTrack || [];
+	_mTrack.push(['trackPage']);
+	(function() { 
+		var mClientId = 'gzq1x9b860';
+		var mProto = ('https:' == document.location.protocol ? 'https://' : 'http://');
+		var mHost = 'tracker.marinsm.com'; 
+		var mt = document.createElement('script'); 
+		mt.type = 'text/javascript'; 
+		mt.async = true; 
+		mt.src = mProto + mHost + '/tracker/async/' + mClientId + '.js'; 
+		var fscr = document.getElementsByTagName('script')[0]; fscr.parentNode.insertBefore(mt, fscr); 
+	})(); 
+</script>
+<noscript><img src="https://tracker.marinsm.com/tp?act=1&amp;cid=gzq1x9b860&amp;script=no" /></noscript>
+</body>
+</html>
+---------------

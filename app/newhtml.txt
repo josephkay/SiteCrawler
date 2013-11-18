@@ -13,11 +13,11 @@
 <meta name="encoding" content="utf-8" />
 <meta name="description" content="Choose from a range of Norwich hotels and book rooms from just £29 online. Premier Inn, everything's Premier but the Price" />
 <meta name="keywords" content="norwich hotels, hotels in norwich, cheap hotel in norwich, accommodation norwich, premier inn" />
-<meta name="date" content="2013-10-07" />
+<meta name="date" content="2013-11-07" />
 <meta name="DC.Title" content="Norwich" />
 <meta name="DC.Subject" content="norwich hotels, hotels in norwich, cheap hotel in norwich, accommodation norwich, premier inn" />
 <meta name="DC.Description" content="Choose from a range of Norwich hotels and book rooms from just £29 online. Premier Inn, everything's Premier but the Price" />
-<meta name="DC.Date" content="2013-10-07" />
+<meta name="DC.Date" content="2013-11-07" />
 <meta name="DC.Publisher" content="J Whitter" />
 
 
@@ -491,7 +491,7 @@ $(document).ready(function(){
 				<span id="wwctrl_home_availabilityModel_day" class="wwctrl">
 					<select name="availabilityModel.day" id="home_availabilityModel_day" class="selectedDay ie6dropdownfix">
 					
-					   	<option value="01" selected="selected">01</option>
+					 	<option value="01">01</option>
 					 	<option value="02">02</option>
 					 	<option value="03">03</option>
 					 	<option value="04">04</option>
@@ -504,7 +504,7 @@ $(document).ready(function(){
 					 	<option value="11">11</option>
 					 	<option value="12">12</option>
 					 	<option value="13">13</option>
-					 	<option value="14">14</option>
+					   	<option value="14" selected="selected">14</option>
 					 	<option value="15">15</option>
 					 	<option value="16">16</option>
 					 	<option value="17">17</option>

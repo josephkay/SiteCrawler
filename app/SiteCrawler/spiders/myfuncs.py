@@ -2,15 +2,22 @@ import csv
 from urllib2 import urlopen
 from scrapy import log
 from PIL import Image
-import BeautifulSoup
+from BeautifulSoup import BeautifulSoup
 import re
 from nltk.tokenize import sent_tokenize
 from nltk.corpus import cmudict
 from nltk.tokenize import RegexpTokenizer
 from HTMLParser import HTMLParser
 import json
+from selenium import webdriver
 
 db_file = "sitecrawlerdb.db"
+
+def screenshot(url, output_path):
+	driver = webdriver.PhantomJS(executable_path=r'C:\Users\kayj\AppData\Roaming\npm\node_modules\phantomjs\lib\phantom\phantomjs')
+	#driver.set_window_size(1024, 768) # optional
+	driver.get(url)
+	driver.save_screenshot(output_path) # save a screenshot to disk
 
 def get_domain(url):
 	pos = url.find(".")
@@ -82,24 +89,94 @@ def test_url(url):
 	else:
 		return True
 
-def get_children(connection, parent, scrapeid):
+def get_children(connection, parent, scrapeid, url_names_dict):
 	dict_list = []
 	children = select_from_and(connection, "SELECT child FROM parents WHERE parent = ? and scrapeid = ?", parent, scrapeid)
-	for tup in children:
-		child = tup[0].encode('utf-8')
+	for [url] in children:
+		if url in url_names_dict:
+			name = url_names_dict[url].encode('utf-8')
+		else:
+			name = ""
+		url = url.encode('utf-8')
 		dict = {}
-		dict["name"] = child
-		children_list = get_children(connection, child, scrapeid)
+		dict["url"] = url
+		dict["name"] = name
+		children_list = get_children(connection, url, scrapeid, url_names_dict)
 		if children_list:
 			dict["children"] = children_list
 		dict_list.append(dict)
 	return dict_list
 
+def timeout(func, args=(), kwargs={}, timeout_duration=10, default=None):
+    """This function will spawn a thread and run the given function
+    using the args, kwargs and return the given default value if the
+    timeout_duration is exceeded.
+    """ 
+    import threading
+    class InterruptableThread(threading.Thread):
+        def __init__(self):
+            threading.Thread.__init__(self)
+            self.result = default
+        def run(self):
+            self.result = func(*args, **kwargs)
+    it = InterruptableThread()
+    it.start()
+    it.join(timeout_duration)
+    if it.isAlive():
+        return it.result
+    else:
+        return it.result
+
 ### --- text manipulation functions --- ###
+
+def filename_safe(url, long_count):
+	loc = url.find("//")
+	if loc != -1:
+		url = url[loc+2:]
+	name = url.replace("/", "-")
+	for char in [":","<",">","?","\"","*"]:
+		name = name.replace(char, "")
+	if len(name) > 100:
+		name = name[:80] + "---#" + str(long_count)
+		long_count += 1
+	return name, long_count
+
+def ignore_tags(soup, tags_list):
+	for tag in tags_list:
+		tags = soup.findAll(tag)
+		for t in tags:
+			if t.string:
+				t.replaceWith(t.string)
+			else:
+				t.replaceWith("")
+	return BeautifulSoup(str(soup))
+
+def replace_bad_chars(text):
+
+	text = text.decode("utf-8")
+	
+	char_replacements = [
+    ( u'\u2018', u"'"),   # LEFT SINGLE QUOTATION MARK
+    ( u'\u2019', u"'"),   # RIGHT SINGLE QUOTATION MARK
+    ( u'\u201c', u'"'),   # LEFT DOUBLE QUOTATION MARK
+    ( u'\u201d', u'"'),   # RIGHT DOUBLE QUOTATION MARK
+    ( u'\u201e', u'"'),   # DOUBLE LOW-9 QUOTATION MARK
+    ( u'\u2013', u'-'),   # EN DASH
+    ( u'\u2026', u'...'), # HORIZONTAL ELLIPSIS
+    ( u'\u0152', u'OE'),  # LATIN CAPITAL LIGATURE OE
+    ( u'\u0153', u'oe'),  # LATIN SMALL LIGATURE OE
+	( u'\u00B7', u''),    # MIDDLE DOT
+	( u"\u2022", u'') ]   # BULLET
+	
+	for (bad, good) in char_replacements:
+		text = text.replace(bad, good)
+	return text
 
 def get_texts(url):
 	html = urlopen(url).read()
-	soup = BeautifulSoup.BeautifulSoup(html)
+	html = replace_bad_chars(remove_comments(html))
+	soup = BeautifulSoup(html)
+	soup = ignore_tags(soup, ['b', 'i', 'u', 'a', 'span'])
 	return soup.findAll(text=True)
 
 def visible(element):
@@ -112,12 +189,12 @@ def visible(element):
 def sentence(element):
 	sentence_chars = [".","!","?"]
 	for char in sentence_chars:
-		if char in element:
+		if element and element[-1] == char:
 			return True
 	return False
 
 def length(element):
-	if len(element.split()) < 5:
+	if len(word_split([element])) < 2:
 		return False
 	return True
 
@@ -135,15 +212,20 @@ def sentence_split(text_list):
 	return new_list
 
 def word_split(text_list):
-	tokenizer = RegexpTokenizer(r'\w+')
+	tokenizer = RegexpTokenizer(r'[,:;/\s+]', gaps=True)
 	new_dict = {}
 	for text in text_list:
 		for word in tokenizer.tokenize(text):
-			word = word.lower()
-			if word in new_dict:
-				new_dict[word] += 1
-			else:
-				new_dict[word] = 1
+			paren_a = word.find("(")
+			paren_b = word.find(")")
+			if paren_a > 0 and paren_b == len(word):
+				word = word[:paren_a] + word[paren_a+1:paren_b]
+			word = word.lower().strip('\'\"-_,.:;!?()*\\/[]{}|<>~=')
+			if word:
+				if word in new_dict:
+					new_dict[word] += 1
+				else:
+					new_dict[word] = 1
 	return new_dict
 
 def syllables(text_list):

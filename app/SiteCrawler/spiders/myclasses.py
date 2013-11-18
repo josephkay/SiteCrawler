@@ -1,8 +1,9 @@
 from scrapy import log
+from myfuncs import *
 
 class URL(object):
 
-	def __init__(self, url, scrapeid, parent=None, base=None):
+	def __init__(self, url, scrapeid, long_count, parent=None, base=None):
 		self.original = url
 		if parent:
 			protocol = parent.protocol
@@ -30,12 +31,14 @@ class URL(object):
 		
 		self.set_path(url)
 		
-		self.parents = self.get_parents(self.strip_bad_file_chars(url).split("/"), [], 0)
+		self.parents = self.get_parents(url.split("/"), [], 0)
 		
 		self.full = self.protocol + self.subdomain + self.domain + self.path
 		
-		self.name = self.get_name(self.subdomain, self.path)
-	
+		#self.name = self.get_name(self.subdomain, self.path)
+		self.name, self.long_count = filename_safe(self.full, long_count)
+		
+		
 	def set_path(self, url):
 		pos = url.find("#")
 		if pos > -1:

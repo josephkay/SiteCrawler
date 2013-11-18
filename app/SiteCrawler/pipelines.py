@@ -11,6 +11,8 @@ from scrapy import signals
 from scrapy.contrib.exporter import CsvItemExporter
 from spiders.myfuncs import *
 from scrapy import log
+import math
+from operator import itemgetter
 
 class SitecrawlerPipeline(object):
 	def process_item(self, item, spider):
@@ -31,10 +33,13 @@ class DuplicatesPipeline(object):
 class ScreenshotPipeline(object):
 	
 	def __init__(self):
-		self.s = Screenshooter()
+		self.driver = webdriver.PhantomJS(executable_path=r'C:\Users\kayj\AppData\Roaming\npm\node_modules\phantomjs\lib\phantom\phantomjs')
 	
 	def process_item(self, item, spider):
-		self.s.capture(item['url_obj'].full, r"{0}\initiator\static\scrapes\{1}\{2}\{3}.png".format(getcwd(), item['scrape_domain'], item['date'], item['url_obj'].name))
+		log.msg("screenshot")
+		#driver.set_window_size(1024, 768) # optional
+		self.driver.get(item['url_obj'].full)
+		self.driver.save_screenshot(r"{0}\initiator\static\scrapes\{1}\{2}\{3}.png".format(getcwd(), item['scrape_domain'], item['date'], item['url_obj'].name))
 		return item
 
 class TextAnalysisPipeline(object):
@@ -64,9 +69,12 @@ class TextAnalysisPipeline(object):
 		
 		
 		
-		urls = select_from(self.c, "SELECT url FROM nodes WHERE scrapeid = ?", self.scrapeid)
-		words = select_from(self.c, "SELECT url, word, freq FROM words WHERE scrapeid = ?", self.scrapeid)
-		sentences = select_from(self.c, "SELECT url, sentence FROM sentences WHERE scrapeid = ?", self.scrapeid)
+		#urls = select_from(self.c, "SELECT url FROM nodes WHERE scrapeid = ?", self.scrapeid)
+		url_names = select_from(self.c, "SELECT url, name FROM nodes WHERE scrapeid = ?", self.scrapeid)
+		#words = select_from(self.c, "SELECT url, word, freq FROM words WHERE scrapeid = ?", self.scrapeid)
+		#sentences = select_from(self.c, "SELECT url, sentence FROM sentences WHERE scrapeid = ?", self.scrapeid)
+		words = [[url, word, freq] for [scrapeid, url, word, freq] in self.words]
+		sentences = [[url, sentence] for [scrapeid, url, sentence] in self.sentences]
 		url_word_count = select_from(self.c, "SELECT url, SUM(freq) FROM words WHERE scrapeid = ? GROUP BY url", self.scrapeid)
 		url_sentence_count = select_from(self.c, "SELECT url, COUNT(*) FROM sentences WHERE scrapeid = ? GROUP BY url", self.scrapeid)
 			
@@ -77,8 +85,9 @@ class TextAnalysisPipeline(object):
 		s_group_size = 5
 		longest_word = 1
 		longest_sent = 1
+		
 
-		for [url] in urls:
+		for [url, name] in url_names:
 			if url not in url_stats["urls"]:
 				url_stats["urls"][url] = {"length":{"sent":{"labels":{}}, "word":{"labels":{}}}}
 
@@ -87,11 +96,15 @@ class TextAnalysisPipeline(object):
 				length = len(word)
 				if length > longest_word:
 					longest_word = length
-
+					actual_longest_word = word
+					actual_longest_word_loc = url
+		
 		for url, sent, freq in sentences:
 			length = sentence_length(sent)
 			if length > longest_sent:
 				longest_sent = length
+				actual_longest_sent = sent
+				actual_longest_sent_loc = url
 
 		def get_label_refs(longest, group_size):
 			group_range = range(1, int(math.ceil(longest/float(group_size))+1))
@@ -116,9 +129,9 @@ class TextAnalysisPipeline(object):
 				for length in label_refs[label]:
 					url_stats["urls"][url]["length"][type]["labels"][label][length] = {"freq":0, "items":[]}
 
-		for url in urls:
-			add_labels_lengths(w_label_refs, "word", url[0])
-			add_labels_lengths(s_label_refs, "sent", url[0])
+		for [url, name] in url_names:
+			add_labels_lengths(w_label_refs, "word", url)
+			add_labels_lengths(s_label_refs, "sent", url)
 
 		for label in w_label_refs:
 			url_stats["Total"]["length"]["word"]["labels"][label] = {}
@@ -161,7 +174,9 @@ class TextAnalysisPipeline(object):
 
 		add_freqs_words(words, "word", w_label_refs, validate_func=real_word)
 		add_freqs_words(sentences, "sent", s_label_refs, length_func=sentence_length)
-
+		
+		key_db_data = []
+		
 		for type in ["word", "sent"]:
 
 			for url in url_stats["urls"]:
@@ -173,6 +188,9 @@ class TextAnalysisPipeline(object):
 						total += length*freq
 						count += freq
 						#print "length: {0}, freq: {1}".format(length, freq)
+					
+				url_stats["urls"][url]["length"][type]["count"] = count
+					
 				if count == 0:
 					url_stats["urls"][url]["length"][type]["average"] = 0
 				else:
@@ -185,34 +203,43 @@ class TextAnalysisPipeline(object):
 					freq = url_stats["Total"]["length"][type]["labels"][label][length]["freq"]
 					total += length*freq
 					count += freq
+			
+			url_stats["Total"]["length"][type]["count"] = count
+			
 			if count == 0:
 				url_stats["Total"]["length"][type]["average"] = 0
 			else:
 				url_stats["Total"]["length"][type]["average"] = total/float(count)
 		
-		name_url_dict = {}
+		for url in url_stats["urls"]:
+			key_db_data.append((self.scrapeid, url, url_stats["urls"][url]["length"]["word"]["average"], url_stats["urls"][url]["length"]["sent"]["average"], url_stats["urls"][url]["length"]["word"]["count"], url_stats["urls"][url]["length"]["sent"]["count"]))
+		key_db_data.append((self.scrapeid, "total", url_stats["Total"]["length"]["word"]["average"], url_stats["Total"]["length"]["sent"]["average"], url_stats["Total"]["length"]["word"]["count"], url_stats["Total"]["length"]["sent"]["count"]))
+		
+		insert_rows(self.c, "INSERT INTO text_data (scrapeid, url, av_word_len, av_sent_len, word_count, sent_count) VALUES (?, ?, ?, ?, ?, ?)", key_db_data)
+		
+		
+		url_name_dict = {}
 		long_count = 0
 		
-		for url in url_stats["urls"]:
-			name = url.replace("/", "-")
-			for char in [":","<",">","?","\"","*","."]:
-				name = name.replace(char, "")
-			if len(name) > 100:
-				name = name[:80] + "---#" + str(long_count)
-				long_count += 1
+		#for url in url_stats["urls"]:
+		for [url, name] in url_names:
+			#name, long_count = filename_safe(url, long_count)
 			with open(r'{0}\initiator\static\scrapes\{1}\{2}\{3}.json'.format(getcwd(), self.domain, self.date, name), 'w') as outfile:
 				json.dump(url_stats["urls"][url], outfile)
-			name_url_dict[name] = url
+			url_name_dict[url] = name
+			
+		with open(r'{0}\initiator\static\scrapes\{1}\{2}\{3}.json'.format(getcwd(), self.domain, self.date, "total"), 'w') as outfile:
+			json.dump(url_stats["Total"], outfile)
 		
-		save_json(r'{0}\initiator\static\scrapes\{1}\{2}\{3}.json'.format(getcwd(), self.domain, self.date, name_url_dict), name_url_dict)
-		save_json(r'{0}\initiator\static\scrapes\{1}\{2}\{3}.json'.format(getcwd(), self.domain, self.date, w_labels), w_labels)
-		save_json(r'{0}\initiator\static\scrapes\{1}\{2}\{3}.json'.format(getcwd(), self.domain, self.date, s_labels), s_labels)
+		extra_data = {'url_name_dict':url_name_dict, 'w_labels':w_labels, 's_labels':s_labels}
 		
+		save_json(r'{0}\initiator\static\scrapes\{1}\{2}\{3}.json'.format(getcwd(), self.domain, self.date, "extra_data"), extra_data)
 		
 		self.conn.commit()
 		self.conn.close()
 	
 	def process_item(self, item, spider):
+		log.msg("text analysis")
 		for sentence in item['sentences']:
 			self.sentences.append((item['scrapeid'], item['url_obj'].full, sentence))
 			
@@ -270,9 +297,17 @@ class SQLiteExportPipeline(object):
 		insert_rows(self.c, "INSERT INTO edges (scrapeid, sourceid, targetid, level) VALUES (?, ?, ?, ?)", new_edge_tups)
 		insert_rows(self.c, "INSERT INTO parents (scrapeid, parent, child) VALUES (?, ?, ?)", self.parent_tups)
 		
+		url_names_dict = {url[url.find("//")+2:]: name for [url, name] in select_from(self.c, "SELECT url, name FROM nodes WHERE scrapeid = ?", self.scrapeid)}
+		
+		log.msg("url_names_dict:")
+		
+		for url, name in url_names_dict.iteritems():
+			log.msg("{0} --- {1}".format(url, name))
+		
 		parents_dict = {}
-		parents_dict["name"] = self.domain
-		parents_dict["children"] = get_children(self.c, self.domain, self.scrapeid)
+		parents_dict["url"] = self.domain
+		parents_dict["name"] = self.domain.replace("/", "-")
+		parents_dict["children"] = get_children(self.c, self.domain, self.scrapeid, url_names_dict)
 
 		with open(r'{0}\initiator\static\scrapes\{1}\{2}\sitemap.json'.format(getcwd(), self.domain, self.date), 'w') as outfile:
 			json.dump(parents_dict, outfile)
@@ -281,6 +316,7 @@ class SQLiteExportPipeline(object):
 		self.conn.close()
 	
 	def process_item(self, item, spider):
+		log.msg("SQL")
 		if item['url_obj'].full not in self.urls_seen:
 			self.urls_seen.add(item['url_obj'].full)
 		

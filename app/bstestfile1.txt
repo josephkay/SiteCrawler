@@ -4,27 +4,17 @@ Norwich Hotels - Book Cheap Hotels in Norwich UK - Premier Inn
 -----------------------------------
  var LOCALE = "en";
 -----------------------------------
-  function gup(name) {  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");  var regexS = "[\\?&]"+name+"=([^&#]*)";  var regex = new RegExp( regexS );  var results = regex.exec( window.location.href );  if (results === null) {   return null;  } else {   return results[1];  } }  function setCookie(c_name, value, expiredays) {  var c_domain=".premierinn.com";   var exdate=new Date();  exdate.setDate(exdate.getDate()+expiredays);  document.cookie = c_name+ "=" +escape(value)+   ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())   +";Domain="+c_domain+";Path=/"; }  var p36 = gup('P36'); if (p36 !== null) {setCookie("P36", p36, 14);} var purl = gup('PURL'); if (purl !== null) {setCookie("PURL", purl, 14);}  function readCookie(name) {  var nameEQ = name + "=";  var ca = document.cookie.split(';');  for (var i=0;i < ca.length;i++) {   var c = ca[i];   while (c.charAt(0)==' ') {c = c.substring(1,c.length);}   if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);  }  return null; } 
+  function gup(name) {  name = name.replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");  var regexS = "[\\?&amp;]"+name+"=([^&amp;#]*)";  var regex = new RegExp( regexS );  var results = regex.exec( window.location.href );  if (results === null) {   return null;  } else {   return results[1];  } }  function setCookie(c_name, value, expiredays) {  var c_domain=".premierinn.com";   var exdate=new Date();  exdate.setDate(exdate.getDate()+expiredays);  document.cookie = c_name+ "=" +escape(value)+   ((expiredays==null) ? "" : ";expires="+exdate.toGMTString())   +";Domain="+c_domain+";Path=/"; }  var p36 = gup('P36'); if (p36 !== null) {setCookie("P36", p36, 14);} var purl = gup('PURL'); if (purl !== null) {setCookie("PURL", purl, 14);}  function readCookie(name) {  var nameEQ = name + "=";  var ca = document.cookie.split(';');  for (var i=0;i &lt; ca.length;i++) {   var c = ca[i];   while (c.charAt(0)==' ') {c = c.substring(1,c.length);}   if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);  }  return null; } 
 -----------------------------------
 #contentcolumn h4 {font-weight:bold;}#contentcolumn p,#contentcolumn h4 {padding-bottom:0.5em;}
 -----------------------------------
 var CQ_EXT = "/assets/.html";CQ_ASSETS_URL = CQ_EXT.substring(0,CQ_EXT.indexOf(".html"));$('html').addClass('js'); $(document).ready(function(){ $("#nav-container .lang").langdropdown(); $("form:has(fieldset.room-select)").not('#dialog-content form').roomrequirements(); $(".linkedDates").not('.htmlLibrary .linkedDates').datepickerinit(); $(".quickSearchField").piautocomplete(".quickSearchHiddenField"); $().opentriggeredlinks(".quickSearchHiddenFieldForTriggerUrl"); $(".utils","#nav-container").loginutils(); $('html .magic').show(); $('.popuplink').popuplink(); $().tooltipinit();});
 -----------------------------------
- 
------------------------------------
-Skip to content
+ Skip to content
 -----------------------------------
 Go to navigation
 -----------------------------------
-Premier Inn
------------------------------------
-$(function(){var swfSrc = "/en.swf.headerFlashPromo.Single.FlashFile.tmp/spool.swf";if (typeof window.headerFlashPromo !== "undefined") { swfSrc = window.headerFlashPromo.Single || swfSrc;} var flashvars = {xmlFile:"/en.xml.headerFlashPromo.Single.XmlDataFile.tmp/spool.xml",targetUrl:""};var params = { flashvars:""};params.wmode = "transparent";var attributes = {};var checkFlag = "headerFlashPromo.Single";if((checkFlag.indexOf("quickflash") === -1) || !((typeof window.disableFlash === "undefined") && (window.disableFlash === true))){swfobject.embedSWF( swfSrc,  "flashAlternativeContent_headerFlashPromo.Single",  "457",  "64",  "6.0.0",  false,  flashvars, params, attributes);}});
------------------------------------
-Manage or cancel a booking
------------------------------------
-Login
------------------------------------
-Logout
+$(function(){var swfSrc = "/en.swf.headerFlashPromo.Single.FlashFile.tmp/spool.swf";if (typeof window.headerFlashPromo !== "undefined") { swfSrc = window.headerFlashPromo.Single || swfSrc;} var flashvars = {xmlFile:"/en.xml.headerFlashPromo.Single.XmlDataFile.tmp/spool.xml",targetUrl:""};var params = { flashvars:""};params.wmode = "transparent";var attributes = {};var checkFlag = "headerFlashPromo.Single";if((checkFlag.indexOf("quickflash") === -1) || !((typeof window.disableFlash === "undefined") &amp;&amp; (window.disableFlash === true))){swfobject.embedSWF( swfSrc,  "flashAlternativeContent_headerFlashPromo.Single",  "457",  "64",  "6.0.0",  false,  flashvars, params, attributes);}});
 -----------------------------------
 Language and Country selection form
 -----------------------------------
@@ -48,44 +38,6 @@ Submit
 -----------------------------------
 Main Navigation
 -----------------------------------
-Premier Inn - Book Cheap Hotels in the UK and Ireland
------------------------------------
-Mobile Landing Page
------------------------------------
-Amend
------------------------------------
-Book a hotel
------------------------------------
-Premier for business
------------------------------------
-Offers
------------------------------------
-Short breaks with Premier Inn
------------------------------------
-Why we're Premier
------------------------------------
-News
------------------------------------
-My Premier Inn
------------------------------------
-Sitemap
------------------------------------
-HomepageFlashXml
------------------------------------
-Premier Inn Affiliate Programme
------------------------------------
-DisabledGo
------------------------------------
-Checkin
------------------------------------
-Matt_UAT_test2
------------------------------------
-autumn-mob
------------------------------------
-Winter Rooms
------------------------------------
-Winter Rooms
------------------------------------
 var SITE_CHANNEL = "Why we're Premier";
 -----------------------------------
 Why we&#39;re Premier
@@ -106,9 +58,7 @@ Quality restaurants
 -----------------------------------
 Filling breakfasts
 -----------------------------------
-Located everywhere
------------------------------------
- 
+Located everywhere 
 -----------------------------------
  
 -----------------------------------
@@ -140,7 +90,7 @@ Norwich Hotels
 -----------------------------------
   var popUpTitle = I18N.SELECT_ARRIVAL_DATE;  var WS_URL = "/services/en/";  var CONTEXT_PATH = "";  var LOCALE = "en_GB"; 
 -----------------------------------
-//<![CDATA[$(function() { $(".linkedDates").datepickerinit();  $('.static-map-container').roundedcorners();  $('#static-map').click(function(){ $('.static-map-container').hide();  // var trackBeacon = $("<div />"); var hotelBeacon = $("<div />"); var offerBeacon = $("<div />"); var interactionBeacon = $("<div />"); var toastBeacon = new Tally(); var requirementsBeacon = $('<div />');  var networkFunnel = new NetworkFunnel(hotelBeacon, requirementsBeacon, offerBeacon, toastBeacon);  var initial = new VELatLong(52.6259777871871, 1.295013427734391); initial.zoom = 13; var map = new MapPanel($("#msveMap"), initial, networkFunnel, hotelBeacon, offerBeacon, interactionBeacon, requirementsBeacon, toastBeacon, trackBeacon, false, undefined, undefined, "Arh8S7vnLu8US3nbDQAACxCmEp7z7LJc6oCldE9pbqQM0V49wESwER_p3K2Ssb_Z"); map.showAsClusters(); networkFunnel.getAllHotels();  $('.MSVE_PoweredByLogo').css('bottom','20px'); //  });});$(document).ready(function(){ $(".home-radios").dcCheckboxHome();  if(jQuery().validate) {  $("#quickbooking").validate(); }  $('#msveMap').css('height','342px'); $('.mapContainer').css('height','342px');});//]]>
+//&lt;![CDATA[$(function() { $(".linkedDates").datepickerinit();  $('.static-map-container').roundedcorners();  $('#static-map').click(function(){ $('.static-map-container').hide();  // var trackBeacon = $("&lt;div /&gt;"); var hotelBeacon = $("&lt;div /&gt;"); var offerBeacon = $("&lt;div /&gt;"); var interactionBeacon = $("&lt;div /&gt;"); var toastBeacon = new Tally(); var requirementsBeacon = $('&lt;div /&gt;');  var networkFunnel = new NetworkFunnel(hotelBeacon, requirementsBeacon, offerBeacon, toastBeacon);  var initial = new VELatLong(52.6259777871871, 1.295013427734391); initial.zoom = 13; var map = new MapPanel($("#msveMap"), initial, networkFunnel, hotelBeacon, offerBeacon, interactionBeacon, requirementsBeacon, toastBeacon, trackBeacon, false, undefined, undefined, "Arh8S7vnLu8US3nbDQAACxCmEp7z7LJc6oCldE9pbqQM0V49wESwER_p3K2Ssb_Z"); map.showAsClusters(); networkFunnel.getAllHotels();  $('.MSVE_PoweredByLogo').css('bottom','20px'); //  });});$(document).ready(function(){ $(".home-radios").dcCheckboxHome();  if(jQuery().validate) {  $("#quickbooking").validate(); }  $('#msveMap').css('height','342px'); $('.mapContainer').css('height','342px');});//]]&gt;
 -----------------------------------
 Show full map
 -----------------------------------
@@ -156,103 +106,9 @@ Your stay details
 -----------------------------------
 Arrival date
 -----------------------------------
-Date
------------------------------------
-01
------------------------------------
-02
------------------------------------
-03
------------------------------------
-04
------------------------------------
-05
------------------------------------
-06
------------------------------------
-07
------------------------------------
-08
------------------------------------
-09
------------------------------------
-10
------------------------------------
-11
------------------------------------
-12
------------------------------------
-13
------------------------------------
-14
------------------------------------
-15
------------------------------------
-16
------------------------------------
-17
------------------------------------
-18
------------------------------------
-19
------------------------------------
-20
------------------------------------
-21
------------------------------------
-22
------------------------------------
-23
------------------------------------
-24
------------------------------------
-25
------------------------------------
-26
------------------------------------
-27
------------------------------------
-28
------------------------------------
-29
------------------------------------
-30
------------------------------------
-31
------------------------------------
 Fields to set your arrival month
 -----------------------------------
-Month
------------------------------------
-Nov 13
------------------------------------
-Dec 13
------------------------------------
-Jan 14
------------------------------------
-Feb 14
------------------------------------
-Mar 14
------------------------------------
-Apr 14
------------------------------------
-May 14
------------------------------------
-Jun 14
------------------------------------
-Jul 14
------------------------------------
-Aug 14
------------------------------------
-Sep 14
------------------------------------
-Oct 14
------------------------------------
-Nov 14
------------------------------------
-Depart midday,
------------------------------------
-on your day of departure
+Depart midday,on your day of departure
 -----------------------------------
 You can choose the number of rooms and nights after selecting your hotel.
 -----------------------------------
@@ -426,101 +282,51 @@ Norwich hotels
 -----------------------------------
 Norwich (Showground/A47)
 -----------------------------------
-     Longwater Interchange,    
------------------------------------
-         Dereham Road,             New Costessey,             Norfolk,      
------------------------------------
-NR5 0TP,
------------------------------------
- United Kingdom
+     Longwater Interchange,             Dereham Road,             New Costessey,             Norfolk,      NR5 0TP, United Kingdom
 -----------------------------------
 Tel: 0871 527  8834 *
 -----------------------------------
-More info
------------------------------------
-     Room only from 
------------------------------------
-   &pound;35.00
+     Room only from    &pound;35.00
 -----------------------------------
 View details and book
 -----------------------------------
 Norwich Airport
 -----------------------------------
-     Delft Way,    
------------------------------------
-         Norwich Airport,             Norwich,      
------------------------------------
-NR6 6BB,
------------------------------------
- United Kingdom
+     Delft Way,             Norwich Airport,             Norwich,      NR6 6BB, United Kingdom
 -----------------------------------
 Tel: 0871 527  8836 *
 -----------------------------------
-More info
------------------------------------
-     Room only from 
------------------------------------
-   &pound;39.00
+     Room only from    &pound;39.00
 -----------------------------------
 View details and book
 -----------------------------------
 Norwich (Broadlands Business Park)
 -----------------------------------
-     Broadland Business Park,    
------------------------------------
-         Old Chapel Way,             Norwich,      
------------------------------------
-NR7 0WG,
------------------------------------
- United Kingdom
+     Broadland Business Park,             Old Chapel Way,             Norwich,      NR7 0WG, United Kingdom
 -----------------------------------
 Tel: 0871 527  8838 *
 -----------------------------------
-More info
------------------------------------
-     Room only from 
------------------------------------
-   &pound;39.00
+     Room only from    &pound;39.00
 -----------------------------------
 View details and book
 -----------------------------------
 Norwich City Centre (Duke Street)
 -----------------------------------
-     Duke Street,    
------------------------------------
-         Norwich,             Norfolk,      
------------------------------------
-NR3 3AP,
------------------------------------
- United Kingdom
+     Duke Street,             Norwich,             Norfolk,      NR3 3AP, United Kingdom
 -----------------------------------
 Tel: 0871 527 8840 *
 -----------------------------------
-More info
------------------------------------
-     Room only from 
------------------------------------
-   &pound;35.00
+     Room only from    &pound;35.00
 -----------------------------------
 View details and book
 -----------------------------------
 Norwich Nelson City Centre
 -----------------------------------
-     Prince Of Wales Road,    
------------------------------------
-         Norwich,             Norfolk,      
------------------------------------
-NR1 1DX,
------------------------------------
- United Kingdom
+     Prince Of Wales Road,             Norwich,             Norfolk,      NR1 1DX, United Kingdom
 -----------------------------------
 Tel: 0871 527  8842 *
 -----------------------------------
-More info
------------------------------------
-     Room only from 
------------------------------------
-   &pound;35.00
+     Room only from    &pound;35.00
 -----------------------------------
 View details and book
 -----------------------------------
@@ -564,13 +370,9 @@ Privacy policy
 -----------------------------------
 How we use cookies
 -----------------------------------
-Careers
------------------------------------
 Affiliate programme
 -----------------------------------
 International Development
------------------------------------
-Corporate information
 -----------------------------------
 Terms and conditions
 -----------------------------------
@@ -604,15 +406,15 @@ Norwich (Showground/A47)
 -----------------------------------
 setCookie("oactive","true");
 -----------------------------------
-if (typeof pio === 'undefined') { var pio = window.pio || {};}if(pio.pageName) {s.pageName="Premier Inn:Why we're Premier:Located everywhere:Norwich Hotels - Book Cheap Hotels in Norwich UK - Premier Inn"+":"+pio.pageName} else {s.pageName="Premier Inn:Why we're Premier:Located everywhere:Norwich Hotels - Book Cheap Hotels in Norwich UK - Premier Inn"}s.channel=((typeof SITE_CHANNEL === 'undefined')?"":SITE_CHANNEL);s.pageType="";if(pio.prop1 && !s.prop1){s.prop1=pio.prop1;}if(pio.prop2 && !s.prop2){s.prop2=pio.prop2;}if(pio.prop3 && !s.prop3){s.prop3=pio.prop3;}if(pio.prop4 && !s.prop4){s.prop4=pio.prop4;}if(pio.prop5 && !s.prop5){s.prop5=pio.prop5;}if(pio.prop6 && !s.prop6){s.prop6=pio.prop6;}if(pio.prop7 && !s.prop7){s.prop7=pio.prop7;}if(pio.prop8 && !s.prop8){s.prop8=pio.prop8;}if(pio.prop9!==undefined && !s.prop9){s.prop9=String(pio.prop9);}if(pio.prop10 && !s.prop10){s.prop10=pio.prop10;}if(pio.prop11 && !s.prop11){s.prop11=pio.prop11;}if(pio.prop12 && !s.prop12){s.prop12=pio.prop12;}if(pio.prop13 && !s.prop13){s.prop13=pio.prop13;}if(pio.prop14 && !s.prop14){s.prop14=pio.prop14;}if(pio.prop15 && !s.prop15){s.prop15=pio.prop15;}if(pio.prop16 && !s.prop16){s.prop16=pio.prop16;}if(pio.prop18 && !s.prop18){s.prop18=pio.prop18;}if(pio.prop19 && !s.prop19){s.prop19=pio.prop19;}if(pio.prop21 && !s.prop21){s.prop21=pio.prop21;}if(pio.prop22 && !s.prop22){s.prop22=pio.prop22;}if(pio.prop24 && !s.prop24){s.prop24=pio.prop24;}if(pio.prop25 && !s.prop25){s.prop25=pio.prop25;}if(pio.prop33 && !s.prop33){s.prop33=pio.prop33;}s.prop27="UK";if(pio.prop41 && !s.prop41){s.prop41=pio.prop41;}/* Conversion Variables */if(pio.zip && !s.zip){s.zip=pio.zip;}if(pio.events && !s.events){s.events=pio.events;}if(pio.products && !s.products){s.products=pio.products;}if(pio.purchaseID && !s.purchaseID){s.purchaseID=pio.purchaseID;}if(pio.eVar17 && !s.eVar17){s.eVar17=pio.eVar17;}if(pio.eVar18 && !s.eVar18){s.eVar18=pio.eVar18;}if(pio.eVar19 && !s.eVar19){s.eVar19=pio.eVar19;}if(pio.eVar21 && !s.eVar21){ s.eVar21=pio.eVar21; s.eVar50=sc_append(s.eVar21,"sc_v50");}if(pio.eVar22 && !s.eVar22){s.eVar22=s.pageName+":"+pio.eVar22;}if(pio.prop20 && !s.prop20){s.prop20=s.pageName+":"+pio.prop20;}if(pio.eVar24 && !s.eVar24){s.eVar24=pio.eVar24;}if(pio.eVar20 && !s.eVar20){s.eVar20=s.pageName+":"+pio.eVar20;}if(pio.eVar25 && !s.eVar25){s.eVar25=pio.eVar25;}if(pio.eVar23 && !s.eVar23){s.eVar23=pio.eVar23;}s.eVar27=s.prop27if(pio.eVar29 && !s.eVar29){s.eVar29=pio.eVar29;}if(pio.eVar31 && !s.eVar31){s.eVar31=pio.eVar31;}if(pio.eVar39 && !s.eVar39){s.eVar39=pio.eVar39;}if(pio.eVar41 && !s.eVar41){s.eVar41=pio.eVar41;}if(pio.eVar50 && !s.eVar50){ s.eVar50=pio.eVar50; s.eVar50=sc_append(s.eVar50,"sc_v50");}if(pio.eVar60 && !s.eVar60){ s.eVar60=pio.eVar60;}if(pio.eVar67 && !s.eVar67){s.eVar67=pio.eVar67;}if(pio.eVar68 && !s.eVar68){s.eVar68=s.pageName+":"+pio.eVar68;}if(pio.eVar73 && !s.eVar73){s.eVar73=pio.eVar73;}if(pio.eVar74 && !s.eVar74){s.eVar74=pio.eVar74;}if(pio.eVar51 && !s.eVar51){s.eVar51=pio.eVar51;}if(pio.eVar56 && !s.eVar56){s.eVar56=pio.eVar56;}if(pio.eVar30 && !s.eVar30){s.eVar30=pio.eVar30;}if(pio.eVar25 && !s.eVar25){s.eVar25=pio.eVar25;}if(pio.state && !s.state){s.state=pio.state;}if(pio.zip && !s.zip){s.zip=pio.zip;}
+if (typeof pio === 'undefined') { var pio = window.pio || {};}if(pio.pageName) {s.pageName="Premier Inn:Why we're Premier:Located everywhere:Norwich Hotels - Book Cheap Hotels in Norwich UK - Premier Inn"+":"+pio.pageName} else {s.pageName="Premier Inn:Why we're Premier:Located everywhere:Norwich Hotels - Book Cheap Hotels in Norwich UK - Premier Inn"}s.channel=((typeof SITE_CHANNEL === 'undefined')?"":SITE_CHANNEL);s.pageType="";if(pio.prop1 &amp;&amp; !s.prop1){s.prop1=pio.prop1;}if(pio.prop2 &amp;&amp; !s.prop2){s.prop2=pio.prop2;}if(pio.prop3 &amp;&amp; !s.prop3){s.prop3=pio.prop3;}if(pio.prop4 &amp;&amp; !s.prop4){s.prop4=pio.prop4;}if(pio.prop5 &amp;&amp; !s.prop5){s.prop5=pio.prop5;}if(pio.prop6 &amp;&amp; !s.prop6){s.prop6=pio.prop6;}if(pio.prop7 &amp;&amp; !s.prop7){s.prop7=pio.prop7;}if(pio.prop8 &amp;&amp; !s.prop8){s.prop8=pio.prop8;}if(pio.prop9!==undefined &amp;&amp; !s.prop9){s.prop9=String(pio.prop9);}if(pio.prop10 &amp;&amp; !s.prop10){s.prop10=pio.prop10;}if(pio.prop11 &amp;&amp; !s.prop11){s.prop11=pio.prop11;}if(pio.prop12 &amp;&amp; !s.prop12){s.prop12=pio.prop12;}if(pio.prop13 &amp;&amp; !s.prop13){s.prop13=pio.prop13;}if(pio.prop14 &amp;&amp; !s.prop14){s.prop14=pio.prop14;}if(pio.prop15 &amp;&amp; !s.prop15){s.prop15=pio.prop15;}if(pio.prop16 &amp;&amp; !s.prop16){s.prop16=pio.prop16;}if(pio.prop18 &amp;&amp; !s.prop18){s.prop18=pio.prop18;}if(pio.prop19 &amp;&amp; !s.prop19){s.prop19=pio.prop19;}if(pio.prop21 &amp;&amp; !s.prop21){s.prop21=pio.prop21;}if(pio.prop22 &amp;&amp; !s.prop22){s.prop22=pio.prop22;}if(pio.prop24 &amp;&amp; !s.prop24){s.prop24=pio.prop24;}if(pio.prop25 &amp;&amp; !s.prop25){s.prop25=pio.prop25;}if(pio.prop33 &amp;&amp; !s.prop33){s.prop33=pio.prop33;}s.prop27="UK";if(pio.prop41 &amp;&amp; !s.prop41){s.prop41=pio.prop41;}/* Conversion Variables */if(pio.zip &amp;&amp; !s.zip){s.zip=pio.zip;}if(pio.events &amp;&amp; !s.events){s.events=pio.events;}if(pio.products &amp;&amp; !s.products){s.products=pio.products;}if(pio.purchaseID &amp;&amp; !s.purchaseID){s.purchaseID=pio.purchaseID;}if(pio.eVar17 &amp;&amp; !s.eVar17){s.eVar17=pio.eVar17;}if(pio.eVar18 &amp;&amp; !s.eVar18){s.eVar18=pio.eVar18;}if(pio.eVar19 &amp;&amp; !s.eVar19){s.eVar19=pio.eVar19;}if(pio.eVar21 &amp;&amp; !s.eVar21){ s.eVar21=pio.eVar21; s.eVar50=sc_append(s.eVar21,"sc_v50");}if(pio.eVar22 &amp;&amp; !s.eVar22){s.eVar22=s.pageName+":"+pio.eVar22;}if(pio.prop20 &amp;&amp; !s.prop20){s.prop20=s.pageName+":"+pio.prop20;}if(pio.eVar24 &amp;&amp; !s.eVar24){s.eVar24=pio.eVar24;}if(pio.eVar20 &amp;&amp; !s.eVar20){s.eVar20=s.pageName+":"+pio.eVar20;}if(pio.eVar25 &amp;&amp; !s.eVar25){s.eVar25=pio.eVar25;}if(pio.eVar23 &amp;&amp; !s.eVar23){s.eVar23=pio.eVar23;}s.eVar27=s.prop27if(pio.eVar29 &amp;&amp; !s.eVar29){s.eVar29=pio.eVar29;}if(pio.eVar31 &amp;&amp; !s.eVar31){s.eVar31=pio.eVar31;}if(pio.eVar39 &amp;&amp; !s.eVar39){s.eVar39=pio.eVar39;}if(pio.eVar41 &amp;&amp; !s.eVar41){s.eVar41=pio.eVar41;}if(pio.eVar50 &amp;&amp; !s.eVar50){ s.eVar50=pio.eVar50; s.eVar50=sc_append(s.eVar50,"sc_v50");}if(pio.eVar60 &amp;&amp; !s.eVar60){ s.eVar60=pio.eVar60;}if(pio.eVar67 &amp;&amp; !s.eVar67){s.eVar67=pio.eVar67;}if(pio.eVar68 &amp;&amp; !s.eVar68){s.eVar68=s.pageName+":"+pio.eVar68;}if(pio.eVar73 &amp;&amp; !s.eVar73){s.eVar73=pio.eVar73;}if(pio.eVar74 &amp;&amp; !s.eVar74){s.eVar74=pio.eVar74;}if(pio.eVar51 &amp;&amp; !s.eVar51){s.eVar51=pio.eVar51;}if(pio.eVar56 &amp;&amp; !s.eVar56){s.eVar56=pio.eVar56;}if(pio.eVar30 &amp;&amp; !s.eVar30){s.eVar30=pio.eVar30;}if(pio.eVar25 &amp;&amp; !s.eVar25){s.eVar25=pio.eVar25;}if(pio.state &amp;&amp; !s.state){s.state=pio.state;}if(pio.zip &amp;&amp; !s.zip){s.zip=pio.zip;}
 -----------------------------------
 setCookie("gactive","true");
 -----------------------------------
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
 -----------------------------------
-var pageTracker;var googleTrackerTimeout;var totalGoogleTrackerTries = 0;function tryGoogleTracker() { if (typeof(_gat) != 'undefined') {  pageTracker = _gat._getTracker("UA-8208115-1");  pageTracker._initData();    pageTracker._trackPageview(s.pageName); } else {  if (totalGoogleTrackerTries++ < 5) {   googleTrackerTimeout = setTimeout("tryGoogleTracker()", 1000);  } }}tryGoogleTracker();
+var pageTracker;var googleTrackerTimeout;var totalGoogleTrackerTries = 0;function tryGoogleTracker() { if (typeof(_gat) != 'undefined') {  pageTracker = _gat._getTracker("UA-8208115-1");  pageTracker._initData();    pageTracker._trackPageview(s.pageName); } else {  if (totalGoogleTrackerTries++ &lt; 5) {   googleTrackerTimeout = setTimeout("tryGoogleTracker()", 1000);  } }}tryGoogleTracker();
 -----------------------------------
-var axel = Math.random() + "";var a = axel * 10000000000000;var dartPageCode = "undefined";var ordCode = "";try {  if (typeof(bookingDartPageCode) != 'undefined') {  if (bookingDartPageCode != "") {   dartPageCode = bookingDartPageCode;  } else {   ordCode = ";ord=1";  } } else {  ordCode = ";ord=1"; }} catch (e) {}document.write('<iframe src="http'+(document.location.protocol=='https:'?'s':'')+'://fls.doubleclick.net/activityi;src=2190810;' + dartPageCode + ordCode + ';num=' + a + '?" width="1" height="1" frameborder="0"></iframe>');
+var axel = Math.random() + "";var a = axel * 10000000000000;var dartPageCode = "undefined";var ordCode = "";try {  if (typeof(bookingDartPageCode) != 'undefined') {  if (bookingDartPageCode != "") {   dartPageCode = bookingDartPageCode;  } else {   ordCode = ";ord=1";  } } else {  ordCode = ";ord=1"; }} catch (e) {}document.write('&lt;iframe src="http'+(document.location.protocol=='https:'?'s':'')+'://fls.doubleclick.net/activityi;src=2190810;' + dartPageCode + ordCode + ';num=' + a + '?" width="1" height="1" frameborder="0"&gt;&lt;/iframe&gt;');
 -----------------------------------
  var _mTrack = _mTrack || []; _mTrack.push(['trackPage']); (function() {   var mClientId = 'gzq1x9b860';  var mProto = ('https:' == document.location.protocol ? 'https://' : 'http://');  var mHost = 'tracker.marinsm.com';   var mt = document.createElement('script');   mt.type = 'text/javascript';   mt.async = true;   mt.src = mProto + mHost + '/tracker/async/' + mClientId + '.js';   var fscr = document.getElementsByTagName('script')[0]; fscr.parentNode.insertBefore(mt, fscr);  })(); 
 -----------------------------------
