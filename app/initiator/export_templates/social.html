@@ -1,0 +1,57 @@
+<!doctype html>
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Screenshot</title>
+	<script src="jquery.min.js" type="text/javascript"></script>
+	<style>
+
+	#img_holder {
+	  width: 400px;
+	  height: 400px;
+	  overflow: hidden;
+	  margin: 20px;
+	}
+
+	#thumb {
+	  width: 400px;
+	}
+
+	</style>
+</head>
+<body>
+<h1>Social screenshots</h1>
+
+<div id="images">
+</div>
+
+<script>
+	function addItem(image, images) {
+		var item = document.createElement('div');
+		item.setAttribute("id","img_holder");
+		
+		var link = document.createElement('a');
+		link.setAttribute("href",image);
+		link.setAttribute("target","_blank");
+		
+		var img = document.createElement('img');
+		img.setAttribute("src",image);
+		img.setAttribute("id","thumb");
+		
+		link.appendChild(img);
+		item.appendChild(link);
+		
+		images.appendChild(item);
+	}
+	
+	$.getJSON("social_names.json", function(response) {
+		var social_names = response;
+		
+		var images = document.getElementById('images');
+		
+		for (var x=0; x<social_names.length; x++) {
+			addItem(social_names[x]+".png",images);
+		}
+	});
+</script>
+
+</body>

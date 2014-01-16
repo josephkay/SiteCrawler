@@ -73,7 +73,7 @@
 			<tbody><tr class="hoverable"><td>Total</td><td class="clicky centre" type="word" url="Total" >{{ "{0:.1f}".format(text_data["total"]["av_word_len"]) }}</td><td class="clicky centre" type="sent" url="Total" >{{ "{0:.1f}".format(text_data["total"]["av_sent_len"]) }}</td><td class="centre">{{ "{0}".format(text_data["total"]["word_count"]) }}</td><td class="centre">{{ "{0}".format(text_data["total"]["sent_count"]) }}</td></tr>
 			{% for url in text_data %}
 				{% if url != "total" %}
-					<tr class="hoverable"><td >{{ url }}</td><td class="clicky centre" type="word" url={{ url }} >{{ "{0:.1f}".format(text_data[url]["av_word_len"]) }}</td><td class="clicky centre" type="sent" url={{ url }} >{{ "{0:.1f}".format(text_data[url]["av_sent_len"]) }}</td><td class="centre">{{ "{0}".format(text_data[url]["word_count"]) }}</td><td class="centre">{{ "{0}".format(text_data[url]["sent_count"]) }}</td></tr>
+					<tr class="hoverable"><td>{{ url }}</td><td class="clicky centre" type="word" url={{ url }} >{{ "{0:.1f}".format(text_data[url]["av_word_len"]) }}</td><td class="clicky centre" type="sent" url={{ url }} >{{ "{0:.1f}".format(text_data[url]["av_sent_len"]) }}</td><td class="centre">{{ "{0}".format(text_data[url]["word_count"]) }}</td><td class="centre">{{ "{0}".format(text_data[url]["sent_count"]) }}</td></tr>
 				{% endif %}
 			{% endfor %}
 		</tbody></table>
@@ -115,7 +115,7 @@
 					url_name = url_name_dict[url];
 				}
 					
-				$.getJSON("{{ url_for('static', filename=folder_path) }}"+url_name+".json", function(url_stats) {
+				$.getJSON("{{ url_for('static', filename=folder_path) }}"+encodeURIComponent(url_name)+".json", function(url_stats) {
 					
 					if (type == "word") {
 						var labels = w_labels;

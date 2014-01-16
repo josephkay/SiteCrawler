@@ -9,6 +9,9 @@ import math
 from operator import itemgetter
 import json
 from os import getcwd
+from os import path as ospath
+import shutil
+import csv
 
 @app.route('/', methods = ['GET', 'POST'])
 def start():
@@ -71,7 +74,7 @@ def choose_graph():
 	domain = request.args.get('domain')
 	date = request.args.get('date')
 	form = RadioForm()
-	form.answer.choices = [("sitemap","Sitemap with screenshots"), ("social","Social media screenshots"), ("text","Text analysis")]
+	form.answer.choices = [("sitemap","Sitemap with screenshots"), ("social","Social media screenshots"), ("text","Text analysis"), ("export","Export data")]
 	if form.validate_on_submit():
 		if form.answer.data == "sitemap":
 			return redirect(url_for('sitemap', domain = domain, date = date))
@@ -79,6 +82,8 @@ def choose_graph():
 			return redirect(url_for('social', domain = domain, date = date))
 		elif form.answer.data == "text":
 			return redirect(url_for('text', domain = domain, date = date))
+		elif form.answer.data == "export":
+			return redirect(url_for('export', domain = domain, date = date))
 		else:
 			return redirect(url_for('choose_graph', domain = domain, date = date))
 	return render_template('choose_graph.html', form = form)
@@ -108,8 +113,11 @@ def social():
 	
 	image_paths = []
 	if social_names:
+		social_names = [name for [name] in social_names]
 		for name in social_names:
-			image_paths.append(r"/static/scrapes/{0}/{1}/{2}.png".format(domain, date, name[0]))
+			image_paths.append(r"/static/scrapes/{0}/{1}/{2}.png".format(domain, date, name))
+	
+	save_json(r'{0}\initiator\static\scrapes\{1}\{2}\{3}.json'.format(getcwd(), domain, date, "social_names"), social_names)  # MOVE THIS UP STREAM!
 	
 	conn.close()
 	return render_template('social.html', image_paths = image_paths)
@@ -135,6 +143,8 @@ def text():
 	
 	conn.close()
 	
+	save_json(r'{0}\initiator\static\scrapes\{1}\{2}\{3}.json'.format(getcwd(), domain, date, "text_data"), text_data_dict)  # MOVE THIS UP STREAM!
+	
 	folder_path_list = [item.encode("utf-8", errors="ignore") for item in ["scrapes", domain, date]]
 	
 	folder_path = "/".join(folder_path_list) + "/"
@@ -142,3 +152,59 @@ def text():
 	extra_data_path = folder_path + "extra_data.json"
 	
 	return render_template('text.html', date = date, domain = domain, scrapeid = scrapeid, folder_path = folder_path, text_data = text_data_dict, extra_data_path = extra_data_path)
+
+@app.route('/export/', methods = ['GET', 'POST'])
+def export():
+	domain = request.args.get('domain')
+	date = request.args.get('date')
+	
+	root = getcwd()
+	newfolder = r'{0}\{1}-{2}'.format(getcwd(),domain,date)
+	newsubfolder = newfolder + r'\files'
+	
+	if ospath.exists(newfolder):
+		message = "Export failed! Directory already Exists!"
+		return render_template("export.html", message = message)
+	else:
+		shutil.copytree(r'{0}\initiator\static\scrapes\{1}\{2}'.format(root, domain, date), newsubfolder)
+		shutil.copy(r'{0}\initiator\static\d3.js'.format(root), newsubfolder)
+		shutil.copy(r'{0}\initiator\static\jquery.min.js'.format(root), newsubfolder)
+		shutil.copy(r'{0}\initiator\static\Chart.js'.format(root), newsubfolder)
+		shutil.copy(r'{0}\initiator\static\style.css'.format(root), newsubfolder)
+		shutil.copy(r'{0}\initiator\export_templates\choose_graph.html'.format(root), newfolder)
+		shutil.copy(r'{0}\initiator\export_templates\tree.html'.format(root), newsubfolder)
+		shutil.copy(r'{0}\initiator\export_templates\text.html'.format(root), newsubfolder)
+		shutil.copy(r'{0}\initiator\export_templates\social.html'.format(root), newsubfolder)
+		
+		
+		conn = sqlite3.connect(db_file)
+		c = conn.cursor()
+		scrapeid = select_from(c, "SELECT id FROM scrapes WHERE date = ?", date)[0][0]
+		text_data_list = select_from(c, "SELECT url, av_word_len, av_sent_len, word_count, sent_count FROM text_data WHERE scrapeid = ?", scrapeid)
+		
+		conn.close()
+		
+		csv_text_file = open(r'{0}\{1}'.format(newfolder, "text_data.csv"), "wb")
+		csv_text = csv.writer(csv_text_file, delimiter=",")
+		csv_text.writerow(["url","Average word length","Average sentence length","Word count","Sentence count"])
+		
+		for row in text_data_list:
+			csv_text.writerow(list(row))
+		
+		csv_text_file.close()
+		
+		
+		json_data = open(r'{0}\initiator\static\scrapes\{1}\{2}\sitemap.json'.format(root, domain, date))
+		sitemap = [json.load(json_data)]
+		
+		depth = 0
+		
+		csv_sitemap_file = open(r'{0}\{1}'.format(newfolder, "sitemap.csv"), "wb")
+		csv_sitemap = csv.writer(csv_sitemap_file, delimiter=",")
+		
+		make_csv_sitemap(csv_sitemap, sitemap, depth)
+		
+		csv_text_file.close()
+		
+		message = "Export successful!"
+		return render_template("export.html", message = message)

@@ -45,6 +45,20 @@ def writeCsvFile(fname, data, *args, **kwargs):
     for row in data:
         mycsv.writerow(row)
 
+def make_csv_sitemap(csv_file, trees_list, depth):
+	for tree in trees_list:
+		url = tree['url']
+		
+		row = [""]*depth
+		row.append(url)
+		csv_file.writerow(row)
+		
+		if "children" in tree:
+			children = tree['children']
+			csv_file = make_csv_sitemap(csv_file, children, depth+1)
+	
+	return csv_file
+
 def insert_row(connection, statement, items):
 	try:
 		connection.execute(statement, items)

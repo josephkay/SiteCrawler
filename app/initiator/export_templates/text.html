@@ -1,0 +1,283 @@
+<!doctype html>
+<meta charset="utf-8">
+
+<html>
+
+<head>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Text Analysis</title>
+	<script src="Chart.js" type="text/javascript"></script>
+	<script src="jquery.min.js" type="text/javascript"></script>
+	<style>
+	
+	.hoverable:hover {
+		background-color: #EEE;
+	}
+	
+	td:hover {
+		background-color: #DDD;
+	}
+	
+	.clicky:hover {
+		background-color: rgba(187,216,235,0.5);
+		cursor: pointer;
+	}
+	
+	th {
+		padding: 10px;
+	}
+	
+	.centre {
+		text-align: center;
+	}
+	
+	.labelclick {
+		display: inline-block;
+		height: 20px;
+		padding: 2px 5px;
+		background-color: #DDD;
+		text-align: center;
+	}
+	
+	.item_block {
+		display: inline-block;
+		padding: 0 30px 0 0;
+	}
+	
+	#chart_holder {
+		position: fixed;
+		background-color: white;
+		top: 80px;
+		padding: 10px 0;
+		width: 100%;
+	}
+	
+	</style>
+</head>
+
+<body>
+	<h1 id="header">Text Analysis</h1>
+	<div id="main">
+		<div id="chart_holder">
+			<canvas id="myChart" width="1200" height="200"></canvas>
+		</div>
+		
+		<div id="data_container" class="section up_buffer">
+			<div id="label_list" class="section"><span>Lengths: </span></div>
+			<div id="word_list"></div>
+		</div>
+		
+		<table>
+			<thead><tr><th>url</th><th>Av. word length</th><th>Av. sentence length</th><th>Word count</th><th>Sentence count</th></tr></thead>
+			<tbody id="tablebody">
+			</tbody>
+		</table>
+		
+		<p id="extratest"></p>
+	</div>
+
+	<script>
+		function addCell(content, htmlclass, row, type, url) {
+			var cell = document.createElement('td');
+			cell.className = htmlclass;
+			if (type) {
+				cell.setAttribute("type",type);
+			}
+			if (url) {
+				cell.setAttribute("url",url);
+			}
+			var content = document.createTextNode(content);
+			cell.appendChild(content);
+			row.appendChild(cell);
+		}
+		
+		function oneDecimal(num) {
+			return Math.round( num * 10) / 10
+		}	
+		
+		$.getJSON("text_data.json", function(response) {
+			var text_data = response;
+			
+			var tbody = document.getElementById('tablebody');
+			var row = document.createElement('tr');
+			row.className = "hoverable";
+			
+			addCell("Total", "whatever", row, 0, 0);
+			addCell(oneDecimal(text_data["total"]["av_word_len"]), "clicky centre", row, "word", "Total");
+			addCell(oneDecimal(text_data["total"]["av_sent_len"]), "clicky centre", row, "sent", "Total");
+			addCell(text_data["total"]["word_count"], "centre", row, 0, 0);
+			addCell(text_data["total"]["sent_count"], "centre", row, 0, 0);
+			
+			tbody.appendChild(row);
+			
+			for (var u in text_data) {
+				if (!text_data.hasOwnProperty(u)) {
+					continue;
+				}
+				if (u != "total") {
+					row = document.createElement('tr');
+					row.className = "hoverable";
+					
+					addCell(u, "", row, 0, 0);
+					addCell(oneDecimal(text_data[u]["av_word_len"]), "clicky centre", row, "word", u);
+					addCell(oneDecimal(text_data[u]["av_sent_len"]), "clicky centre", row, "sent", u);
+					addCell(text_data[u]["word_count"], "centre", row, 0, 0);
+					addCell(text_data[u]["sent_count"], "centre", row, 0, 0);
+					
+					tbody.appendChild(row);
+				}
+			}
+			
+		});
+		
+		$.getJSON("extra_data.json", function(response) {
+			var extra_data = response;
+		
+			var url_name_dict = extra_data['url_name_dict'];
+			var w_labels = extra_data['w_labels'];
+			var s_labels = extra_data['s_labels'];
+			
+			$('.clicky').on('click', function() {
+			
+				$(this).parent().parent().find('tr').find('td').css('background-color','');
+				$(this).parent().parent().find('tr').css('background-color','');
+				$(this).parent().css('background-color','rgba(187,216,235,0.5)');
+				$(this).css('background-color','#BBD8EB');
+				
+				var type = $(this).attr('type');
+				var url = $(this).attr('url');
+				var url_name;
+				
+				if (url == "Total") {
+					url_name = "total";
+				} else {
+					url_name = url_name_dict[url];
+				}
+				
+				//document.getElementById('extratest').innerHTML = url_name;
+				
+				$.getJSON(encodeURIComponent(url_name)+".json", function(url_stats) {
+					
+					if (type == "word") {
+						var labels = w_labels;
+					} else if (type == "sent") {
+						var labels = s_labels;
+					}
+					
+					var dataset = new Array();
+					var labels_in_use = new Array();
+					
+					for (var i = 0; i < labels.length; i++) {
+						var value = 0;
+						for (length in url_stats["length"][type]["labels"][labels[i]]) {
+							value += url_stats["length"][type]["labels"][labels[i]][length]["freq"];
+						}
+						if (value > 0) {
+							labels_in_use.push(labels[i])
+						}
+						dataset.push(value)
+					}
+					
+					//document.getElementById('extratest').innerHTML = dataset;
+					
+					var options = {
+						scaleOverride : true,
+						scaleStartValue : 0,
+						//barShowStroke : false,
+						barStrokeWidth : 2,
+						barValueSpacing : 1,
+						yAxisFixedWidth : 50,
+						scaleLineColor : "rgba(200,200,200,1)",
+						xAxisLineWidth : 5,
+						scaleOverlay : true,
+						xAxisOverlap : 5,
+						yAxisOverlap : 0,
+					}
+					
+					var max = Math.max.apply(Math, dataset);
+					
+					//document.getElementById('extratest').innerHTML = "FISH";
+					
+					var level = 10;
+					var l_count = 2;
+					
+					while (true) {
+						if (max <= level) {
+							operator = level/10
+							unit = Math.ceil(max/operator); 
+							options.scaleSteps = unit;
+							options.scaleStepWidth = operator;
+							break;
+						} else if (l_count%3 == 0) {
+							level *= 2.5;
+						} else {
+							level *= 2;
+						}
+						l_count += 1;
+					}
+					
+					
+					document.getElementById('label_list').innerHTML = "<span>Lengths: </span>";
+					document.getElementById('word_list').innerHTML = "";
+					
+					var label;
+					for (x in labels.reverse()) {
+						label = labels[x];
+						for (var m = 0; m < labels_in_use.length; m++) {
+							if (label == labels_in_use[m]) {
+								y = " <div class='labelclick hoverable' type="+type+" value='"+label+"' >"+label+"</div>";
+								$("#label_list span:last").after(y);
+						}
+						}
+					}
+					
+					labels.reverse()
+					
+					var data = {
+						labels : labels,
+						datasets : [
+							{
+								fillColor : "rgba(187,216,235,0.5)",
+								strokeColor : "rgba(187,216,235,1)",
+								data : dataset
+							}
+						]
+					}
+					
+					//Get the context of the canvas element we want to select
+					var ctx = document.getElementById("myChart").getContext("2d");
+					var myNewChart = new Chart(ctx).Bar(data, options);
+					
+					
+						$('#data_container').delegate('.labelclick', 'click', function() {
+							$(this).parent().find('div').css('background-color','');
+							$(this).css('background-color','#BBD8EB');
+							
+							var label = $(this).attr('value');
+							var type = $(this).attr('type');
+							//var url = $(this).attr('url');
+							
+							document.getElementById('word_list').innerHTML = "";
+							
+							//document.getElementById('tester').innerHTML += url_stats["Total"]["length"]["sent"]["labels"][label][length]["items"]
+							
+							for (length in url_stats["length"][type]["labels"][label]) {
+								for (var k= 0; k < url_stats["length"][type]["labels"][label][length]["items"].length; k++) {
+									item = url_stats["length"][type]["labels"][label][length]["items"][k];
+									document.getElementById('word_list').innerHTML += "<div class='item_block'>"+item+"</div>";
+								}
+							}
+							
+							
+						; return false; } );
+					
+					
+				});
+			; return false; } );
+		});
+		
+	</script>
+	
+	<p id="tester"></p>
+</body>
+</html>
