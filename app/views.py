@@ -74,7 +74,7 @@ def choose_graph():
 	domain = request.args.get('domain')
 	date = request.args.get('date')
 	form = RadioForm()
-	form.answer.choices = [("sitemap","Sitemap with screenshots"), ("social","Social media screenshots"), ("text","Text analysis"), ("export","Export data")]
+	form.answer.choices = [("sitemap","Sitemap with screenshots"), ("social","Social media screenshots"), ("text","Text analysis"), ("content","Content analysis"), ("export","Export data")]
 	if form.validate_on_submit():
 		if form.answer.data == "sitemap":
 			return redirect(url_for('sitemap', domain = domain, date = date))
@@ -84,6 +84,8 @@ def choose_graph():
 			return redirect(url_for('text', domain = domain, date = date))
 		elif form.answer.data == "export":
 			return redirect(url_for('export', domain = domain, date = date))
+		elif form.answer.data == "content":
+			return redirect(url_for('content', domain = domain, date = date))
 		else:
 			return redirect(url_for('choose_graph', domain = domain, date = date))
 	return render_template('choose_graph.html', form = form)
@@ -131,6 +133,37 @@ def text():
 	c = conn.cursor()
 	scrapeid = select_from(c, "SELECT id FROM scrapes WHERE date = ?", date)[0][0]
 	text_data_list = select_from(c, "SELECT url, av_word_len, av_sent_len, word_count, sent_count FROM text_data WHERE scrapeid = ?", scrapeid)
+	
+	text_data_dict = {}
+	
+	for url, word_len, sent_len, word_count, sent_count in text_data_list:
+		text_data_dict[url] = {}
+		text_data_dict[url]["av_word_len"] = word_len
+		text_data_dict[url]["av_sent_len"] = sent_len
+		text_data_dict[url]["word_count"] = word_count
+		text_data_dict[url]["sent_count"] = sent_count
+	
+	conn.close()
+	
+	save_json(r'{0}\initiator\static\scrapes\{1}\{2}\{3}.json'.format(getcwd(), domain, date, "text_data"), text_data_dict)  # MOVE THIS UP STREAM!
+	
+	folder_path_list = [item.encode("utf-8", errors="ignore") for item in ["scrapes", domain, date]]
+	
+	folder_path = "/".join(folder_path_list) + "/"
+	
+	extra_data_path = folder_path + "extra_data.json"
+	
+	return render_template('text.html', date = date, domain = domain, scrapeid = scrapeid, folder_path = folder_path, text_data = text_data_dict, extra_data_path = extra_data_path)
+
+@app.route('/content/', methods = ['GET', 'POST'])
+def content():
+	domain = request.args.get('domain')
+	date = request.args.get('date')
+	
+	conn = sqlite3.connect(db_file)
+	c = conn.cursor()
+	scrapeid = select_from(c, "SELECT id FROM scrapes WHERE date = ?", date)[0][0]
+	content_data_list = select_from(c, "SELECT url, av_word_len, av_sent_len, word_count, sent_count FROM text_data WHERE scrapeid = ?", scrapeid)  # what will the format be?
 	
 	text_data_dict = {}
 	
@@ -204,7 +237,7 @@ def export():
 		
 		make_csv_sitemap(csv_sitemap, sitemap, depth)
 		
-		csv_text_file.close()
+		csv_sitemap_file.close()
 		
 		message = "Export successful!"
 		return render_template("export.html", message = message)

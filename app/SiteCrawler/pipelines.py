@@ -13,6 +13,9 @@ from spiders.myfuncs import *
 from scrapy import log
 import math
 from operator import itemgetter
+from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+import bs4 as bs
 
 class SitecrawlerPipeline(object):
 	def process_item(self, item, spider):
@@ -30,15 +33,84 @@ class DuplicatesPipeline(object):
 			self.urls_seen.add(item['url_obj'].full)
 			return item
 
+class HTMLPipeline(object):
+	def __init__(self):
+		pass
+		
+	@classmethod
+	def from_crawler(cls, crawler):
+		pipeline = cls()
+		crawler.signals.connect(pipeline.spider_opened, signals.spider_opened)
+		crawler.signals.connect(pipeline.spider_closed, signals.spider_closed)
+		return pipeline
+	
+	def spider_opened(self, spider):
+		self.conn = sqlite3.connect(db_file)
+		self.c = self.conn.cursor()
+	
+	def spider_closed(self, spider):
+		self.conn.commit()
+		self.conn.close()
+	
+	def process_item(self, item, spider):
+		log.msg("content")
+		
+		html = get_HTML(item['url_obj'].full)
+		soup = bs.BeautifulSoup(html)
+		fresh_soup = bs.BeautifulSoup(urlopen(item['url_obj'].full).read())
+		
+		images = [i for i in soup('img')]
+		image_rows = []
+		flashes = [f for f in soup(type="application/x-shockwave-flash")]
+		links = [l for l in soup('a')]
+		pdfs = []
+		h1s = [h for h in soup('h1')]
+		h2s = [h for h in soup('h2')]
+		h3s = [h for h in soup('h3')]
+		h4s = [h for h in soup('h4')]
+		h5s = [h for h in soup('h5')]
+		h6s = [h for h in soup('h6')]
+		forms = [f for f in soup('form')]
+		scripts = [s for s in fresh_soup('script')]
+
+		for image in images:
+			row = [item['scrapeid'], item['url_obj'].full]
+			
+			for attribute in ["src","alt","height","width"]:
+				if image.has_key(attribute):
+					row.append(image[attribute])
+				else:
+					row.append(None)
+			
+			image_rows.append(row)
+
+		for link in links:
+			if link.has_key("href"):
+				if ".pdf" in link['href']:
+					pdfs.append(link)
+		
+		content_counts = [item['scrapeid'], item['url_obj'].full, len(images), len(links), len(pdfs), len(flashes), len(forms), len(scripts), len(h1s), len(h2s), len(h3s), len(h4s), len(h5s), len(h6s)]
+		
+		insert_rows(self.c, "INSERT INTO images (scrapeid, url, src, alt, height, width) VALUES (?, ?, ?, ?, ?, ?)", image_rows)
+		insert_row(self.c, "INSERT INTO content (scrapeid, url, images, links, pdfs, flashes, forms, scripts, h1s, h2s, h3s, h4s, h5s, h6s) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", content_counts)
+
 class ScreenshotPipeline(object):
 	
 	def __init__(self):
 		self.driver = webdriver.PhantomJS(executable_path=r'C:\Users\kayj\AppData\Roaming\npm\node_modules\phantomjs\lib\phantom\phantomjs')
+		self.driver.set_page_load_timeout(15)
 	
 	def process_item(self, item, spider):
 		log.msg("screenshot")
 		#driver.set_window_size(1024, 768) # optional
-		self.driver.get(item['url_obj'].full)
+		#  Hopefully this try/except will save things if the screenshooter crashes...
+		try:
+			self.driver.get(item['url_obj'].full)
+		except:
+			self.driver = webdriver.PhantomJS(executable_path=r'C:\Users\kayj\AppData\Roaming\npm\node_modules\phantomjs\lib\phantom\phantomjs')
+			self.driver.set_page_load_timeout(15)
+			self.driver.get(item['url_obj'].full)
+		WebDriverWait(self.driver, timeout=2)
 		self.driver.save_screenshot(r"{0}\initiator\static\scrapes\{1}\{2}\{3}.png".format(getcwd(), item['scrape_domain'], item['date'], item['url_obj'].name))
 		return item
 

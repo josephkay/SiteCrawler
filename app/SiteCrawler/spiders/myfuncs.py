@@ -2,14 +2,19 @@ import csv
 from urllib2 import urlopen
 from scrapy import log
 from PIL import Image
-from BeautifulSoup import BeautifulSoup
 import re
 from nltk.tokenize import sent_tokenize
 from nltk.corpus import cmudict
 from nltk.tokenize import RegexpTokenizer
 from HTMLParser import HTMLParser
 import json
+from contextlib import closing
 from selenium import webdriver
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+import bs4 as bs
+import time
 
 db_file = "sitecrawlerdb.db"
 
@@ -141,6 +146,15 @@ def timeout(func, args=(), kwargs={}, timeout_duration=10, default=None):
     else:
         return it.result
 
+def save_json(location, object):
+	with open(location, 'w') as outfile:
+		json.dump(object, outfile)
+
+def remove_query(url):
+	if "?" in url:
+		url = url[:url.find("?")]
+	return url
+
 ### --- text manipulation functions --- ###
 
 def filename_safe(url, long_count):
@@ -163,7 +177,7 @@ def ignore_tags(soup, tags_list):
 				t.replaceWith(t.string)
 			else:
 				t.replaceWith("")
-	return BeautifulSoup(str(soup))
+	return bs.BeautifulSoup(str(soup))
 
 def replace_bad_chars(text):
 
@@ -189,14 +203,14 @@ def replace_bad_chars(text):
 def get_texts(url):
 	html = urlopen(url).read()
 	html = replace_bad_chars(remove_comments(html))
-	soup = BeautifulSoup(html)
+	soup = bs.BeautifulSoup(html)
 	soup = ignore_tags(soup, ['b', 'i', 'u', 'a', 'span'])
 	return soup.findAll(text=True)
 
 def visible(element):
     if element.parent.name in ['style', 'script', '[document]', 'head', 'title']:
         return False
-    elif re.match('<!--.*-->', str(element)):
+    elif re.match('<!--.*-->', element.encode('utf-8', errors="ignore")):
         return False
     return True
 
@@ -303,7 +317,14 @@ def remove_comments(html):
 		end = html.find("-->", start)
 		html = html[:start] + html[end+3:]
 	return html
-	
-def save_json(location, object):
-	with open(location, 'w') as outfile:
-		json.dump(object, outfile)
+
+### --- HTML manipulation functions --- ###
+
+def get_HTML(url):
+	with closing(webdriver.Firefox()) as browser:
+		browser.get(url)
+		#WebDriverWait(browser, timeout=1)
+		time.sleep(3)
+		html = browser.page_source.encode("ascii", errors="ignore")
+		#browser.save_screenshot("screentest.png")
+		return html

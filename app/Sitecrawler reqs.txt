@@ -1,0 +1,15 @@
+0. Python2.7 32-bit
+1. QT (non-python)  -- not needed anymore
+2. flask
+3. openssl (non-python)
+4. pyopenssl
+5. pyqt4
+6. pillow
+7. twisted
+8. ZODB3
+9. Zope.interface
+10. scrapy
+11. lxml
+12. Flask-WTF
+13. PyWin32
+14. PhantomJS

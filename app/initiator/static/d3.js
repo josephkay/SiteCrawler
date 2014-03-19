@@ -2109,7 +2109,7 @@
   d3.round = function(x, n) {
     return n ? Math.round(x * (n = Math.pow(10, n))) / n : Math.round(x);
   };
-  var d3_formatPrefixes = [ "y", "z", "a", "f", "p", "n", "µ", "m", "", "k", "M", "G", "T", "P", "E", "Z", "Y" ].map(d3_formatPrefix);
+  var d3_formatPrefixes = [ "y", "z", "a", "f", "p", "n", "mumu", "m", "", "k", "M", "G", "T", "P", "E", "Z", "Y" ].map(d3_formatPrefix);
   d3.formatPrefix = function(value, precision) {
     var i = 0;
     if (value) {
@@ -7313,10 +7313,10 @@
     };
   }
   d3.random = {
-    normal: function(µ, s) {
+    normal: function(mumu, s) {
       var n = arguments.length;
       if (n < 2) s = 1;
-      if (n < 1) µ = 0;
+      if (n < 1) mumu = 0;
       return function() {
         var x, y, r;
         do {
@@ -7324,7 +7324,7 @@
           y = Math.random() * 2 - 1;
           r = x * x + y * y;
         } while (!r || r > 1);
-        return µ + s * x * Math.sqrt(-2 * Math.log(r) / r);
+        return mumu + s * x * Math.sqrt(-2 * Math.log(r) / r);
       };
     },
     logNormal: function() {

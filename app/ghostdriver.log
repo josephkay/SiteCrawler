@@ -1,60 +1,77 @@
 PhantomJS is launching GhostDriver...
-[INFO  - 2014-01-14T13:18:42.970Z] GhostDriver - Main - running on port 53592
-[INFO  - 2014-01-14T13:18:44.282Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - _decorateNewWindow - page.settings: {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.2 Safari/534.34","webSecurityEnabled":true}
-[INFO  - 2014-01-14T13:18:44.282Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - page.customHeaders:  - {}
-[INFO  - 2014-01-14T13:18:44.282Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - CONSTRUCTOR - Desired Capabilities: {"platform":"ANY","browserName":"phantomjs","version":"","javascriptEnabled":true}
-[INFO  - 2014-01-14T13:18:44.282Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - CONSTRUCTOR - Negotiated Capabilities: {"browserName":"phantomjs","version":"1.9.2","driverName":"ghostdriver","driverVersion":"1.0.4","platform":"windows-7-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
-[INFO  - 2014-01-14T13:18:44.282Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 64ab36c0-7d1e-11e3-aaee-73d89ff37820
-[ERROR - 2014-01-14T13:19:36.545Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - Page at 'http://www.renault.fr/concessionnaires/' - Console Error (msg): SyntaxError: Parse error
-[ERROR - 2014-01-14T13:19:36.546Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - Page at 'http://www.renault.fr/concessionnaires/' - Console Error (stack): []
-[ERROR - 2014-01-14T13:22:08.755Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - Page at 'http://www.renault.fr/gamme-renault/mini-sites-vehicules/megane-coupe-cabriolet-floride/' - Console Error (msg): TypeError: 'undefined' is not a function (evaluating 'swfobject.embedSWF')
-[ERROR - 2014-01-14T13:22:08.755Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - Page at 'http://www.renault.fr/gamme-renault/mini-sites-vehicules/megane-coupe-cabriolet-floride/' - Console Error (stack): [
-  {
-    "file": "http://www.renault.fr/gamme-renault/mini-sites-vehicules/megane-coupe-cabriolet-floride/",
-    "line": 64,
-    "function": ""
-  }
-]
-[ERROR - 2014-01-14T13:22:09.029Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - Page at 'http://www.renault.fr/gamme-renault/mini-sites-vehicules/megane-coupe-cabriolet-floride/' - Console Error (msg): ReferenceError: Can't find variable: DD_belatedPNG
-[ERROR - 2014-01-14T13:22:09.029Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - Page at 'http://www.renault.fr/gamme-renault/mini-sites-vehicules/megane-coupe-cabriolet-floride/' - Console Error (stack): [
-  {
-    "file": "http://www.renault.fr/gamme-renault/mini-sites-vehicules/megane-coupe-cabriolet-floride/",
-    "line": 1,
-    "function": ""
-  }
-]
-[ERROR - 2014-01-14T13:23:10.976Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - Page at 'http://www.renault.fr/apres-vente/revision-entretien/revision/revision/climatisation/' - Console Error (msg): SyntaxError: Parse error
-[ERROR - 2014-01-14T13:23:10.976Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - Page at 'http://www.renault.fr/apres-vente/revision-entretien/revision/revision/climatisation/' - Console Error (stack): []
-[INFO  - 2014-01-14T13:23:43.138Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[ERROR - 2014-01-14T13:26:16.174Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - Page at 'http://www.renault.fr/createurs-entreprises/' - Console Error (msg): TypeError: 'undefined' is not an object (evaluating '_d.title')
-[ERROR - 2014-01-14T13:26:16.174Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - Page at 'http://www.renault.fr/createurs-entreprises/' - Console Error (stack): [
-  {
-    "file": "http://prod-renope.integra.fr/createursdentreprises/web/js/swfaddress.js",
-    "line": 405,
-    "function": ""
-  },
-  {
-    "file": "http://prod-renope.integra.fr/createursdentreprises/web/js/swfaddress.js",
-    "line": 834,
-    "function": ""
-  }
-]
-[ERROR - 2014-01-14T13:26:20.126Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - Page at 'http://www.renault.fr/decouvrez-renault/renault-tv/' - Console Error (msg): SyntaxError: Parse error
-[ERROR - 2014-01-14T13:26:20.126Z] Session [64ab36c0-7d1e-11e3-aaee-73d89ff37820] - Page at 'http://www.renault.fr/decouvrez-renault/renault-tv/' - Console Error (stack): []
-[INFO  - 2014-01-14T13:28:43.131Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T13:33:43.131Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T13:38:43.160Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T13:43:43.160Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T13:48:43.160Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T13:53:43.160Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T13:58:43.160Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T14:03:43.160Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T14:08:43.160Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T14:13:43.160Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T14:18:43.160Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T14:23:43.160Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T14:28:43.160Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T14:33:43.160Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T14:38:43.160Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T14:43:43.160Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
-[INFO  - 2014-01-14T14:48:43.160Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T02:39:19.891Z] GhostDriver - Main - running on port 49841
+[INFO  - 2014-01-27T02:39:20.168Z] Session [39404240-86fc-11e3-aead-a9e82f393acc] - _decorateNewWindow - page.settings: {"XSSAuditingEnabled":false,"javascriptCanCloseWindows":true,"javascriptCanOpenWindows":true,"javascriptEnabled":true,"loadImages":true,"localToRemoteUrlAccessEnabled":false,"userAgent":"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.34 (KHTML, like Gecko) PhantomJS/1.9.2 Safari/534.34","webSecurityEnabled":true}
+[INFO  - 2014-01-27T02:39:20.168Z] Session [39404240-86fc-11e3-aead-a9e82f393acc] - page.customHeaders:  - {}
+[INFO  - 2014-01-27T02:39:20.168Z] Session [39404240-86fc-11e3-aead-a9e82f393acc] - CONSTRUCTOR - Desired Capabilities: {"platform":"ANY","browserName":"phantomjs","version":"","javascriptEnabled":true}
+[INFO  - 2014-01-27T02:39:20.168Z] Session [39404240-86fc-11e3-aead-a9e82f393acc] - CONSTRUCTOR - Negotiated Capabilities: {"browserName":"phantomjs","version":"1.9.2","driverName":"ghostdriver","driverVersion":"1.0.4","platform":"windows-7-32bit","javascriptEnabled":true,"takesScreenshot":true,"handlesAlerts":false,"databaseEnabled":false,"locationContextEnabled":false,"applicationCacheEnabled":false,"browserConnectionEnabled":false,"cssSelectorsEnabled":true,"webStorageEnabled":false,"rotatable":false,"acceptSslCerts":false,"nativeEvents":true,"proxy":{"proxyType":"direct"}}
+[INFO  - 2014-01-27T02:39:20.168Z] SessionManagerReqHand - _postNewSessionCommand - New Session Created: 39404240-86fc-11e3-aead-a9e82f393acc
+[INFO  - 2014-01-27T02:44:19.741Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T02:49:19.740Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T02:54:19.740Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T02:59:19.760Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T03:04:19.762Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T03:09:19.762Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T03:14:19.762Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T03:19:19.762Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T03:24:19.791Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T03:29:19.791Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T03:34:19.791Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T03:39:19.791Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T03:44:19.810Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T03:49:19.810Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T03:54:19.810Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T03:59:19.810Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T04:04:19.832Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T04:09:19.832Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T04:14:19.832Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T04:19:19.832Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T04:24:19.832Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T04:29:19.861Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T04:34:19.861Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T04:39:19.861Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T04:44:19.861Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T04:49:19.892Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T04:54:19.892Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T04:59:19.892Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T05:04:19.892Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T05:09:19.922Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T05:14:19.922Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T05:19:19.922Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T05:24:19.922Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T05:29:19.922Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T05:34:19.946Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T05:39:19.946Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T05:44:19.946Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T05:49:19.946Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T05:54:19.970Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T05:59:19.970Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T06:04:19.970Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T06:09:19.970Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T06:14:19.998Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T06:19:19.998Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T06:24:19.998Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T06:29:19.998Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T06:34:19.998Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T06:39:20.037Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T06:44:20.037Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T06:49:20.037Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T06:54:20.037Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T06:59:20.037Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T07:04:20.062Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T07:09:20.062Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T07:14:20.062Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T07:19:20.062Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T07:24:20.086Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T07:29:20.086Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T07:34:20.086Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T07:39:20.086Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T07:44:20.109Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T07:49:20.109Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T07:54:20.109Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T07:59:20.109Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T08:04:20.109Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T08:09:20.135Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T08:14:20.135Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T08:19:20.135Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T08:24:20.135Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW
+[INFO  - 2014-01-27T08:29:20.156Z] SessionManagerReqHand - _cleanupWindowlessSessions - Asynchronous Sessions clean-up phase starting NOW

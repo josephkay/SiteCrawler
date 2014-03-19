@@ -64,6 +64,7 @@ class URL(object):
 			self.get_parents(new_path_list[:length-1], parents_list, n+1)
 		elif length == 1:
 			parents_list.append([self.scrapeid, self.domain, self.subdomain + self.domain + "/" + new_path_list[0]])
+			#parents_list.append([self.scrapeid, "All", self.domain])
 		return parents_list
 	
 	def set_domain(self, url, domain):

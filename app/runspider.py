@@ -34,7 +34,7 @@ def runspider():
 	logfile = open('testlog.log', 'w')
 	log_observer = ScrapyFileLogObserver(logfile, level=logging.DEBUG)
 	log_observer.start()
-	log.start(loglevel=logging.DEBUG)
+	log.start(logfile=None, loglevel=logging.DEBUG)
 	
 	dispatcher.connect(stop_reactor, signal=signals.spider_closed)
 	

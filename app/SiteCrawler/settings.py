@@ -13,14 +13,14 @@ NEWSPIDER_MODULE = 'SiteCrawler.spiders'
 
 ITEM_PIPELINES = [
 	'SiteCrawler.pipelines.DuplicatesPipeline',
-	'SiteCrawler.pipelines.ScreenshotPipeline',
-	#'SiteCrawler.pipelines.CsvExportPipeline',
+	#'SiteCrawler.pipelines.ScreenshotPipeline',
 	'SiteCrawler.pipelines.SQLiteExportPipeline',
 	'SiteCrawler.pipelines.TextAnalysisPipeline'
+	#'SiteCrawler.pipelines.HTMLPipeline'
 
 ]
 
-DEPTH_LIMIT = 1
+DEPTH_LIMIT = 0
 
 # The following sets it to breadth-first crawling.
 DEPTH_PRIORITY = 1

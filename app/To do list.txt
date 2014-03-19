@@ -4,6 +4,16 @@ Change: Look into separating out the SQLiteExportPipeline into its distinct role
 
 Change: Is the current "name" string doing its job? Merge it with the method being used to make urls safe for saving as json files.
 
-Add: Put word count and sentence count into the text analysis view.
+Add: Put image count and % of images with alt and height/width values in a new section.
+
+Add: Include Background-images with the image count. Look at http://cthedot.de/cssutils/.
+
+Add: Include the number of PDF download links in the same section.
+
+Add: Use Selenium (or similar) to get html post javascript. This will allow counting of flash objects (where type = "application/x-shockwave-flash")
 
 Determine: What are the most interesting sentence analysis methods that you could use with NLTK?
+
+Determine: Can all links with a ? in them have the query string removed? And if so, how can we avoid scraping the same page over and over again?
+
+Add: Include a log for just the errors.
