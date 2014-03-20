@@ -11,16 +11,19 @@ BOT_NAME = 'SiteCrawler'
 SPIDER_MODULES = ['SiteCrawler.spiders']
 NEWSPIDER_MODULE = 'SiteCrawler.spiders'
 
-ITEM_PIPELINES = [
-	'SiteCrawler.pipelines.DuplicatesPipeline',
-	#'SiteCrawler.pipelines.ScreenshotPipeline',
-	'SiteCrawler.pipelines.SQLiteExportPipeline',
-	'SiteCrawler.pipelines.TextAnalysisPipeline'
-	#'SiteCrawler.pipelines.HTMLPipeline'
+ITEM_PIPELINES = {
+    'SiteCrawler.pipelines.DuplicatesPipeline': 1,
+    #'SiteCrawler.pipelines.ScreenshotPipeline': 2,
+    #'SiteCrawler.pipelines.SQLiteExportPipeline': 3,
+    'SiteCrawler.pipelines.NodesPipeline': 4,
+    'SiteCrawler.pipelines.EdgesPipeline': 5,
+    'SiteCrawler.pipelines.ParentsPipeline': 6,
+    'SiteCrawler.pipelines.TextAnalysisPipeline': 7
+    #'SiteCrawler.pipelines.HTMLPipeline': 8
 
-]
+}
 
-DEPTH_LIMIT = 0
+DEPTH_LIMIT = 1
 
 # The following sets it to breadth-first crawling.
 DEPTH_PRIORITY = 1

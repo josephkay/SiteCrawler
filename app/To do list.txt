@@ -1,19 +1,22 @@
-Determine: Is __init__() necessary in the classes in pipelines.py when you use spider_opened()?
-
-Change: Look into separating out the SQLiteExportPipeline into its distinct roles.
-
 Change: Is the current "name" string doing its job? Merge it with the method being used to make urls safe for saving as json files.
 
 Add: Put image count and % of images with alt and height/width values in a new section.
 
 Add: Include Background-images with the image count. Look at http://cthedot.de/cssutils/.
 
-Add: Include the number of PDF download links in the same section.
-
-Add: Use Selenium (or similar) to get html post javascript. This will allow counting of flash objects (where type = "application/x-shockwave-flash")
-
 Determine: What are the most interesting sentence analysis methods that you could use with NLTK?
 
 Determine: Can all links with a ? in them have the query string removed? And if so, how can we avoid scraping the same page over and over again?
 
+Determine: Can url_stats (in the text pipeline) be changed into a number of smaller objects that are easier to understand?
+
+Add: Find a way to make it possible for users to choose which pipelines they want via the web interface.
+
+
+--- DONE ---
+
 Add: Include a log for just the errors.
+
+Change: Look into separating out the SQLiteExportPipeline into its distinct roles.
+
+Determine: Is __init__() necessary in the classes in pipelines.py when you use spider_opened()?  Answer: You wouldn't normally need both, but they appear to come in at different times - init when the pipeline class is instantiated, and the other one when the the spider class is istantiated.

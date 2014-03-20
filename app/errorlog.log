@@ -1,0 +1,41 @@
+2014-03-20 16:37:41+0000 [-] Unhandled Error
+	Traceback (most recent call last):
+	  File "C:\Python27\lib\site-packages\twisted\internet\base.py", line 416, in fireEvent
+	    DeferredList(beforeResults).addCallback(self._continueFiring)
+	  File "C:\Python27\lib\site-packages\twisted\internet\defer.py", line 304, in addCallback
+	    callbackKeywords=kw)
+	  File "C:\Python27\lib\site-packages\twisted\internet\defer.py", line 293, in addCallbacks
+	    self._runCallbacks()
+	  File "C:\Python27\lib\site-packages\twisted\internet\defer.py", line 575, in _runCallbacks
+	    current.result = callback(current.result, *args, **kw)
+	--- <exception caught here> ---
+	  File "C:\Python27\lib\site-packages\twisted\internet\base.py", line 429, in _continueFiring
+	    callable(*args, **kwargs)
+	  File "C:\Python27\lib\site-packages\twisted\internet\base.py", line 1187, in _reallyStartRunning
+	    self._handleSignals()
+	  File "C:\Python27\lib\site-packages\twisted\internet\posixbase.py", line 300, in _handleSignals
+	    _SignalReactorMixin._handleSignals(self)
+	  File "C:\Python27\lib\site-packages\twisted\internet\base.py", line 1152, in _handleSignals
+	    signal.signal(signal.SIGINT, self.sigInt)
+	exceptions.ValueError: signal only works in main thread
+	
+2014-03-20 16:50:35+0000 [-] ERROR: Traceback (most recent call last):
+2014-03-20 16:50:35+0000 [-] ERROR:   File "C:\Python27\lib\site-packages\flask\app.py", line 1836, in __call__
+2014-03-20 16:50:35+0000 [-] ERROR:     return self.wsgi_app(environ, start_response)
+2014-03-20 16:50:35+0000 [-] ERROR:   File "C:\Python27\lib\site-packages\flask\app.py", line 1820, in wsgi_app
+2014-03-20 16:50:35+0000 [-] ERROR:     response = self.make_response(self.handle_exception(e))
+2014-03-20 16:50:35+0000 [-] ERROR:   File "C:\Python27\lib\site-packages\flask\app.py", line 1403, in handle_exception
+2014-03-20 16:50:35+0000 [-] ERROR:     reraise(exc_type, exc_value, tb)
+2014-03-20 16:50:35+0000 [-] ERROR:   File "C:\Python27\lib\site-packages\flask\app.py", line 1817, in wsgi_app
+2014-03-20 16:50:35+0000 [-] ERROR:     response = self.full_dispatch_request()
+2014-03-20 16:50:35+0000 [-] ERROR:   File "C:\Python27\lib\site-packages\flask\app.py", line 1477, in full_dispatch_request
+2014-03-20 16:50:35+0000 [-] ERROR:     rv = self.handle_user_exception(e)
+2014-03-20 16:50:35+0000 [-] ERROR:   File "C:\Python27\lib\site-packages\flask\app.py", line 1381, in handle_user_exception
+2014-03-20 16:50:35+0000 [-] ERROR:     reraise(exc_type, exc_value, tb)
+2014-03-20 16:50:35+0000 [-] ERROR:   File "C:\Python27\lib\site-packages\flask\app.py", line 1475, in full_dispatch_request
+2014-03-20 16:50:35+0000 [-] ERROR:     rv = self.dispatch_request()
+2014-03-20 16:50:35+0000 [-] ERROR:   File "C:\Python27\lib\site-packages\flask\app.py", line 1461, in dispatch_request
+2014-03-20 16:50:35+0000 [-] ERROR:     return self.view_functions[rule.endpoint](**req.view_args)
+2014-03-20 16:50:35+0000 [-] ERROR:   File "C:\Python27\SiteCrawler\app\views.py", line 170, in content
+2014-03-20 16:50:35+0000 [-] ERROR:     for url, word_len, sent_len, word_count, sent_count in text_data_list:
+2014-03-20 16:50:35+0000 [-] ERROR: NameError: global name 'text_data_list' is not defined

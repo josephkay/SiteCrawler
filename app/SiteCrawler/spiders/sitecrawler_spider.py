@@ -50,9 +50,6 @@ class MySpider(CrawlSpider):
 		
 		item['depth'] = response.meta['depth']
 		item['links'] = []
-		item['scrapeid'] = self.scrapeid
-		item['date'] = self.unix_date
-		item['scrape_domain'] = self.scrape_domain
 		
 		# --- This bit has been turned off until I start using the links again.
 		#hxs = HtmlXPathSelector(response)

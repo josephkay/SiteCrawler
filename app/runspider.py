@@ -20,36 +20,41 @@ def stop_reactor():
 
 @app.route("/runspider/")
 def runspider():
-	date = datetime.datetime.utcnow()
-	unix_date = calendar.timegm(date.utctimetuple())
-	
-	route = request.args.get('route')
-	domain = request.args.get('domain')
-	
-	directory = r"{0}\initiator\static\scrapes\{1}\{2}".format(os.getcwd(), domain, unix_date)
-	
-	if not os.path.exists(directory):
-		os.makedirs(directory)
-	
-	logfile = open('testlog.log', 'w')
-	log_observer = ScrapyFileLogObserver(logfile, level=logging.DEBUG)
-	log_observer.start()
-	log.start(logfile=None, loglevel=logging.DEBUG)
-	
-	dispatcher.connect(stop_reactor, signal=signals.spider_closed)
-	
-	spider = MySpider(route, unix_date)
-	
-	settings_module = importlib.import_module('SiteCrawler.settings')
-	settings = CrawlerSettings(settings_module)
-	crawler = Crawler(settings)
-	
-	crawler.configure()
-	crawler.crawl(spider)
-	crawler.start()
-	
-	log.msg('Running reactor...')
-	reactor.run()  # the script will block here until the spider is closed
-	log.msg('Reactor stopped.')
-	return redirect(url_for('choose_graph', domain = domain, date = unix_date))
+    date = datetime.datetime.utcnow()
+    unix_date = calendar.timegm(date.utctimetuple())
+    
+    route = request.args.get('route')
+    domain = request.args.get('domain')
+    
+    directory = r"{0}\initiator\static\scrapes\{1}\{2}".format(os.getcwd(), domain, unix_date)
+    
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    
+    debugfile = open('debuglog.log', 'w')
+    debug_observer = ScrapyFileLogObserver(debugfile, level=logging.DEBUG)
+    debug_observer.start()
+    
+    errorfile = open('errorlog.log', 'w')
+    error_observer = ScrapyFileLogObserver(errorfile, level=logging.ERROR)
+    error_observer.start()
+    
+    log.start(loglevel=logging.DEBUG)
+    
+    dispatcher.connect(stop_reactor, signal=signals.spider_closed)
+    
+    spider = MySpider(route, unix_date)
+    
+    settings_module = importlib.import_module('SiteCrawler.settings')
+    settings = CrawlerSettings(settings_module)
+    crawler = Crawler(settings)
+    
+    crawler.configure()
+    crawler.crawl(spider)
+    crawler.start()
+    
+    log.msg('Running reactor...')
+    reactor.run()  # the script will block here until the spider is closed
+    log.msg('Reactor stopped.')
+    return redirect(url_for('choose_graph', domain = domain, date = unix_date))
 
