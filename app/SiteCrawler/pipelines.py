@@ -99,8 +99,6 @@ class ScreenshotPipeline(object):
         return pipeline
     
     def spider_opened(self, spider):
-        self.conn = sqlite3.connect(db_file)
-        self.c = self.conn.cursor()
         self.date = spider.unix_date
         self.domain = spider.scrape_domain
         self.driver = webdriver.PhantomJS(executable_path=r'C:\Users\kayj\AppData\Roaming\npm\node_modules\phantomjs\lib\phantom\phantomjs')
