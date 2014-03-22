@@ -1,2 +1,5 @@
 scrapes/
 sitecrawlerdb.db
+ghostdriver.log
+debuglog.log
+errorlog.log
